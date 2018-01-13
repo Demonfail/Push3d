@@ -1,7 +1,7 @@
 /// @func xVec4Transform(v, m)
-/// @desc TODO
-/// @param {array} v TODO
-/// @param {array} m TODO
+/// @desc Transforms the vector by the matrix.
+/// @param {array} v The vector to transform.
+/// @param {array} m The transform matrix.
 var _x = argument1[ 0]*argument0[0] + argument1[ 4]*argument0[1] + argument1[ 8]*argument0[2] + argument1[12]*argument0[3];
 var _y = argument1[ 1]*argument0[0] + argument1[ 5]*argument0[1] + argument1[ 9]*argument0[2] + argument1[13]*argument0[3];
 var _z = argument1[ 2]*argument0[0] + argument1[ 6]*argument0[1] + argument1[10]*argument0[2] + argument1[14]*argument0[3];

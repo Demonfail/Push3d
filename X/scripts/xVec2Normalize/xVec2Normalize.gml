@@ -1,6 +1,6 @@
 /// @func xVec2Normalize(v)
-/// @desc TODO
-/// @param {array} v TODO
+/// @desc Normalizes the vector (makes the vector's length equal to `1`).
+/// @param {array} v The vector to be normalized.
 var _lengthSqr = (argument0[0] * argument0[0]
 	+ argument0[1] * argument0[1]);
 if (_lengthSqr <= 0) {
