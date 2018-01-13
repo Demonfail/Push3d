@@ -63,6 +63,25 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xVec3Subtract](#xvec3subtract)
 	- [xVec3Transform](#xvec3transform)
 	- [xVec3Unproject](#xvec3unproject)
+	- [xVec4Abs](#xvec4abs)
+	- [xVec4Add](#xvec4add)
+	- [xVec4ClampLength](#xvec4clamplength)
+	- [xVec4Clone](#xvec4clone)
+	- [xVec4Create](#xvec4create)
+	- [xVec4CreateBarycentric](#xvec4createbarycentric)
+	- [xVec4Dot](#xvec4dot)
+	- [xVec4Equals](#xvec4equals)
+	- [xVec4Length](#xvec4length)
+	- [xVec4LengthSqr](#xvec4lengthsqr)
+	- [xVec4Lerp](#xvec4lerp)
+	- [xVec4MaxComponent](#xvec4maxcomponent)
+	- [xVec4Maximize](#xvec4maximize)
+	- [xVec4MinComponent](#xvec4mincomponent)
+	- [xVec4Minimize](#xvec4minimize)
+	- [xVec4Multiply](#xvec4multiply)
+	- [xVec4Normalize](#xvec4normalize)
+	- [xVec4Scale](#xvec4scale)
+	- [xVec4Subtract](#xvec4subtract)
 	- [xVec4Transform](#xvec4transform)
 
 # Reference
@@ -428,7 +447,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[2, 4]`.
+This would make the vector `_v1` equal to `[2, 4]`.
 ```
 var _v1 = [1, 4];
 var _v2 = [2, 3];
@@ -469,7 +488,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[1, 3]`.
+This would make the vector `_v1` equal to `[1, 3]`.
 ```
 var _v1 = [1, 4];
 var _v2 = [2, 3];
@@ -489,7 +508,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[3, 8]`.
+This would make the vector `_v1` equal to `[3, 8]`.
 ```
 var _v1 = [1, 2];
 var _v2 = [3, 4];
@@ -755,7 +774,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[2, 4, 6]`.
+This would make the vector `_v1` equal to `[2, 4, 6]`.
 ```
 var _v1 = [1, 4, 5];
 var _v2 = [2, 3, 6];
@@ -796,7 +815,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[1, 3, 5]`.
+This would make the vector `_v1` equal to `[1, 3, 5]`.
 ```
 var _v1 = [1, 4, 5];
 var _v2 = [2, 3, 6];
@@ -816,7 +835,7 @@ v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
 ### Example:
-This would make the vector `v1` equal to `[4, 10, 18]`.
+This would make the vector `_v1` equal to `[4, 10, 18]`.
 ```
 var _v1 = [1, 2, 3];
 var _v2 = [4, 5, 6];
@@ -939,6 +958,298 @@ screen | `array` | An array containing `[screenWidth, screenHeight]`.
 world | `array` | The world matrix.
 view | `array` | The view matrix.
 projection | `array` | The projection matrix.
+
+## xVec4Abs
+```
+xVec4Abs(v)
+```
+Sets vector's components to their absolute value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+
+## xVec4Add
+```
+xVec4Add(v1, v2)
+```
+Adds vectors `v1`, `v2` and stores the result into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+## xVec4ClampLength
+```
+xVec4ClampLength(v, min, max)
+```
+Clamps vector's length between `min` and `max`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+min | `real` | The minimum vector length.
+max | `real` | The maximum vector length.
+
+## xVec4Clone
+```
+xVec4Clone(v)
+```
+Creates a clone of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+
+### Returns:
+`array`: The created clone.
+
+## xVec4Create
+```
+xVec4Create(x, y, z, w)
+```
+Creates a new vector with given components.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The first vector component.
+y | `real` | The second vector component.
+z | `real` | The third vector component.
+w | `real` | The fourth vector component.
+
+### Returns:
+`array`: The created vector.
+
+### Note:
+One could also just write `[x, y, z, w]`, which would give the same result.
+
+## xVec4CreateBarycentric
+```
+xVec4CreateBarycentric(v1, v2, v3, f, g)
+```
+Creates a new vector using barycentric coordinates, following formula `v1 + f(v2-v1) + g(v3-v1)`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first point of triangle.
+v2 | `array` | The second point of triangle.
+v3 | `array` | The third point of triangle.
+f | `real` | The first weighting factor.
+g | `real` | The second weighting factor.
+
+### Returns:
+`array`: The created vector.
+
+## xVec4Dot
+```
+xVec4Dot(v1, v2)
+```
+Gets the dot product of vectors `v1` and `v2`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+### Returns:
+`real`: The dot product.
+
+## xVec4Equals
+```
+xVec4Equals(v1, v2)
+```
+Gets whether vectors `v1` and `v2` are equal.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+### Returns:
+`bool`: True if the vectors are equal.
+
+## xVec4Length
+```
+xVec4Length(v)
+```
+Gets length of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+The | `real` | vector's length.
+
+## xVec4LengthSqr
+```
+xVec4LengthSqr(v)
+```
+Gets squared length of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+The | `real` | vector's squared length.
+
+## xVec4Lerp
+```
+xVec4Lerp(v1, v2, s)
+```
+Linearly interpolates between vectors `v1`, `v2` and stores the resulting vector into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+s | `real` | The interpolation factor.
+
+## xVec4MaxComponent
+```
+xVec4MaxComponent(v)
+```
+Gets the largest component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+
+### Returns:
+`real`: The vetor's largest component.
+
+### Example:
+Here the `_max` variable would be equal to `4`.
+```
+var _vec = [1, 2, 3, 4];
+var _max = xVec3MaxComponent(_vec);
+```
+
+## xVec4Maximize
+```
+xVec4Maximize(v1, v2)
+```
+Gets a vector that is made up of the largest components of the vectors `v1`, `v2` and stores it into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+### Example:
+This would make the vector `_v1` equal to `[2, 4, 6, 8]`.
+```
+var _v1 = [1, 4, 5, 8];
+var _v2 = [2, 3, 6, 7];
+xVec4Maximize(_v1, _v2);
+```
+
+## xVec4MinComponent
+```
+xVec4MinComponent(v)
+```
+Gets the smallest component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+
+### Returns:
+`real`: The vetor's smallest component.
+
+### Example:
+Here the `_min` variable would be equal to `1`.
+```
+var _vec = [1, 2, 3, 4];
+var _min = xVec4MinComponent(_vec);
+```
+
+## xVec4Minimize
+```
+xVec4Minimize(v1, v2)
+```
+Gets a vector that is made up of the smallest components of the vectors `v1`, `v2` and stores it into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+### Example:
+This would make the vector `_v1` equal to `[1, 3, 5, 7]`.
+```
+var _v1 = [1, 4, 5, 8];
+var _v2 = [2, 3, 6, 7];
+xVec4Minimize(_v1, _v2);
+```
+
+## xVec4Multiply
+```
+xVec4Multiply(v1, v2)
+```
+Multiplies the vectors `v1`, `v2` componentwise and stores the result into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The first vector.
+v2 | `array` | The second vector.
+
+### Example:
+This would make the vector `_v1` equal to `[5, 12, 21, 32]`.
+```
+var _v1 = [1, 2, 3, 4];
+var _v2 = [5, 6, 7, 8];
+xVec4Multiply(_v1, _v2);
+```
+
+## xVec4Normalize
+```
+xVec4Normalize(v)
+```
+Normalizes the vector (makes the vector's length equal to `1`).
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector to be normalized.
+
+## xVec4Scale
+```
+xVec4Scale(v, s)
+```
+Scales the vector's components by the given value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The vector.
+s | `real` | The value to scale the components by.
+
+## xVec4Subtract
+```
+xVec4Subtract(v1, v2)
+```
+Subtracts vector `v2` from `v1` and stores the result into `v1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v1 | `array` | The vector to subtract from.
+v2 | `array` | The vector to subtract.
 
 ## xVec4Transform
 ```

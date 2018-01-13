@@ -4,7 +4,7 @@
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 /// @example
-/// This would make the vector `v1` equal to `[2, 4]`.
+/// This would make the vector `_v1` equal to `[2, 4]`.
 /// ```
 /// var _v1 = [1, 4];
 /// var _v2 = [2, 3];
