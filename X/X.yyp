@@ -655,6 +655,14 @@
             }
         },
         {
+            "Key": "95059d2c-c19b-49e2-abe7-f3f136e8cb08",
+            "Value": {
+                "id": "d1754f53-a709-4fca-8314-7ccbaad36c90",
+                "resourcePath": "views\\95059d2c-c19b-49e2-abe7-f3f136e8cb08.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "965bf7e2-aef9-4e56-9349-109075916316",
             "Value": {
                 "id": "9044aceb-ac15-4fbc-bc7a-8663bd363199",
@@ -723,6 +731,14 @@
             "Value": {
                 "id": "61c9a233-9066-4ad1-a8db-68fa67d098c2",
                 "resourcePath": "scripts\\xQuaternionMultiply\\xQuaternionMultiply.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "a380f637-d3c8-4371-b5ea-a769e39c38b4",
+            "Value": {
+                "id": "c3cae2f1-c1a7-4d97-86bc-9b014dbc48d7",
+                "resourcePath": "scripts\\xSurfaceCreateFromSprite\\xSurfaceCreateFromSprite.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -983,6 +999,14 @@
             }
         },
         {
+            "Key": "e2207574-3dbb-4482-a2da-b68a498dd4fc",
+            "Value": {
+                "id": "7254df66-cdb8-46ed-a48c-e5482d12cd82",
+                "resourcePath": "scripts\\xSurfaceCheck\\xSurfaceCheck.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "e34df816-120e-472c-a758-d06ac2d671e2",
             "Value": {
                 "id": "8b27a221-03d1-4323-a920-1b454c69a279",
@@ -1019,6 +1043,14 @@
             "Value": {
                 "id": "640ede4a-3fa2-4e9c-9be2-4aa2c467f734",
                 "resourcePath": "views\\e52912d0-2f7f-4394-acab-1ff41db47352.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "e59790ac-cf18-48a5-b882-5cd651a26770",
+            "Value": {
+                "id": "3b614908-93cf-4c30-8e3b-74e6d88185dc",
+                "resourcePath": "views\\e59790ac-cf18-48a5-b882-5cd651a26770.yy",
                 "resourceType": "GMFolder"
             }
         },
@@ -1229,7 +1261,9 @@
         "ab55c9ef-21fc-4373-8580-4d920ab879ea",
         "a42eef52-7f3e-4fa3-903d-b0b0556c7cf6",
         "2d9a847f-59ab-40ec-bddf-c9da90389ef7",
-        "b0582dc1-bddd-42c7-89c8-77da2cf64e33"
+        "b0582dc1-bddd-42c7-89c8-77da2cf64e33",
+        "e2207574-3dbb-4482-a2da-b68a498dd4fc",
+        "a380f637-d3c8-4371-b5ea-a769e39c38b4"
     ],
     "tutorial": ""
 }

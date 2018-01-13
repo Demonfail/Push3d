@@ -37,6 +37,8 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xQuaternionToAngle](#xquaterniontoangle)
 	- [xQuaternionToAxis](#xquaterniontoaxis)
 	- [xQuaternionToMatrix](#xquaterniontomatrix)
+	- [xSurfaceCheck](#xsurfacecheck)
+	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
 	- [xVec2Abs](#xvec2abs)
 	- [xVec2Add](#xvec2add)
 	- [xVec2ClampLength](#xvec2clamplength)
@@ -556,6 +558,37 @@ q | `array` | The quaternion.
 
 ### Returns:
 `array`: The created rotation matrix.
+
+## xSurfaceCheck
+```
+xSurfaceCheck(surface, width, height)
+```
+Checks whether the surface exists and if it has correct size. Broken surfaces are recreated. Surfaces of wrong size are resized.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+surface | `real` | The id of the surface.
+width | `real` | The desired width of the surface.
+height | `real` | The desired height of the surface.
+
+### Returns:
+`real`: The surface id.
+
+## xSurfaceCreateFromSprite
+```
+xSurfaceCreateFromSprite(sprite, index)
+```
+Creates a surface from the sprite.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+sprite | `real` | The id of the sprite.
+index | `real` | The sprite subimage index.
+
+### Returns:
+`real`: The created surface.
 
 ## xVec2Abs
 ```
