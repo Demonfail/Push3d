@@ -143,10 +143,34 @@
             }
         },
         {
+            "Key": "247c5ba3-86e8-4795-90b0-9188cf82cea7",
+            "Value": {
+                "id": "62903046-3efc-460c-85c5-6eb3ca9bb56e",
+                "resourcePath": "views\\247c5ba3-86e8-4795-90b0-9188cf82cea7.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "2adea10a-6442-4774-9a7c-9d970452a9bf",
+            "Value": {
+                "id": "754a4342-54b0-4d8f-8760-7e8a0e291f3f",
+                "resourcePath": "scripts\\xQuaternionDot\\xQuaternionDot.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "2b262f32-0004-4c5a-b13e-b3c7894b444d",
             "Value": {
                 "id": "aba53a1a-c750-4a9a-bfa5-67e85a8bf5cc",
                 "resourcePath": "scripts\\xVec3Abs\\xVec3Abs.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "2cc385a9-682d-4fa0-ae70-ca5781a7bf77",
+            "Value": {
+                "id": "98fad556-8f1c-4cab-b7ad-daf3278c2811",
+                "resourcePath": "scripts\\xQuaternionToAngle\\xQuaternionToAngle.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -199,6 +223,14 @@
             }
         },
         {
+            "Key": "32de0c9b-2899-490e-bfc2-ab999d018e27",
+            "Value": {
+                "id": "1c1d1186-3251-4dcc-aa27-836957aa4b14",
+                "resourcePath": "scripts\\xQuaternionLerp\\xQuaternionLerp.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "3367f6d8-457d-4139-9229-fa6c41ebaf87",
             "Value": {
                 "id": "3b0ad55b-b1b8-432c-9b4c-e0854cc95cb8",
@@ -247,6 +279,14 @@
             }
         },
         {
+            "Key": "3fdee841-dc6c-4682-9fbd-8649afa50cbd",
+            "Value": {
+                "id": "4bba0ba7-e23b-4f3e-ba37-6ae0cfb87361",
+                "resourcePath": "scripts\\xQuaternionLengthSqr\\xQuaternionLengthSqr.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "4105c189-3a1e-4869-ac1a-225808fcf532",
             "Value": {
                 "id": "61502bd7-504b-4f29-a080-598847aaded5",
@@ -283,6 +323,22 @@
             "Value": {
                 "id": "267f0ff3-fffb-4056-ac54-223ea91e990b",
                 "resourcePath": "scripts\\xVec4LengthSqr\\xVec4LengthSqr.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "4e358721-698e-4799-865a-b16e983dfe7e",
+            "Value": {
+                "id": "59296289-7b81-4b5a-946d-fc21d5c7344f",
+                "resourcePath": "scripts\\xQuaternionSubtract\\xQuaternionSubtract.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "4fad43f7-ee3e-4663-ab87-b783da5eb7e4",
+            "Value": {
+                "id": "8761017a-03f7-41f1-9901-bb5f67e4ffea",
+                "resourcePath": "scripts\\xQuaternionCreateLookRotation\\xQuaternionCreateLookRotation.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -359,6 +415,14 @@
             }
         },
         {
+            "Key": "5c45df72-1220-4acc-b8f5-68062196e75a",
+            "Value": {
+                "id": "68bc4501-e5aa-4840-ad04-39b27d85c791",
+                "resourcePath": "scripts\\xQuaternionCreateFromAxisAngle\\xQuaternionCreateFromAxisAngle.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "5cdd84b5-c1e2-4558-99d6-0c17bd3ba3e5",
             "Value": {
                 "id": "30767b19-e93b-45c3-bd48-8fa42fe1c975",
@@ -415,6 +479,22 @@
             }
         },
         {
+            "Key": "6cefbafe-3621-4c16-bf0c-0cf968f96982",
+            "Value": {
+                "id": "86e6da40-0a39-4ba9-b921-98d8a432e44a",
+                "resourcePath": "scripts\\xQuaternionCreate\\xQuaternionCreate.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "6e0d060f-4b9b-4313-8c4f-0ec6da450688",
+            "Value": {
+                "id": "9c444ec0-6ed6-47d3-8f83-7031b8db1eb6",
+                "resourcePath": "scripts\\xQuaternionRotate\\xQuaternionRotate.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "6eb8ead8-19d3-4705-8e28-58564a621335",
             "Value": {
                 "id": "388f3c6c-ebca-431a-8dfc-9a04f047406d",
@@ -451,6 +531,14 @@
             "Value": {
                 "id": "0f5604ed-aac9-453b-9268-691cb11501be",
                 "resourcePath": "scripts\\xVec2Add\\xVec2Add.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "7a30ba4d-8d8b-457b-a2c2-48c0fe554b5d",
+            "Value": {
+                "id": "122a8244-dc8e-4c35-99c2-af30fda41e8d",
+                "resourcePath": "scripts\\xQuaternionCreateFromToRotation\\xQuaternionCreateFromToRotation.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -511,6 +599,14 @@
             }
         },
         {
+            "Key": "8ddaee6c-1044-4ba8-9eb1-efb34ae4c966",
+            "Value": {
+                "id": "5a19a83d-fe9d-4bc5-95f5-cf7c26783ce6",
+                "resourcePath": "scripts\\xQuaternionInverse\\xQuaternionInverse.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "8deb3613-d871-4288-acc5-f1de90925363",
             "Value": {
                 "id": "f3953ede-e1f1-46b8-82db-c8942d780648",
@@ -559,6 +655,14 @@
             }
         },
         {
+            "Key": "9b3ce800-f89c-4314-80bb-2a4db862c7ac",
+            "Value": {
+                "id": "5865de33-d590-49c2-aab4-8ffc7a55c8c2",
+                "resourcePath": "scripts\\xQuaternionToMatrix\\xQuaternionToMatrix.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "9c5e1e85-8da7-4f74-bbea-5a825ce44aa9",
             "Value": {
                 "id": "613b9b44-b06f-4baf-86c0-38fc5dc018c7",
@@ -575,11 +679,27 @@
             }
         },
         {
+            "Key": "a1d53516-8b8c-4863-bfb9-f1eae3ded9dd",
+            "Value": {
+                "id": "ef90044d-8ea2-46be-8359-c9eaec7711f4",
+                "resourcePath": "scripts\\xQuaternionSlerp\\xQuaternionSlerp.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "a1de266c-3b1a-49ba-aa96-1ece5ae8979f",
             "Value": {
                 "id": "81142fbb-aef3-482e-8cc8-ef930f43eddf",
                 "resourcePath": "views\\a1de266c-3b1a-49ba-aa96-1ece5ae8979f.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "a37ca5c1-9b9d-4d92-a4cf-c1b00b78e84b",
+            "Value": {
+                "id": "61c9a233-9066-4ad1-a8db-68fa67d098c2",
+                "resourcePath": "scripts\\xQuaternionMultiply\\xQuaternionMultiply.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -639,6 +759,14 @@
             }
         },
         {
+            "Key": "ac00e368-cffc-4072-aedd-6fb577a3140a",
+            "Value": {
+                "id": "3b3c16f1-630a-4fd3-8f93-f6a9ea4ce796",
+                "resourcePath": "scripts\\xQuaternionNormalize\\xQuaternionNormalize.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "b0582dc1-bddd-42c7-89c8-77da2cf64e33",
             "Value": {
                 "id": "01db0e90-e7a4-4033-942c-f2331312107a",
@@ -687,10 +815,34 @@
             }
         },
         {
+            "Key": "b4c5a59b-1174-4d0c-93b2-8532e641ea2e",
+            "Value": {
+                "id": "173c31cb-a9d1-4631-9387-a1da497c6031",
+                "resourcePath": "scripts\\xQuaternionToAxis\\xQuaternionToAxis.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "b529864d-8804-4359-b9f5-d15f31ff2e0c",
+            "Value": {
+                "id": "b2f7fc7e-2181-4bae-ac0d-97c72f029e87",
+                "resourcePath": "scripts\\xQuaternionLength\\xQuaternionLength.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "b73250d9-7d49-4e33-bd17-2d3e7c235444",
             "Value": {
                 "id": "8e743c1f-57e4-455a-b097-4552020f2833",
                 "resourcePath": "scripts\\xMatrixCreate\\xMatrixCreate.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "c2baf8bc-bf8e-4ceb-99a2-eb15ffc3baac",
+            "Value": {
+                "id": "78215457-712f-4483-b935-d209b32ea485",
+                "resourcePath": "scripts\\xQuaternionConjugate\\xQuaternionConjugate.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -791,6 +943,14 @@
             }
         },
         {
+            "Key": "e070d21c-60cb-4a8d-82fd-28d5696ffbbb",
+            "Value": {
+                "id": "f607cba6-ca9b-40ac-9764-142b98e2d03f",
+                "resourcePath": "scripts\\xQuaternionAdd\\xQuaternionAdd.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "e34df816-120e-472c-a758-d06ac2d671e2",
             "Value": {
                 "id": "8b27a221-03d1-4323-a920-1b454c69a279",
@@ -803,6 +963,14 @@
             "Value": {
                 "id": "ea15de4a-3a69-45f6-ac96-12bae5195a33",
                 "resourcePath": "scripts\\xVec3Multiply\\xVec3Multiply.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "e3b6ef0d-f895-4912-bbdb-12926464cdc6",
+            "Value": {
+                "id": "041c1e9c-0065-4c05-be59-03ade9868913",
+                "resourcePath": "scripts\\xQuaternionClone\\xQuaternionClone.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -895,6 +1063,14 @@
             }
         },
         {
+            "Key": "f5fce720-3415-4a73-8608-993a4d204d97",
+            "Value": {
+                "id": "77f0fc10-43e6-4c07-92b1-69aee3dcebbe",
+                "resourcePath": "scripts\\xQuaternionScale\\xQuaternionScale.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "fc3cd849-93a3-47d2-ac0e-970fc12199e0",
             "Value": {
                 "id": "1411159b-2227-4d62-935c-a60072861cbd",
@@ -907,6 +1083,14 @@
             "Value": {
                 "id": "ad729dbb-cedf-4de8-bdcd-1c297b2b5193",
                 "resourcePath": "scripts\\xVec4Dot\\xVec4Dot.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "ff14f443-81ee-4fff-bc9d-bbc1531d2d70",
+            "Value": {
+                "id": "ca224e96-226f-42a5-b17c-8000c56509d2",
+                "resourcePath": "scripts\\xQuaternionCreateIdentity\\xQuaternionCreateIdentity.yy",
                 "resourceType": "GMScript"
             }
         }
@@ -925,6 +1109,28 @@
         "d7173a01-084a-41a0-87d0-8560d30638bd",
         "04f3d727-af01-42de-9b21-dedb14d5e178",
         "62e16272-3045-4077-ae79-b3acc2c9afaf",
+        "e070d21c-60cb-4a8d-82fd-28d5696ffbbb",
+        "e3b6ef0d-f895-4912-bbdb-12926464cdc6",
+        "c2baf8bc-bf8e-4ceb-99a2-eb15ffc3baac",
+        "6cefbafe-3621-4c16-bf0c-0cf968f96982",
+        "5c45df72-1220-4acc-b8f5-68062196e75a",
+        "7a30ba4d-8d8b-457b-a2c2-48c0fe554b5d",
+        "ff14f443-81ee-4fff-bc9d-bbc1531d2d70",
+        "4fad43f7-ee3e-4663-ab87-b783da5eb7e4",
+        "2adea10a-6442-4774-9a7c-9d970452a9bf",
+        "8ddaee6c-1044-4ba8-9eb1-efb34ae4c966",
+        "b529864d-8804-4359-b9f5-d15f31ff2e0c",
+        "3fdee841-dc6c-4682-9fbd-8649afa50cbd",
+        "32de0c9b-2899-490e-bfc2-ab999d018e27",
+        "a37ca5c1-9b9d-4d92-a4cf-c1b00b78e84b",
+        "ac00e368-cffc-4072-aedd-6fb577a3140a",
+        "6e0d060f-4b9b-4313-8c4f-0ec6da450688",
+        "f5fce720-3415-4a73-8608-993a4d204d97",
+        "a1d53516-8b8c-4863-bfb9-f1eae3ded9dd",
+        "4e358721-698e-4799-865a-b16e983dfe7e",
+        "2cc385a9-682d-4fa0-ae70-ca5781a7bf77",
+        "b4c5a59b-1174-4d0c-93b2-8532e641ea2e",
+        "9b3ce800-f89c-4314-80bb-2a4db862c7ac",
         "90e23c5f-86a5-44c8-8178-8c1b3b9d10b5",
         "763e8b9a-8362-4066-85ab-1b662b691b22",
         "b2e352a2-70f1-4eb3-9d79-ecdb1d8d1306",

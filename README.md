@@ -16,6 +16,27 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xMatrixSubtractComponentwise](#xmatrixsubtractcomponentwise)
 	- [xMatrixToEuler](#xmatrixtoeuler)
 	- [xMatrixTranspose](#xmatrixtranspose)
+	- [xQuaternionAdd](#xquaternionadd)
+	- [xQuaternionClone](#xquaternionclone)
+	- [xQuaternionConjugate](#xquaternionconjugate)
+	- [xQuaternionCreate](#xquaternioncreate)
+	- [xQuaternionCreateFromAxisAngle](#xquaternioncreatefromaxisangle)
+	- [xQuaternionCreateFromToRotation](#xquaternioncreatefromtorotation)
+	- [xQuaternionCreateIdentity](#xquaternioncreateidentity)
+	- [xQuaternionCreateLookRotation](#xquaternioncreatelookrotation)
+	- [xQuaternionDot](#xquaterniondot)
+	- [xQuaternionInverse](#xquaternioninverse)
+	- [xQuaternionLength](#xquaternionlength)
+	- [xQuaternionLengthSqr](#xquaternionlengthsqr)
+	- [xQuaternionLerp](#xquaternionlerp)
+	- [xQuaternionMultiply](#xquaternionmultiply)
+	- [xQuaternionNormalize](#xquaternionnormalize)
+	- [xQuaternionRotate](#xquaternionrotate)
+	- [xQuaternionScale](#xquaternionscale)
+	- [xQuaternionSubtract](#xquaternionsubtract)
+	- [xQuaternionToAngle](#xquaterniontoangle)
+	- [xQuaternionToAxis](#xquaterniontoaxis)
+	- [xQuaternionToMatrix](#xquaterniontomatrix)
 	- [xVec2Abs](#xvec2abs)
 	- [xVec2Add](#xvec2add)
 	- [xVec2ClampLength](#xvec2clamplength)
@@ -259,6 +280,282 @@ Transposes the matrix.
 Name | Type | Description
 ---- | ---- | -----------
 m | `array` | The matrix to be transposed.
+
+## xQuaternionAdd
+```
+xQuaternionAdd(q1, q2)
+```
+Adds the quaternions `q1`, `q2` and stores the result to `q1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q1 | `array` | The first quaternion.
+q2 | `array` | The second quaternion.
+
+## xQuaternionClone
+```
+xQuaternionClone(v)
+```
+Creates a clone of the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The quaternion.
+
+### Returns:
+`array`: The created quaternion.
+
+## xQuaternionConjugate
+```
+xQuaternionConjugate(q)
+```
+Conjugates the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+## xQuaternionCreate
+```
+xQuaternionCreate(x, y, z, w)
+```
+Creates a quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The x component of the quaternion.
+y | `real` | The y component of the quaternion.
+z | `real` | The z component of the quaternion.
+w | `real` | The w component of the quaternion.
+
+### Returns:
+`array`: The created quaternion.
+
+## xQuaternionCreateFromAxisAngle
+```
+xQuaternionCreateFromAxisAngle(axis, angle)
+```
+Creates a quaternion form the axis an the angle.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+axis | `array` | A 3D vector representing the axis.
+angle | `real` | The angle in degrees.
+
+### Returns:
+`array`: The created quaternion.
+
+## xQuaternionCreateFromToRotation
+```
+xQuaternionCreateFromToRotation(from, to)
+```
+Creates a quaternion that represents rotation from one vector to another.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+from | `array` | The 3D "from" vector.
+to | `array` | The 3D "to" vector.
+
+### Returns:
+`array`: The created quaternion.
+
+## xQuaternionCreateIdentity
+```
+xQuaternionCreateIdentity()
+```
+Creates an identity quaternion.
+
+### Returns:
+`array`: The created identity quaternion.
+
+## xQuaternionCreateLookRotation
+```
+xQuaternionCreateLookRotation(forward, up)
+```
+Creates a quaternion with the specified forward and up vectors. These vectors must not be parallel! If they are, then an identity quaternion will be returned.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+forward | `array` | The 3D forward unit vector.
+up | `array` | The 3D up unit vector.
+
+### Returns:
+`array`: An array representing the quaternion.
+
+## xQuaternionDot
+```
+xQuaternionDot(q1, q2)
+```
+Gets the dot product of the two quaternions.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q1 | `array` | The first quaternion.
+q2 | `array` | The second quaternion.
+
+### Returns:
+`real`: The dot product of the two quaternions.
+
+## xQuaternionInverse
+```
+xQuaternionInverse(q)
+```
+Inverts the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+## xQuaternionLength
+```
+xQuaternionLength(q)
+```
+Gets the length of the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+### Returns:
+`real`: The length of the quaternion.
+
+## xQuaternionLengthSqr
+```
+xQuaternionLengthSqr(q)
+```
+Gets the squared length of the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | An array representing the quaternion.
+
+### Returns:
+`real`: The squared length of the quaternion.
+
+## xQuaternionLerp
+```
+xQuaternionLerp(q1, q2, s)
+```
+Performs a linear interpolation between the quaternions `q1`, `q2` and stores the result to `q1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q1 | `array` | The first quaternion.
+q2 | `array` | The second quaternion.
+s | `real` | The lerping factor.
+
+## xQuaternionMultiply
+```
+xQuaternionMultiply(q1, q2)
+```
+Multiplies the quaternions `q1`, `q2` and stores the result to `q1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q1 | `array` | The first quaternion.
+q2 | `array` | The second quaternion.
+
+## xQuaternionNormalize
+```
+xQuaternionNormalize(q)
+```
+Normalizes the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+## xQuaternionRotate
+```
+xQuaternionRotate(q, v)
+```
+Rotates the 3D vector by the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+v | `array` | The 3D vector.
+
+## xQuaternionScale
+```
+xQuaternionScale(q, s)
+```
+Scales a quaternion by the value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+s | `real` | The value to scale the quaternion by.
+
+## xQuaternionSubtract
+```
+xQuaternionSubtract(q1, q2)
+```
+Subtracts quaternion `q2` from `q1` and stores the result into `q1`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q1 | `array` | The quaternion to subtract from.
+q2 | `array` | The quaternion to subtract.
+
+## xQuaternionToAngle
+```
+xQuaternionToAngle(q)
+```
+Gets quaternion angle in degrees.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+### Returns:
+`real`: The quaternion angle in degrees.
+
+## xQuaternionToAxis
+```
+xQuaternionToAxis(q)
+```
+Creates 3D axis from the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+### Returns:
+`array`: The created axis as `[x, y, z]`.
+
+## xQuaternionToMatrix
+```
+xQuaternionToMatrix(q)
+```
+Creates a rotation matrix from the quaternion.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+q | `array` | The quaternion.
+
+### Returns:
+`array`: The created rotation matrix.
 
 ## xVec2Abs
 ```
