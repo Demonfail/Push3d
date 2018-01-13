@@ -1,13 +1,13 @@
 
 {
-    "name": "room0",
+    "name": "xRTests",
     "id": "afcf878a-07d5-46bf-b6a4-4bbb213f20c4",
     "creationCodeFile": "",
     "inheritCode": false,
     "inheritCreationOrder": false,
     "inheritLayers": false,
     "instanceCreationOrderIDs": [
-
+        "352eddcd-8039-4aa8-aaf1-7278f9795af9"
     ],
     "IsDnD": false,
     "layers": [
@@ -25,7 +25,7 @@
             "inheritSubLayers": false,
             "inheritVisibility": false,
             "instances": [
-
+{"name": "inst_3D595CB","id": "352eddcd-8039-4aa8-aaf1-7278f9795af9","colour": { "Value": 4294967295 },"creationCodeFile": "","creationCodeType": "","ignore": false,"inheritCode": false,"inheritItemSettings": false,"IsDnD": false,"m_originalParentID": "00000000-0000-0000-0000-000000000000","m_serialiseFrozen": false,"modelName": "GMRInstance","name_with_no_file_rename": "inst_3D595CB","objId": "c719ec1f-857d-4e07-a0f7-ed347d0a964e","properties": null,"rotation": 0,"scaleX": 1,"scaleY": 1,"mvc": "1.0","x": 0,"y": 0}
             ],
             "layers": [
 
@@ -87,7 +87,7 @@
     },
     "roomSettings":     {
         "id": "b805bc37-b68d-45d0-93ef-2f8f3aa121f1",
-        "Height": 768,
+        "Height": 576,
         "inheritRoomSettings": false,
         "modelName": "GMRoomSettings",
         "persistent": false,

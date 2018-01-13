@@ -1,10 +1,10 @@
 {
-    "id": "5b1a12d2-3fa3-4f5f-a310-1f82344b3e81",
+    "id": "5620cf92-ff05-4907-8fed-8656eb738c72",
     "modelName": "GMFolder",
     "mvc": "1.1",
-    "name": "5b1a12d2-3fa3-4f5f-a310-1f82344b3e81",
+    "name": "5620cf92-ff05-4907-8fed-8656eb738c72",
     "children": [
-        "f300f178-0965-4ef5-9d38-8563945a9771"
+        
     ],
     "filterType": "GMObject",
     "folderName": "objects",
