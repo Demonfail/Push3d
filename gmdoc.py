@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """ GMDoc2
-Copyright (c) 2017, Patrik Kraif.
+Copyright (c) 2018, Patrik Kraif.
 """
 import argparse
 import json

@@ -1,5 +1,5 @@
 {
-    "id": "dd6c89b9-3fd7-4d0f-8799-ae439d6223c1",
+    "id": "0b7f25d6-76fc-4665-9de6-30e136c2e935",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xVec2Clone",

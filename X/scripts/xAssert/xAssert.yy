@@ -1,5 +1,5 @@
 {
-    "id": "62039e56-12e1-4383-9900-2d9406db83ec",
+    "id": "eefefafb-89fc-44dc-a2bc-eec65d21a1ff",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xAssert",

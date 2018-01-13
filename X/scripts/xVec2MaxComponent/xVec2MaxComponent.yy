@@ -1,5 +1,5 @@
 {
-    "id": "cb3abd0f-b3ce-46eb-857c-8a4a0b61f348",
+    "id": "68a8c059-e8ff-4083-86af-287703d015ec",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xVec2MaxComponent",

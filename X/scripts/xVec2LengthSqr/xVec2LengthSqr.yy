@@ -1,5 +1,5 @@
 {
-    "id": "301dc0ac-c47e-4d7b-a39d-ad878c8b980f",
+    "id": "39985561-af6d-403a-af1d-9cf87d1643cf",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xVec2LengthSqr",

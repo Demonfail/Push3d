@@ -1,5 +1,5 @@
 {
-    "id": "3d9c8498-8c86-4ba9-8cf1-c9e48e4cf7b9",
+    "id": "2edc2afa-73de-48fe-99b9-8c4c576b4047",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xVec2Scale",

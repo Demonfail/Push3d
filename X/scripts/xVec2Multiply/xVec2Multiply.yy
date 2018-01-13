@@ -1,5 +1,5 @@
 {
-    "id": "8892f173-8638-4144-b155-bb5d62014b98",
+    "id": "55f6d502-485e-4900-aca0-8857c519ccff",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "xVec2Multiply",
