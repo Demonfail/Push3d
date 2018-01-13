@@ -103,6 +103,14 @@
             }
         },
         {
+            "Key": "16741f0d-f9b2-4cff-bb48-e23e3fdfbf99",
+            "Value": {
+                "id": "a42739e7-22ca-4fce-ac38-177a49ba2566",
+                "resourcePath": "shaders\\xSdrYCbCrToRGB\\xSdrYCbCrToRGB.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "1d4013ab-c222-4cd7-aa59-00691d78ae99",
             "Value": {
                 "id": "8217d365-4219-4528-a196-5ab51f7dde7c",
@@ -147,6 +155,14 @@
             "Value": {
                 "id": "62903046-3efc-460c-85c5-6eb3ca9bb56e",
                 "resourcePath": "views\\247c5ba3-86e8-4795-90b0-9188cf82cea7.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "25149fe9-58d5-467e-95db-978cfdd7ca3e",
+            "Value": {
+                "id": "3a503146-f8a5-4b17-9c57-1140b24d1a0e",
+                "resourcePath": "views\\25149fe9-58d5-467e-95db-978cfdd7ca3e.yy",
                 "resourceType": "GMFolder"
             }
         },
@@ -404,6 +420,14 @@
                 "id": "9ea91edf-399b-4748-9733-f31d597b4e6f",
                 "resourcePath": "scripts\\xVec3Maximize\\xVec3Maximize.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "5b547574-e3a5-40a3-8e5a-d7b76766537e",
+            "Value": {
+                "id": "a2815cac-1b87-49a1-b546-a0e2ca7715eb",
+                "resourcePath": "shaders\\xSdrRGBToYCbCr\\xSdrRGBToYCbCr.yy",
+                "resourceType": "GMShader"
             }
         },
         {
@@ -924,6 +948,14 @@
                 "id": "9b67ec83-a332-444d-95e3-bf23a33554e2",
                 "resourcePath": "views\\d3b3d133-ccff-4598-b0a1-400c28d94afb.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "d495696a-4f2b-496c-9a02-2138b30c1f8e",
+            "Value": {
+                "id": "385d0ea2-6e71-4fb5-9b86-9ab28a036187",
+                "resourcePath": "shaders\\xSdrDefault\\xSdrDefault.yy",
+                "resourceType": "GMShader"
             }
         },
         {
