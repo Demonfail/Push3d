@@ -7,7 +7,7 @@
 /// @return {array} An array representing the quaternion.
 var _forward = argument0;
 var _up = argument1;
-var _rot1 = bbQuaternionCreateFromToRotation([0, 0, 1], _forward);
+var _rot1 = xQuaternionCreateFromToRotation([0, 0, 1], _forward);
 var _right = xVec3Clone(_forward);
 xVec3Cross(_right, _up);
 _up = xVec3Clone(_right);
