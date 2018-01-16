@@ -1,8 +1,12 @@
+Texture2D texNormal : register(t1);
+
 struct VS_out {
-	float4 Position : SV_POSITION;
-	float3 Normal   : NORMAL0;
-	float2 TexCoord : TEXCOORD0;
-	float  Depth    : TEXCOORD1;
+	float4 Position  : SV_POSITION;
+	float3 Normal    : NORMAL0;
+	float3 Tangent   : TANGENT0;
+	float3 Bitangent : BINORMAL0;
+	float2 TexCoord  : TEXCOORD0;
+	float  Depth     : TEXCOORD1;
 };
 
 struct PS_out {
@@ -19,9 +23,11 @@ float3 xEncodeDepth(float d) {
 	return enc;
 }
 
-void main(in VS_out IN, out PS_out OUT) {	
+void main(in VS_out IN, out PS_out OUT) {
+	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
+  N = normalize(mul(float3x3(IN.Tangent, IN.Bitangent, IN.Normal), N));
 	OUT.Target0 = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
-	OUT.Target1.rgb = normalize(IN.Normal) * 0.5 + 0.5;
+	OUT.Target1.rgb = N * 0.5 + 0.5;
 	OUT.Target1.a = 1.0;
 	OUT.Target2.rgb = xEncodeDepth(IN.Depth);
 	OUT.Target2.a = 1.0;

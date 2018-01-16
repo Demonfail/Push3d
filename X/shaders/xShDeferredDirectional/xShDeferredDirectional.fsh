@@ -41,8 +41,8 @@ void main(in VS_out IN, out PS_out OUT) {
 	float3 texCoordShadowMap = float3(posShadowMap.xy * 0.5 + 0.5, posShadowMap.z);
 	texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
 
-	OUT.Target0 = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap);
-	return;
+	/*OUT.Target0 = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap);
+	return;*/
 
 	float3 L = -normalize(u_fLightDir);
 	float NdotL = saturate(dot(N, L));

@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "0f7eb84b-7fa1-4cda-ad1a-c723c2d5dec9",
+            "Value": {
+                "id": "caa0b852-eaf0-4c98-8a56-ddde6841c345",
+                "resourcePath": "datafiles_yy\\Models\\Cube.obj.yy",
+                "resourceType": "GMIncludedFile"
+            }
+        },
+        {
             "Key": "10042de4-0f61-48e0-b369-751fa8023140",
             "Value": {
                 "id": "e601f324-fad0-4cd1-b527-0151dbc17565",
@@ -319,6 +327,14 @@
             }
         },
         {
+            "Key": "418705f9-084f-4750-8171-9905afeb9167",
+            "Value": {
+                "id": "ee30055a-46c7-4b61-9ee2-0401320c21b6",
+                "resourcePath": "scripts\\xMeshLoadFromObj\\xMeshLoadFromObj.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "42968b2c-a7bb-4752-9e40-257893814cf8",
             "Value": {
                 "id": "51d40531-ed9e-43b6-9fe4-cc4ecaac493d",
@@ -332,14 +348,6 @@
                 "id": "c1d6de80-5bc2-4855-8bc7-7948da7380d9",
                 "resourcePath": "scripts\\xVec3MinComponent\\xVec3MinComponent.yy",
                 "resourceType": "GMScript"
-            }
-        },
-        {
-            "Key": "46db5bc3-fa97-4cf4-b2bf-77a42dd5a64c",
-            "Value": {
-                "id": "01bd1796-281d-4f88-9bdc-1d229fc7550d",
-                "resourcePath": "views\\46db5bc3-fa97-4cf4-b2bf-77a42dd5a64c.yy",
-                "resourceType": "GMFolder"
             }
         },
         {
@@ -663,6 +671,14 @@
             }
         },
         {
+            "Key": "8aed6e7b-4516-4512-9305-c978b2c01b51",
+            "Value": {
+                "id": "ccb4da4d-a2aa-4e54-a303-761db2d20a1c",
+                "resourcePath": "scripts\\xStringSplitOnFirst\\xStringSplitOnFirst.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "8bdc065c-197d-4b3f-9712-e6cac0a2dd0d",
             "Value": {
                 "id": "8deea033-4892-46c1-976d-854dc91a1c85",
@@ -799,6 +815,14 @@
             }
         },
         {
+            "Key": "a45cc2a5-0bda-46ca-ba6e-0ee2a4463ecc",
+            "Value": {
+                "id": "ac78ea7b-d8fb-4fc1-ba35-33132c77e75e",
+                "resourcePath": "scripts\\xMeshCreate\\xMeshCreate.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "a511a813-75e1-4cb3-89c7-baf2a2e22726",
             "Value": {
                 "id": "c03fba00-667d-4b71-a953-e49371c8c390",
@@ -839,6 +863,14 @@
             }
         },
         {
+            "Key": "aa0d1f3b-b003-439e-8790-048079132da1",
+            "Value": {
+                "id": "774d0963-9256-4066-84af-ec53f26e4f7f",
+                "resourcePath": "scripts\\xMeshInit\\xMeshInit.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ab55c9ef-21fc-4373-8580-4d920ab879ea",
             "Value": {
                 "id": "25e7a502-135e-4565-aae2-6e5ea87e0158",
@@ -852,6 +884,14 @@
                 "id": "3b3c16f1-630a-4fd3-8f93-f6a9ea4ce796",
                 "resourcePath": "scripts\\xQuaternionNormalize\\xQuaternionNormalize.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "acda562c-68fc-44fe-9789-643642204c0c",
+            "Value": {
+                "id": "f5a5deb1-d268-48e7-91af-1e3bc337e980",
+                "resourcePath": "views\\acda562c-68fc-44fe-9789-643642204c0c.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -935,6 +975,14 @@
             }
         },
         {
+            "Key": "c2fbe371-a5e5-4767-b1ae-62ed8be347a4",
+            "Value": {
+                "id": "3fcf79a9-dc34-46ec-b2c8-c8b7a4a87de5",
+                "resourcePath": "scripts\\xMeshRecalculateTBN\\xMeshRecalculateTBN.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "c31a9e53-0b43-47fc-8b81-7a2f2f8dc137",
             "Value": {
                 "id": "7582fde0-6dfc-4dfd-8e76-f1b02a72df0d",
@@ -963,6 +1011,14 @@
             "Value": {
                 "id": "e80d2fa3-cb65-4f32-948d-e788f90c61af",
                 "resourcePath": "scripts\\xVec3Dot\\xVec3Dot.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "c9256b61-8cd4-4e48-821a-eb19af92cf3f",
+            "Value": {
+                "id": "3f3ff426-41f0-4ca1-96e4-affabd81ae0b",
+                "resourcePath": "scripts\\xMeshDestroy\\xMeshDestroy.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -1039,11 +1095,11 @@
             }
         },
         {
-            "Key": "dd076541-c9aa-4be9-9516-aaab8ba300ac",
+            "Key": "dd3294e7-98cf-4f7d-b189-cb362b81bcf6",
             "Value": {
-                "id": "53fc1b02-98d5-4a13-bfef-a1bd6e898662",
-                "resourcePath": "views\\dd076541-c9aa-4be9-9516-aaab8ba300ac.yy",
-                "resourceType": "GMFolder"
+                "id": "4e2a4269-ed63-478b-93ef-20cc1f05c7a7",
+                "resourcePath": "scripts\\xMeshToVBuffer\\xMeshToVBuffer.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -1191,19 +1247,27 @@
             }
         },
         {
-            "Key": "f688142d-7f38-444c-a5e8-22aa481fe71f",
-            "Value": {
-                "id": "2c82a5a7-e50e-4729-8ed1-3a4e1c4faf1e",
-                "resourcePath": "datafiles_yy\\X\\Shaders\\Common.ps.yy",
-                "resourceType": "GMIncludedFile"
-            }
-        },
-        {
             "Key": "fc3cd849-93a3-47d2-ac0e-970fc12199e0",
             "Value": {
                 "id": "1411159b-2227-4d62-935c-a60072861cbd",
                 "resourcePath": "scripts\\xVec2Create\\xVec2Create.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "fd5bc1e3-5d27-4791-83a6-5959bbdf45d4",
+            "Value": {
+                "id": "752b0ca0-c081-4e8c-aa85-f41f4ec3f5e0",
+                "resourcePath": "views\\fd5bc1e3-5d27-4791-83a6-5959bbdf45d4.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "fe54b343-12af-4d16-b96f-cc19d1f19aeb",
+            "Value": {
+                "id": "fc1bc3ba-a001-4f18-82fe-7791a7129fed",
+                "resourcePath": "views\\fe54b343-12af-4d16-b96f-cc19d1f19aeb.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -1326,6 +1390,13 @@
         "a42eef52-7f3e-4fa3-903d-b0b0556c7cf6",
         "2d9a847f-59ab-40ec-bddf-c9da90389ef7",
         "b0582dc1-bddd-42c7-89c8-77da2cf64e33",
+        "a45cc2a5-0bda-46ca-ba6e-0ee2a4463ecc",
+        "c9256b61-8cd4-4e48-821a-eb19af92cf3f",
+        "aa0d1f3b-b003-439e-8790-048079132da1",
+        "418705f9-084f-4750-8171-9905afeb9167",
+        "c2fbe371-a5e5-4767-b1ae-62ed8be347a4",
+        "dd3294e7-98cf-4f7d-b189-cb362b81bcf6",
+        "8aed6e7b-4516-4512-9305-c978b2c01b51",
         "e2207574-3dbb-4482-a2da-b68a498dd4fc",
         "a380f637-d3c8-4371-b5ea-a769e39c38b4"
     ],

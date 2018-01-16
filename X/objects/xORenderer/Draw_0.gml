@@ -2,7 +2,8 @@
 var _shader;
 var _screenWidth = window_get_width();
 var _screenHeight = window_get_height();
-var _texDefault = sprite_get_texture(xSprDefault, 0);
+var _texAlbedo = sprite_get_texture(xSprDefault, 0);
+var _texNormal = sprite_get_texture(xSprDefault, 1);
 
 // Check surfaces
 xSurfaceCheck(application_surface, _screenWidth, _screenHeight);
@@ -35,7 +36,9 @@ matrix_set(matrix_projection, _matProjSun);
 var _matShadowMap = matrix_multiply(_matViewSun, _matProjSun);
 
 shader_set(xShShadowMap);
-vertex_submit(vBuffer, pr_trianglelist, _texDefault)
+matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 50, 50, 50));
+vertex_submit(vBuffer, pr_trianglelist, _texAlbedo)
+matrix_set(matrix_world, matrix_build_identity());
 shader_reset();
 
 surface_reset_target();
@@ -61,12 +64,16 @@ var _matView = matrix_build_lookat(
 var _matViewInverse = xMatrixClone(_matView);
 xMatrixInverse(_matViewInverse);
 
+matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 50, 50, 50));
 matrix_set(matrix_view, _matView);
 matrix_set(matrix_projection,
 	matrix_build_projection_perspective_fov(
 		60, window_get_width() / window_get_height(), 1, clipFar));
 
-vertex_submit(vBuffer, pr_trianglelist, _texDefault);
+texture_set_stage(1, _texNormal); // Set normal map
+vertex_submit(vBuffer, pr_trianglelist, _texAlbedo);
+
+matrix_set(matrix_world, matrix_build_identity());
 
 shader_reset();
 surface_reset_target();
