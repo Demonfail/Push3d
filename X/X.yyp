@@ -106,7 +106,7 @@
             "Key": "16741f0d-f9b2-4cff-bb48-e23e3fdfbf99",
             "Value": {
                 "id": "a42739e7-22ca-4fce-ac38-177a49ba2566",
-                "resourcePath": "shaders\\xSdrYCbCrToRGB\\xSdrYCbCrToRGB.yy",
+                "resourcePath": "shaders\\xShYCbCrToRGB\\xShYCbCrToRGB.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -164,6 +164,14 @@
                 "id": "3a503146-f8a5-4b17-9c57-1140b24d1a0e",
                 "resourcePath": "views\\25149fe9-58d5-467e-95db-978cfdd7ca3e.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "274ff708-fcb8-41e8-9c5e-417a8cff0912",
+            "Value": {
+                "id": "8eda12fe-0043-420b-8158-c8775b721285",
+                "resourcePath": "sprites\\xSprDefault\\xSprDefault.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -327,6 +335,14 @@
             }
         },
         {
+            "Key": "46db5bc3-fa97-4cf4-b2bf-77a42dd5a64c",
+            "Value": {
+                "id": "01bd1796-281d-4f88-9bdc-1d229fc7550d",
+                "resourcePath": "views\\46db5bc3-fa97-4cf4-b2bf-77a42dd5a64c.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "4be05c98-387b-4f2a-a7bf-347e6163fe42",
             "Value": {
                 "id": "e21cf9d1-b4d3-4615-bbe6-b3a0b99f2da3",
@@ -423,10 +439,18 @@
             }
         },
         {
+            "Key": "5829d0db-f473-4d1b-b511-e1da7c4653f7",
+            "Value": {
+                "id": "e8eacb5a-9f72-4e56-ae4b-042420a7dad6",
+                "resourcePath": "views\\5829d0db-f473-4d1b-b511-e1da7c4653f7.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "5b547574-e3a5-40a3-8e5a-d7b76766537e",
             "Value": {
                 "id": "a2815cac-1b87-49a1-b546-a0e2ca7715eb",
-                "resourcePath": "shaders\\xSdrRGBToYCbCr\\xSdrRGBToYCbCr.yy",
+                "resourcePath": "shaders\\xShRGBToYCbCr\\xShRGBToYCbCr.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -556,6 +580,14 @@
                 "id": "0f5604ed-aac9-453b-9268-691cb11501be",
                 "resourcePath": "scripts\\xVec2Add\\xVec2Add.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "77cc3fbb-3dcc-41bf-9c05-af79d15a21d6",
+            "Value": {
+                "id": "1c213fef-ff8c-4b96-bfa3-72eb66e22ea0",
+                "resourcePath": "shaders\\xShGBuffer\\xShGBuffer.yy",
+                "resourceType": "GMShader"
             }
         },
         {
@@ -834,7 +866,7 @@
             "Key": "b27f27ed-7501-4411-b834-4d9fe9534bc8",
             "Value": {
                 "id": "a5833e4d-dd82-4b8c-974a-7d41169ee1b9",
-                "resourcePath": "objects\\xOTests\\xOTests.yy",
+                "resourcePath": "objects\\xORenderer\\xORenderer.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -970,7 +1002,7 @@
             "Key": "d495696a-4f2b-496c-9a02-2138b30c1f8e",
             "Value": {
                 "id": "385d0ea2-6e71-4fb5-9b86-9ab28a036187",
-                "resourcePath": "shaders\\xSdrDefault\\xSdrDefault.yy",
+                "resourcePath": "shaders\\xShDefault\\xShDefault.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -988,6 +1020,14 @@
                 "id": "f81b190e-986f-4a99-8b3d-2a2092afa47e",
                 "resourcePath": "scripts\\xMatrixSubtractComponentwise\\xMatrixSubtractComponentwise.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "dd076541-c9aa-4be9-9516-aaab8ba300ac",
+            "Value": {
+                "id": "53fc1b02-98d5-4a13-bfef-a1bd6e898662",
+                "resourcePath": "views\\dd076541-c9aa-4be9-9516-aaab8ba300ac.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -1132,6 +1172,14 @@
                 "id": "77f0fc10-43e6-4c07-92b1-69aee3dcebbe",
                 "resourcePath": "scripts\\xQuaternionScale\\xQuaternionScale.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "f688142d-7f38-444c-a5e8-22aa481fe71f",
+            "Value": {
+                "id": "2c82a5a7-e50e-4729-8ed1-3a4e1c4faf1e",
+                "resourcePath": "datafiles_yy\\X\\Shaders\\Common.ps.yy",
+                "resourceType": "GMIncludedFile"
             }
         },
         {
