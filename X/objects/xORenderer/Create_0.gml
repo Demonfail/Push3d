@@ -1,6 +1,7 @@
 /// @desc Init
 gpu_set_zwriteenable(true);
 gpu_set_ztestenable(true);
+gpu_set_cullmode(cull_counterclockwise);
 
 // Surfaces
 application_surface_enable(true);

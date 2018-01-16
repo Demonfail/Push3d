@@ -591,6 +591,14 @@
             }
         },
         {
+            "Key": "79156036-93c8-467d-a25d-9828474c410d",
+            "Value": {
+                "id": "dc2975d4-2494-445d-9a73-1d350ccd753b",
+                "resourcePath": "shaders\\xShDeferredDirectional\\xShDeferredDirectional.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "7a30ba4d-8d8b-457b-a2c2-48c0fe554b5d",
             "Value": {
                 "id": "122a8244-dc8e-4c35-99c2-af30fda41e8d",

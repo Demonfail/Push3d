@@ -1,4 +1,5 @@
 /// @desc Render
+var _shader;
 var _screenWidth = window_get_width();
 var _screenHeight = window_get_height();
 
@@ -18,17 +19,21 @@ gpu_set_blendenable(false);
 
 var _clipFar = 8192;
 
-var _shader = xShGBuffer;
+_shader = xShGBuffer;
 shader_set(_shader);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), _clipFar);
 
-matrix_set(matrix_view,
-	matrix_build_lookat(
-		x, y, z,
-		x + dcos(direction),
-		y - dsin(direction),
-		z + dtan(pitch),
-		0, 0, 1));
+var _matView = matrix_build_lookat(
+	x, y, z,
+	x + dcos(direction),
+	y - dsin(direction),
+	z + dtan(pitch),
+	0, 0, 1);
+
+var _matViewInverse = xMatrixClone(_matView);
+xMatrixInverse(_matViewInverse);
+
+matrix_set(matrix_view, _matView);
 
 matrix_set(matrix_projection,
 	matrix_build_projection_perspective_fov(
@@ -47,6 +52,34 @@ surface_copy(surGBuffer[xEGBuffer.Albedo], 0, 0, application_surface);
 
 //==============================================================================
 // Light pass
+surface_set_target(application_surface);
+gpu_set_zwriteenable(false);
+gpu_set_ztestenable(false);
+
+// First render base lighting to be added upon
+var _aspect = _screenWidth / _screenHeight;
+var _tanFovY = dtan(fov * 0.5);
+
+_shader = xShDeferredDirectional;
+shader_set(_shader);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightDir"), 0.5, 0.5, -0.5);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 0.8, 0.8, 0.5, 1.0);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fTanAspect"), _tanFovY * _aspect, -_tanFovY);
+shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
+texture_set_stage(1, surface_get_texture(surGBuffer[xEGBuffer.Normal]));
+texture_set_stage(2, surface_get_texture(surGBuffer[xEGBuffer.Depth]));
+draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
+shader_reset();
+
+// Blend other lights
+gpu_set_blendmode_ext(bm_one, bm_one);
+
+gpu_set_blendmode(bm_normal);
+
+gpu_set_ztestenable(true);
+gpu_set_zwriteenable(true);
+surface_reset_target();
 
 
 //==============================================================================
