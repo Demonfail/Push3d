@@ -1,5 +1,5 @@
-attribute vec4 in_Position;     // (x, y, z, w)
-attribute vec2 in_TextureCoord; // (u, v)
+attribute vec4 in_Position;     // (x,y,z,w)
+attribute vec2 in_TextureCoord; // (u,v)
 
 varying vec2 v_vTexCoord;
 

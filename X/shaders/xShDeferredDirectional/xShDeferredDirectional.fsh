@@ -32,7 +32,7 @@ void main(in VS_out IN, out PS_out OUT) {
 		discard;
 	}
 
-	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz) * 2.0 - 1.0;
+	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
 	float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
 	float3 posView = xProject(IN.TexCoord, depth);
 	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;

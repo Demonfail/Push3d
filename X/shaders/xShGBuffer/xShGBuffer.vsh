@@ -4,7 +4,7 @@ struct VS_in {
 	float4 Position : POSITION0; // (x,y,z,w)
 	float3 Normal   : NORMAL0;   // (x,y,z)
 	float2 TexCoord : TEXCOORD0; // (u,v)
-	float4 TangentW : TEXCOORD1;
+	float4 TangentW : TEXCOORD1; // (tangent.xyz,bitangentSign)
 };
 
 struct VS_out {
@@ -18,10 +18,10 @@ struct VS_out {
 
 void main(in VS_in IN, out VS_out OUT) {
 	OUT.Position = mul(gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION], IN.Position);
-	OUT.Normal = mul(gm_Matrices[MATRIX_WORLD], float4(IN.Normal, 0.0)).xyz;
-	OUT.Tangent = mul(gm_Matrices[MATRIX_WORLD], float4(IN.TangentW.xyz, 0.0)).xyz;
-	OUT.Bitangent = mul(gm_Matrices[MATRIX_WORLD],
-		normalize(float4(cross(IN.Normal, IN.TangentW.xyz) * IN.TangentW.w, 0.0))).xyz;
+	OUT.Normal = normalize(mul(gm_Matrices[MATRIX_WORLD], float4(IN.Normal, 0.0)).xyz);
+	OUT.Tangent = normalize(mul(gm_Matrices[MATRIX_WORLD], float4(IN.TangentW.xyz, 0.0)).xyz);
+	OUT.Bitangent = normalize(mul(gm_Matrices[MATRIX_WORLD],
+		normalize(float4(cross(IN.Normal, IN.TangentW.xyz) * IN.TangentW.w, 0.0))).xyz);
 	OUT.TexCoord = IN.TexCoord;
 	OUT.Depth = OUT.Position.z / u_fClipFar;
 }

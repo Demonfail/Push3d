@@ -2,7 +2,7 @@ struct VS_in {
 	float4 Position : POSITION0; // (x,y,z,w)
 	float3 Normal   : NORMAL0;   // (x,y,z)
 	float2 TexCoord : TEXCOORD0; // (u,v)
-	float4 TangentW : TEXCOORD1;
+	float4 TangentW : TEXCOORD1; // (tangent.xyz,bitangentSign)
 };
 
 struct VS_out {
