@@ -535,6 +535,14 @@
             }
         },
         {
+            "Key": "6de46218-0978-44da-ba6a-de27f4bf7da9",
+            "Value": {
+                "id": "633d22ad-1e2b-4016-a988-471b826f8e00",
+                "resourcePath": "shaders\\xShShadowMap\\xShShadowMap.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "6e0d060f-4b9b-4313-8c4f-0ec6da450688",
             "Value": {
                 "id": "9c444ec0-6ed6-47d3-8f83-7031b8db1eb6",

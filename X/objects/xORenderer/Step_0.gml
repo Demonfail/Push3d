@@ -32,3 +32,12 @@ if (keyboard_check(ord("A"))) {
 }
 
 z += (keyboard_check(ord("E")) - keyboard_check(ord("Q"))) * _speed;
+
+// Set sun light direction
+if (keyboard_check(vk_control)) {
+	sunDir = [
+		+dcos(direction),
+		-dsin(direction),
+		+dtan(pitch)
+	];
+}

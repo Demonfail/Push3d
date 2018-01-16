@@ -1,7 +1,9 @@
-Texture2D texNormal : register(t1);
-Texture2D texDepth  : register(t2);
+Texture2D texNormal    : register(t1);
+Texture2D texDepth     : register(t2);
+Texture2D texShadowMap : register(t3);
 
 uniform float4x4 u_mInverse;
+uniform float4x4 u_mShadowMap;
 uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float3   u_fLightDir;
@@ -32,8 +34,15 @@ void main(in VS_out IN, out PS_out OUT) {
 
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz) * 2.0 - 1.0;
 	float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
-	//float3 posView = xProject(IN.TexCoord, depth);
-	//float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
+	float3 posView = xProject(IN.TexCoord, depth);
+	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
+
+	float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
+	float3 texCoordShadowMap = float3(posShadowMap.xy * 0.5 + 0.5, posShadowMap.z);
+	texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
+
+	OUT.Target0 = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap);
+	return;
 
 	float3 L = -normalize(u_fLightDir);
 	float NdotL = saturate(dot(N, L));

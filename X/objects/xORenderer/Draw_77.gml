@@ -10,3 +10,6 @@ for (var i = 0; i < xEGBuffer.SIZE; ++i) {
 	draw_surface_stretched(surGBuffer[i], _x, _y, _w, _h);
 	_x += _w;
 }
+
+draw_surface_stretched(surShadowMap, _x, _y, _h, _h);
+_x += _h;

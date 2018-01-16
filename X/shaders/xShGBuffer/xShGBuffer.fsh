@@ -21,7 +21,7 @@ float3 xEncodeDepth(float d) {
 
 void main(in VS_out IN, out PS_out OUT) {	
 	OUT.Target0 = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
-	OUT.Target1.rgb = normalize(IN.Normal) * 2.0 - 1.0;
+	OUT.Target1.rgb = normalize(IN.Normal) * 0.5 + 0.5;
 	OUT.Target1.a = 1.0;
 	OUT.Target2.rgb = xEncodeDepth(IN.Depth);
 	OUT.Target2.a = 1.0;

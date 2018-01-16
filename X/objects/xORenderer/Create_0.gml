@@ -18,6 +18,11 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
 	surGBuffer[i] = noone;
 }
 
+surShadowMap = noone;
+shadowMapRes = 1024;
+shadowMapArea = 512;
+sunDir = [0.5, 0.5, -0.5];
+
 // Vertex format
 vertex_format_begin();
 vertex_format_add_position_3d();

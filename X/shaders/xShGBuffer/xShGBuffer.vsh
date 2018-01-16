@@ -1,9 +1,9 @@
 uniform float u_fClipFar;
 
 struct VS_in {
-	float4 Position : POSITION0;  // (x,y,z,w)
-	float3 Normal   : NORMAL0;    // (x,y,z)
-	float2 TexCoord : TEXCOORD0;  // (u,v)
+	float4 Position : POSITION0; // (x,y,z,w)
+	float3 Normal   : NORMAL0;   // (x,y,z)
+	float2 TexCoord : TEXCOORD0; // (u,v)
 };
 
 struct VS_out {
