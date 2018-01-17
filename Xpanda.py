@@ -13,6 +13,8 @@ PATH_XSHADERS = "./X/Xshaders/"
 
 def clear(file):
     data = ""
+    cleared = False
+
     with open(file, "r") as f:
         data = f.read()
 
@@ -27,8 +29,11 @@ def clear(file):
                 "#PRAGMA INCLUDE(\"{}\")".format(m.group(1)))
 
         data = data.replace("#PRAGMA INCLUDE", "#pragma include")
-    with open(file, "w") as f:
-        f.write(data)
+        cleared = True
+
+    if cleared:
+        with open(file, "w") as f:
+            f.write(data)
 
 def expand(file):
     data = ""
