@@ -16,6 +16,12 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xMatrixSubtractComponentwise](#xmatrixsubtractcomponentwise)
 	- [xMatrixToEuler](#xmatrixtoeuler)
 	- [xMatrixTranspose](#xmatrixtranspose)
+	- [xMeshCreate](#xmeshcreate)
+	- [xMeshDestroy](#xmeshdestroy)
+	- [xMeshInit](#xmeshinit)
+	- [xMeshLoadFromObj](#xmeshloadfromobj)
+	- [xMeshRecalculateTBN](#xmeshrecalculatetbn)
+	- [xMeshToVBuffer](#xmeshtovbuffer)
 	- [xQuaternionAdd](#xquaternionadd)
 	- [xQuaternionClone](#xquaternionclone)
 	- [xQuaternionConjugate](#xquaternionconjugate)
@@ -37,6 +43,7 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xQuaternionToAngle](#xquaterniontoangle)
 	- [xQuaternionToAxis](#xquaterniontoaxis)
 	- [xQuaternionToMatrix](#xquaterniontomatrix)
+	- [xStringSplitOnFirst](#xstringsplitonfirst)
 	- [xSurfaceCheck](#xsurfacecheck)
 	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
 	- [xVec2Abs](#xvec2abs)
@@ -282,6 +289,74 @@ Transposes the matrix.
 Name | Type | Description
 ---- | ---- | -----------
 m | `array` | The matrix to be transposed.
+
+## xMeshCreate
+```
+xMeshCreate()
+```
+Creates an empty mesh.
+
+### Returns:
+`real`: The id of the ds_map containing mesh data.
+
+## xMeshDestroy
+```
+xMeshDestroy(mesh)
+```
+Destroys the mesh.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+mesh | `real` | The id of the mesh.
+
+## xMeshInit
+```
+xMeshInit()
+```
+Initializes mesh functionality.
+
+## xMeshLoadFromObj
+```
+xMeshLoadFromObj(file)
+```
+Loads a 3D mesh data into a ds_map from the *.obj file.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+file | `string` | The path to the file.
+
+### Returns:
+`real`: The id of the mesh on success or `noone` on fail.
+
+## xMeshRecalculateTBN
+```
+xMeshRecalculateTBN(mesh)
+```
+Recalculates tangent and bitangent vectors for the mesh.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+mesh | `real` | The id of the mesh.
+
+### Returns:
+`bool`: True on success.
+
+## xMeshToVBuffer
+```
+xMeshToVBuffer(mesh)
+```
+Creates a vertex buffer from the mesh.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+mesh | `real` | The id of the mesh.
+
+### Returns:
+`real`: The id of the vertex buffer on success or `noone` on fail.
 
 ## xQuaternionAdd
 ```
@@ -558,6 +633,21 @@ q | `array` | The quaternion.
 
 ### Returns:
 `array`: The created rotation matrix.
+
+## xStringSplitOnFirst
+```
+xStringSplitOnFirst(string, delimiter)
+```
+Splits the string in two at the first occurence of the delimiter.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to split.
+delimiter | `string` | The delimiter.
+
+### Returns:
+`array`: An array containing [firstHalf, secondHalf]. If the delimiter is not found in the string, then secondHalf equals empty string and firstHalf is the original string.
 
 ## xSurfaceCheck
 ```
