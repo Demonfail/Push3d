@@ -455,6 +455,14 @@
             }
         },
         {
+            "Key": "58cf5c74-43c1-4a38-9cf0-3c8ae1ab76c7",
+            "Value": {
+                "id": "c1625b4d-e849-4d5b-954d-d9111ec5d399",
+                "resourcePath": "datafiles_yy\\Models\\TestScene.obj.yy",
+                "resourceType": "GMIncludedFile"
+            }
+        },
+        {
             "Key": "5b547574-e3a5-40a3-8e5a-d7b76766537e",
             "Value": {
                 "id": "a2815cac-1b87-49a1-b546-a0e2ca7715eb",

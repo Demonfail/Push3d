@@ -28,7 +28,7 @@ var _matViewSun = matrix_build_lookat(
 
 var _matProjSun = matrix_build_projection_ortho(
 	shadowMapArea, shadowMapArea,
-	-shadowMapArea * 0.5, shadowMapArea * 0.5);
+	0, shadowMapArea);
 
 matrix_set(matrix_view, _matViewSun);
 matrix_set(matrix_projection, _matProjSun);
@@ -36,7 +36,7 @@ matrix_set(matrix_projection, _matProjSun);
 var _matShadowMap = matrix_multiply(_matViewSun, _matProjSun);
 
 shader_set(xShShadowMap);
-matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 50, 50, 50));
+matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40));
 vertex_submit(vBuffer, pr_trianglelist, _texAlbedo)
 matrix_set(matrix_world, matrix_build_identity());
 shader_reset();
@@ -64,15 +64,14 @@ var _matView = matrix_build_lookat(
 var _matViewInverse = xMatrixClone(_matView);
 xMatrixInverse(_matViewInverse);
 
-matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 50, 50, 50));
 matrix_set(matrix_view, _matView);
 matrix_set(matrix_projection,
 	matrix_build_projection_perspective_fov(
 		60, window_get_width() / window_get_height(), 1, clipFar));
 
 texture_set_stage(1, _texNormal); // Set normal map
+matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40));
 vertex_submit(vBuffer, pr_trianglelist, _texAlbedo);
-
 matrix_set(matrix_world, matrix_build_identity());
 
 shader_reset();
@@ -98,6 +97,7 @@ var _tanFovY = dtan(fov * 0.5);
 _shader = xShDeferredDirectional;
 shader_set(_shader);
 shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 0.8, 0.8, 0.5, 1.0);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fTanAspect"), _tanFovY * _aspect, -_tanFovY);

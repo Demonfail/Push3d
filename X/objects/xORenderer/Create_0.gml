@@ -20,7 +20,7 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
 
 surShadowMap = noone;
 shadowMapRes = 1024;
-shadowMapArea = 512;
+shadowMapArea = 1024;
 sunDir = [0.5, 0.5, -0.5];
 
 // Camera
@@ -34,7 +34,7 @@ mouseYLast = 0;
 
 // Meshes
 xMeshInit();
-var _mesh = xMeshLoadFromObj("Models/Cube.obj");
+var _mesh = xMeshLoadFromObj("Models/TestScene.obj");
 xAssert(_mesh != noone, "Mesh loading failed!");
 xMeshRecalculateTBN(_mesh);
 vBuffer = xMeshToVBuffer(_mesh);

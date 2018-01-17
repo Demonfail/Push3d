@@ -24,6 +24,7 @@ Texture2D texShadowMap : register(t3);
 
 uniform float4x4 u_mInverse;
 uniform float4x4 u_mShadowMap;
+uniform float    u_fShadowMapArea;
 uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float3   u_fLightDir;
@@ -44,22 +45,37 @@ void main(in VS_out IN, out PS_out OUT) {
 		discard;
 	}
 
+	float shadow = 0.0;
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
-	float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
-	float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
-	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
-
-	float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
-	float3 texCoordShadowMap = float3(posShadowMap.xy * 0.5 + 0.5, posShadowMap.z);
-	texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
-
-	/*OUT.Target0 = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap);
-	return;*/
-
 	float3 L = -normalize(u_fLightDir);
 	float NdotL = saturate(dot(N, L));
+	
+	if (NdotL > 0.0) {
+		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
+		float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
+		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
+
+		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
+		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
+		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);
+
+		if (texCoordShadowMap.x >= 0.0
+			&& texCoordShadowMap.y >= 0.0
+			&& texCoordShadowMap.x <= 1.0
+			&& texCoordShadowMap.y <= 1.0) {
+			texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
+			float3 shadowMap = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap).xyz;
+			shadow = xDecodeDepth(shadowMap) < posShadowMap.z ? 1.0 : 0.0;
+
+			float lerpRegion = 4.0;
+			float shadowLerp =
+				clamp((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion, 0.0, 1.0);
+			shadow = lerp(shadow, 0.0, shadowLerp);
+		}
+	}
+
 	float4 lightCol;
-	lightCol.rgb = u_fLightCol.rgb * u_fLightCol.a * NdotL;
+	lightCol.rgb = u_fLightCol.rgb * u_fLightCol.a * NdotL * (1.0 - shadow);
 	lightCol.a = 1.0;
 
 	OUT.Target0 = base * lightCol;

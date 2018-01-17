@@ -12,5 +12,6 @@ struct VS_out {
 
 void main(in VS_in IN, out VS_out OUT) {
 	OUT.Position = mul(gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION], IN.Position);
+	OUT.Position.z = OUT.Position.z * 0.5 + 0.5;
 	OUT.TexCoord = IN.TexCoord;
 }
