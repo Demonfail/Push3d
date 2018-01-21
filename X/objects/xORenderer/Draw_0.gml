@@ -17,7 +17,7 @@ gpu_set_blendenable(false);
 //==============================================================================
 // Shadow map
 surface_set_target(surShadowMap);
-draw_clear_alpha(0, 0);
+draw_clear(c_red);
 
 var _matViewSun = matrix_build_lookat(
 	x, y, 0,
@@ -98,6 +98,8 @@ _shader = xShDeferredDirectional;
 shader_set(_shader);
 shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
+var _texel = 1 / shadowMapRes;
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 0.8, 0.8, 0.5, 1.0);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fTanAspect"), _tanFovY * _aspect, -_tanFovY);

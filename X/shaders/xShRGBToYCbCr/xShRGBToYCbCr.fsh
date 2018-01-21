@@ -1,4 +1,4 @@
-uniform vec2 u_vScreenSize; // (screenWidth, screenHeight)
+uniform vec2 u_vScreenSize; // (screenWidth,screenHeight)
 
 varying vec2 v_vTexCoord;
 

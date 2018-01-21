@@ -25,6 +25,7 @@ Texture2D texShadowMap : register(t3);
 uniform float4x4 u_mInverse;
 uniform float4x4 u_mShadowMap;
 uniform float    u_fShadowMapArea;
+uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
 uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float3   u_fLightDir;
@@ -38,6 +39,27 @@ struct VS_out {
 struct PS_out {
 	float4 Target0 : SV_TARGET0;
 };
+
+// Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
+float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ) {
+	if (uv.x < 0.0
+		|| uv.y < 0.0
+		|| uv.x > 1.0
+		|| uv.y > 1.0) {
+		return 0.0;
+	}
+	float2 temp = uv.xy / texel + 0.5;
+	float2 f = frac(temp);
+	float2 centroidUV = floor(temp) * texel;
+	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV).xyz), compareZ);
+	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(0.0, 1.0)).xyz), compareZ);
+	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 0.0)).xyz), compareZ);
+	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 1.0)).xyz), compareZ);
+	float a = lerp(lb, lt, f.y);
+	float b = lerp(rb, rt, f.y);
+	float c = lerp(a, b, f.x);
+	return c;
+}
 
 void main(in VS_out IN, out PS_out OUT) {
 	float4 base = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
@@ -58,20 +80,12 @@ void main(in VS_out IN, out PS_out OUT) {
 		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
 		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
 		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);
-
-		if (texCoordShadowMap.x >= 0.0
-			&& texCoordShadowMap.y >= 0.0
-			&& texCoordShadowMap.x <= 1.0
-			&& texCoordShadowMap.y <= 1.0) {
-			texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
-			float3 shadowMap = texShadowMap.Sample(gm_BaseTexture, texCoordShadowMap).xyz;
-			shadow = xDecodeDepth(shadowMap) < posShadowMap.z ? 1.0 : 0.0;
-
-			float lerpRegion = 4.0;
-			float shadowLerp =
-				clamp((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion, 0.0, 1.0);
-			shadow = lerp(shadow, 0.0, shadowLerp);
-		}
+		texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
+		float bias = clamp(u_fShadowMapArea * u_fShadowMapTexel * tan(acos(NdotL)) / u_fShadowMapArea, 0.0, 0.125);
+		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, texCoordShadowMap, posShadowMap.z - bias);
+		const float lerpRegion = 2.0;
+		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);
+		shadow = lerp(shadow, 0.0, shadowLerp);
 	}
 
 	float4 lightCol;

@@ -2,6 +2,7 @@
 gpu_set_zwriteenable(true);
 gpu_set_ztestenable(true);
 gpu_set_cullmode(cull_counterclockwise);
+//gpu_set_texfilter(true);
 
 // Surfaces
 application_surface_enable(true);
@@ -19,7 +20,7 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
 }
 
 surShadowMap = noone;
-shadowMapRes = 1024;
+shadowMapRes = 512;
 shadowMapArea = 1024;
 sunDir = [0.5, 0.5, -0.5];
 
