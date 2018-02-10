@@ -41,3 +41,14 @@ if (keyboard_check(vk_control)) {
 		+dtan(pitch)
 	];
 }
+
+// Create point light
+if (keyboard_check_pressed(vk_space)) {
+	var l = instance_create_depth(x, y, 0, xOLightPoint);
+	l.z = z;
+}
+
+// Destroy all point lights
+if (keyboard_check_pressed(vk_backspace)) {
+	instance_destroy(xOLightPoint);
+}

@@ -9,9 +9,6 @@ var i = string_pos(argument1, argument0);
 if (i == 0) {
 	return [argument0, ""];
 }
-while (string_char_at(argument0, i + 1) == argument1) {
-	++i;
-}
 return [
 	string_copy(argument0, 1, i - 1),
 	string_delete(argument0, 1, i)

@@ -64,10 +64,11 @@ var _matView = matrix_build_lookat(
 var _matViewInverse = xMatrixClone(_matView);
 xMatrixInverse(_matViewInverse);
 
+var _matProj = matrix_build_projection_perspective_fov(
+	60, window_get_width() / window_get_height(), 1, clipFar);
+
 matrix_set(matrix_view, _matView);
-matrix_set(matrix_projection,
-	matrix_build_projection_perspective_fov(
-		60, window_get_width() / window_get_height(), 1, clipFar));
+matrix_set(matrix_projection, _matProj);
 
 texture_set_stage(1, _texNormal); // Set normal map
 matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40));
@@ -93,6 +94,7 @@ gpu_set_ztestenable(false);
 // First render base lighting to be added upon
 var _aspect = _screenWidth / _screenHeight;
 var _tanFovY = dtan(fov * 0.5);
+var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
 
 _shader = xShDeferredDirectional;
 shader_set(_shader);
@@ -102,7 +104,7 @@ var _texel = 1 / shadowMapRes;
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 0.8, 0.8, 0.5, 1.0);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fTanAspect"), _tanFovY * _aspect, -_tanFovY);
+shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
 shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
 shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
 texture_set_stage(1, surface_get_texture(surGBuffer[xEGBuffer.Normal]));
@@ -113,6 +115,45 @@ shader_reset();
 
 // Blend other lights
 gpu_set_blendmode_ext(bm_one, bm_one);
+
+// Point lights
+if (instance_exists(xOLightPoint)) {
+	var _cullMode = gpu_get_cullmode();
+	_shader = xShDeferredPoint;
+	shader_set(_shader);
+	shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
+	shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
+	shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
+	texture_set_stage(1, surface_get_texture(surGBuffer[xEGBuffer.Normal]));
+	texture_set_stage(2, surface_get_texture(surGBuffer[xEGBuffer.Depth]));
+
+	var _matWorld = matrix_get(matrix_world);
+	matrix_set(matrix_view, _matView);
+	matrix_set(matrix_projection, _matProj);
+
+	gpu_set_cullmode(cull_clockwise);
+
+	var _1by255 = 1 / 255;
+	var _albedo = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
+	with (xOLightPoint) {
+		shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightPos"),
+			x, y, z, radius);
+		shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"),
+			color_get_red(color) * _1by255,
+			color_get_green(color) * _1by255,
+			color_get_blue(color) * _1by255,
+			intensity);
+
+		matrix_set(matrix_world,
+			matrix_build(x, y, z, 0, 0, 0, radius, radius, radius));
+		vertex_submit(other.vBufferLightPoint, pr_trianglelist, _albedo);
+	}
+
+	matrix_set(matrix_world, _matWorld);
+
+	gpu_set_cullmode(_cullMode);
+	shader_reset();
+}
 
 gpu_set_blendmode(bm_normal);
 

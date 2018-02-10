@@ -10,70 +10,56 @@ if (_file == -1) {
 // Create mesh structure
 var _mesh = xMeshCreate();
 var _vertex = _mesh[? "vertex"];
-var _normal = _mesh[? "normal"];
-var _texture = _mesh[? "texture"];
 var _face = _mesh[? "face"];
+
+var _hasNormal = ds_map_exists(_mesh, "normal");
+var _normal = _hasNormal ? _mesh[? "normal"] : ds_list_create();
+
+var _hasTexture = ds_map_exists(_mesh, "texture");
+var _texture = _hasTexture ? _mesh[? "texture"] : ds_list_create();
 
 // Laod mesh data
 while (!file_text_eof(_file)) {
 	var _line = file_text_read_string(_file);
-	var _split = xStringSplitOnFirst(_line, " ");
-	_line = _split[1];
-	var _id = _split[0];
+	var _split = xStringExplode(_line, " ");
 
-	switch (_id) {
+	switch (_split[0]) {
 		// Vertex
 		case "v":
-			_split = xStringSplitOnFirst(_line, " "); 
-			ds_list_add(_vertex, real(_split[0]));
-
-			_split = xStringSplitOnFirst(_split[1], " "); 
-			ds_list_add(_vertex, real(_split[0]));
-
-			_split = xStringSplitOnFirst(_split[1], " "); 
-			ds_list_add(_vertex, real(_split[0]));
+			ds_list_add(_vertex, real(_split[1]));
+			ds_list_add(_vertex, real(_split[2]));
+			ds_list_add(_vertex, real(_split[3]));
 			break;
 
 		// Vertex normal
 		case "vn":
-			_split = xStringSplitOnFirst(_line, " ");
-			ds_list_add(_normal, real(_split[0]));
-
-			_split = xStringSplitOnFirst(_split[1], " ");
-			ds_list_add(_normal, real(_split[0]));
-
-			_split = xStringSplitOnFirst(_split[1], " ");
-			ds_list_add(_normal, real(_split[0]));
+			ds_list_add(_normal, real(_split[1]));
+			ds_list_add(_normal, real(_split[2]));
+			ds_list_add(_normal, real(_split[3]));
 			break;
 
 		// Vertex texture coordinate
 		case "vt":
-			_split = xStringSplitOnFirst(_line, " ");
-			ds_list_add(_texture, real(_split[0]));
-
-			_split = xStringSplitOnFirst(_split[1], " ");
-			ds_list_add(_texture, real(_split[0]));
+			ds_list_add(_texture, real(_split[1]));
+			ds_list_add(_texture, real(_split[2]));
 			break;
 
 		// Face
 		case "f":
-			var _f; _f[2] = "";
-			_split = xStringSplitOnFirst(_line, " ");
-			_f[0] = _split[0];
-			_split = xStringSplitOnFirst(_split[1], " ");
-			_f[1] = _split[0];
-			_split = xStringSplitOnFirst(_split[1], " ");
-			_f[2] = _split[0];
+			for (var i = 1; i < 4; ++i) {
+				var _f = xStringExplode(_split[i], "/");
+				var _faceMap = ds_map_create();
 
-			for (var i = 0; i < 3; ++i) {
-				_split = xStringSplitOnFirst(_f[i], "/");
-				var v = (real(_split[0]) - 1) * 3;
-				_split = xStringSplitOnFirst(_split[1], "/");
-				var t = (real(_split[0]) - 1) * 2;
-				_split = xStringSplitOnFirst(_split[1], "/");
-				var n = (real(_split[0]) - 1) * 3;
+				_faceMap[? "vertex"] = (real(_f[0]) - 1) * 3;
+				if (array_length_1d(_f) == 3) {
+					if (_f[1] != "") {
+						_faceMap[? "texture"] = (real(_f[1]) - 1) * 2;
+					}
+					_faceMap[? "normal"] = (real(_f[2]) - 1) * 3;
+				}
 
-				ds_list_add(_face, v, t, n);
+				ds_list_add(_face, _faceMap);
+				ds_list_mark_as_map(_face, ds_list_size(_face) - 1);
 			}
 			break;
 	}
@@ -81,5 +67,21 @@ while (!file_text_eof(_file)) {
 	file_text_readln(_file);
 }
 file_text_close(_file);
+
+if (!_hasNormal) {
+	if (ds_list_empty(_normal)) {
+		ds_list_destroy(_normal);
+	} else {
+		ds_map_add_list(_mesh, "normal", _normal);
+	}
+}
+
+if (!_hasTexture) {
+	if (ds_list_empty(_texture)) {
+		ds_list_destroy(_texture);
+	} else {
+		ds_map_add_list(_mesh, "texture", _texture);
+	}
+}
 
 return _mesh;

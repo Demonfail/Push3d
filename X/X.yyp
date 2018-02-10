@@ -271,6 +271,14 @@
             }
         },
         {
+            "Key": "34504916-e546-4ecb-8c73-849251ea4b32",
+            "Value": {
+                "id": "0d572600-b8eb-4077-af87-6a7f79f47128",
+                "resourcePath": "shaders\\xShDeferredPoint\\xShDeferredPoint.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "36edb25a-7ef0-40d3-8b83-ca9e6d286c85",
             "Value": {
                 "id": "6ea1b032-0f3a-4f47-8202-7769f75be4a0",
@@ -371,6 +379,14 @@
             "Value": {
                 "id": "59296289-7b81-4b5a-946d-fc21d5c7344f",
                 "resourcePath": "scripts\\xQuaternionSubtract\\xQuaternionSubtract.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "4e874030-9deb-4a0a-acfc-918b46f6c767",
+            "Value": {
+                "id": "f3b38e14-5d35-4665-8701-d36d6cff9e4a",
+                "resourcePath": "scripts\\xStringExplode\\xStringExplode.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -919,6 +935,14 @@
             }
         },
         {
+            "Key": "b1be9679-2c34-485f-b1d1-991068ba3857",
+            "Value": {
+                "id": "f5a09361-eeb6-4748-94bb-092a61c8df63",
+                "resourcePath": "datafiles_yy\\Models\\LightPoint.obj.yy",
+                "resourceType": "GMIncludedFile"
+            }
+        },
+        {
             "Key": "b2134b67-0e94-4ece-9e38-31be248aed03",
             "Value": {
                 "id": "c7f5f512-3f46-4d04-97ea-373828b7bcbe",
@@ -1124,6 +1148,14 @@
                 "id": "7254df66-cdb8-46ed-a48c-e5482d12cd82",
                 "resourcePath": "scripts\\xSurfaceCheck\\xSurfaceCheck.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "e23f9310-fde6-4c7d-b0f8-ed6172a7a655",
+            "Value": {
+                "id": "d17c8c07-b072-428b-93c9-f2983e9357fe",
+                "resourcePath": "objects\\xOLightPoint\\xOLightPoint.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1404,6 +1436,7 @@
         "418705f9-084f-4750-8171-9905afeb9167",
         "c2fbe371-a5e5-4767-b1ae-62ed8be347a4",
         "dd3294e7-98cf-4f7d-b189-cb362b81bcf6",
+        "4e874030-9deb-4a0a-acfc-918b46f6c767",
         "8aed6e7b-4516-4512-9305-c978b2c01b51",
         "e2207574-3dbb-4482-a2da-b68a498dd4fc",
         "a380f637-d3c8-4371-b5ea-a769e39c38b4"

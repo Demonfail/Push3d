@@ -29,7 +29,7 @@ uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
 uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float3   u_fLightDir;
-uniform float4   u_fLightCol; // (r,g,b,intensity)
+uniform float4   u_fLightCol;       // (r,g,b,intensity)
 
 struct VS_out {
 	float4 Position : SV_POSITION;
@@ -42,10 +42,8 @@ struct PS_out {
 
 // Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ) {
-	if (uv.x < 0.0
-		|| uv.y < 0.0
-		|| uv.x > 1.0
-		|| uv.y > 1.0) {
+	if (uv.x < 0.0 || uv.y < 0.0
+		|| uv.x > 1.0 || uv.y > 1.0) {
 		return 0.0;
 	}
 	float2 temp = uv.xy / texel + 0.5;
@@ -55,10 +53,11 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(0.0, 1.0)).xyz), compareZ);
 	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 0.0)).xyz), compareZ);
 	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 1.0)).xyz), compareZ);
-	float a = lerp(lb, lt, f.y);
-	float b = lerp(rb, rt, f.y);
-	float c = lerp(a, b, f.x);
-	return c;
+	return lerp(
+		lerp(lb, lt, f.y),
+		lerp(rb, rt, f.y),
+		f.x
+	);
 }
 
 void main(in VS_out IN, out PS_out OUT) {
@@ -76,7 +75,6 @@ void main(in VS_out IN, out PS_out OUT) {
 		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
 		float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
 		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
-
 		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
 		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
 		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);

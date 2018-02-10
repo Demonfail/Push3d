@@ -5,30 +5,27 @@
 var _mesh = argument0;
 var _vertex = _mesh[? "vertex"];
 var _texture = _mesh[? "texture"];
-var _face = _mesh[? "face"];
 var _tangent = _mesh[? "tangent"];
 var _bitangent = _mesh[? "bitangent"];
 var _normal = _mesh[? "normal"];
+var _face = _mesh[? "face"];
 
-var _faceNew = ds_list_create();
-var _hadTangent = false;
-var _hadBitangent = false;
+xAssert(!is_undefined(_texture), "Trying to recalculate TBN for mesh without UVs!");
+xAssert(!is_undefined(_normal), "Trying to recalculate TBN for mesh without normals!");
 
 // Clear tangent and bitangent data
 if (is_undefined(_tangent)) {
-	_tangent = ds_list_create();
+	_tangent = ds_list_create(); // [x, y, z, ...]
 	ds_map_add_list(_mesh, "tangent", _tangent);
 } else {
 	ds_list_clear(_tangent);
-	_hadTangent = true;
 }
 
 if (is_undefined(_bitangent)) {
-	_bitangent = ds_list_create();
+	_bitangent = ds_list_create(); // [sign, ...]
 	ds_map_add_list(_mesh, "bitangent", _bitangent);
 } else {
 	ds_list_clear(_bitangent);
-	_hadBitangent = true;
 }
 
 // Calculate tangent and bitangent
@@ -41,28 +38,22 @@ var _temp;
 
 while (i < _size) {
 	// First vertex data
-	var _v0  = _face[| i++];
-	var _uv0 = _face[| i++];
-	var _n0  = _face[| i++];
-
-	if (_hadTangent) { i++; }
-	if (_hadBitangent) { i++; }
+	var _f0 = _face[| i++];
+	var _v0  = _f0[? "vertex"];
+	var _uv0 = _f0[? "texture"];
+	var _n0  = _f0[? "normal"];
 
 	// Second vertex data
-	var _v1  = _face[| i++];
-	var _uv1 = _face[| i++];
-	var _n1  = _face[| i++];
-
-	if (_hadTangent) { i++; }
-	if (_hadBitangent) { i++; }
+	var _f1 = _face[| i++];
+	var _v1  = _f1[? "vertex"];
+	var _uv1 = _f1[? "texture"];
+	var _n1  = _f1[? "normal"];
 
 	// Third vertex data
-	var _v2  = _face[| i++];
-	var _uv2 = _face[| i++];
-	var _n2  = _face[| i++];
-
-	if (_hadTangent) { i++; }
-	if (_hadBitangent) { i++; }
+	var _f2 = _face[| i++];
+	var _v2  = _f2[? "vertex"];
+	var _uv2 = _f2[? "texture"];
+	var _n2  = _f2[? "normal"];
 
 	// Edges of the triangle : postion delta
 	var _vecV0 = [_vertex[| _v0], _vertex[| _v0+1], _vertex[| _v0+2]];
@@ -188,16 +179,17 @@ while (i < _size) {
 	ds_list_add(_bitangent, _B1s);
 	ds_list_add(_bitangent, _B2s);
 
-	ds_list_add(_faceNew, _v0, _uv0, _n0, tInd + 0, bInd + 0);
-	ds_list_add(_faceNew, _v1, _uv1, _n1, tInd + 3, bInd + 1);
-	ds_list_add(_faceNew, _v2, _uv2, _n2, tInd + 6, bInd + 2);
+	_f0[? "tangent"] = tInd;
+	_f0[? "bitangent"] = bInd;
+
+	_f1[? "tangent"] = tInd + 3;
+	_f1[? "bitangent"] = bInd + 1;
+
+	_f2[? "tangent"] = tInd + 6;
+	_f2[? "bitangent"] = bInd + 2;
 
 	tInd += 9;
 	bInd += 3;
 }
-
-// Replace old data
-ds_map_replace_list(_mesh, "face", _faceNew);
-ds_list_destroy(_face);
 
 return true;
