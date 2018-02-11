@@ -1,4 +1,5 @@
 /// @func xStringExplode(string, char)
+// TODO: Write script documentation.
 var a = [];
 var i = 0;
 var s;

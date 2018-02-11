@@ -44,6 +44,6 @@ xMeshDestroy(_mesh);
 
 _mesh = xMeshLoadFromObj("Models/TestScene.obj");
 xAssert(_mesh != noone, "Mesh loading failed!");
-xMeshRecalculateTBN(_mesh);
+xMeshRecalculateTangentW(_mesh);
 vBuffer = xMeshToVBuffer(_mesh, global.vBufferFormat);
 xMeshDestroy(_mesh);

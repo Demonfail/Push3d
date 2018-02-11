@@ -48,6 +48,7 @@ surface_reset_target();
 surface_set_target_ext(0, application_surface);
 surface_set_target_ext(1, surGBuffer[xEGBuffer.Normal]);
 surface_set_target_ext(2, surGBuffer[xEGBuffer.Depth]);
+// TODO: surface_set_target_ext(3, surEmissive);
 draw_clear_alpha(0, 0);
 
 _shader = xShGBuffer;
@@ -87,7 +88,8 @@ surface_copy(surGBuffer[xEGBuffer.Albedo], 0, 0, application_surface);
 
 //==============================================================================
 // Light pass
-surface_set_target(application_surface);
+surface_set_target_ext(0, application_surface);
+// TODO: surface_set_target_ext(1, surEmissive);
 gpu_set_zwriteenable(false);
 gpu_set_ztestenable(false);
 
@@ -95,6 +97,8 @@ gpu_set_ztestenable(false);
 var _aspect = _screenWidth / _screenHeight;
 var _tanFovY = dtan(fov * 0.5);
 var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
+var _texSceneNormal = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
+var _texSceneDepth = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
 
 _shader = xShDeferredDirectional;
 shader_set(_shader);
@@ -107,8 +111,8 @@ shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
 shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
 shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
-texture_set_stage(1, surface_get_texture(surGBuffer[xEGBuffer.Normal]));
-texture_set_stage(2, surface_get_texture(surGBuffer[xEGBuffer.Depth]));
+texture_set_stage(1, _texSceneNormal);
+texture_set_stage(2, _texSceneDepth);
 texture_set_stage(3, surface_get_texture(surShadowMap));
 draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
 shader_reset();
@@ -124,8 +128,8 @@ if (instance_exists(xOLightPoint)) {
 	shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 	shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
 	shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
-	texture_set_stage(1, surface_get_texture(surGBuffer[xEGBuffer.Normal]));
-	texture_set_stage(2, surface_get_texture(surGBuffer[xEGBuffer.Depth]));
+	texture_set_stage(1, _texSceneNormal);
+	texture_set_stage(2, _texSceneDepth);
 
 	var _matWorld = matrix_get(matrix_world);
 	matrix_set(matrix_view, _matView);
@@ -134,21 +138,23 @@ if (instance_exists(xOLightPoint)) {
 	gpu_set_cullmode(cull_clockwise);
 
 	var _1by255 = 1 / 255;
-	var _albedo = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
+	var _texSceneAlbedo = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
+	var _uLightPos = shader_get_uniform(_shader, "u_fLightPos");
+	var _uLightCol = shader_get_uniform(_shader, "u_fLightCol");
+
 	with (xOLightPoint) {
-		shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightPos"),
-			x, y, z, radius);
-		shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"),
+		shader_set_uniform_f(_uLightPos, x, y, z, radius);
+		shader_set_uniform_f(_uLightCol,
 			color_get_red(color) * _1by255,
 			color_get_green(color) * _1by255,
 			color_get_blue(color) * _1by255,
 			intensity);
 
+		var _scale = radius + 0.2;
 		matrix_set(matrix_world,
-			matrix_build(x, y, z, 0, 0, 0, radius, radius, radius));
-		vertex_submit(other.vBufferLightPoint, pr_trianglelist, _albedo);
+			matrix_build(x, y, z, 0, 0, 0, _scale, _scale, _scale));
+		vertex_submit(other.vBufferLightPoint, pr_trianglelist, _texSceneAlbedo);
 	}
-
 	matrix_set(matrix_world, _matWorld);
 
 	gpu_set_cullmode(_cullMode);
@@ -161,6 +167,10 @@ gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
 surface_reset_target();
 
-
 //==============================================================================
 // Forward pass
+//surface_set_target(application_surface);
+//matrix_set(matrix_view, _matView);
+//matrix_set(matrix_projection, _matProj);
+// TODO: Render particles and other forward shaded stuff here...
+//surface_reset_target();

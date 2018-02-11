@@ -1,5 +1,5 @@
 # X
-A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scroll down a bit and see for yourself what you can grab ;) Also, you gain no financial obligations towards me for using anything from this repo, but if you want to show either your appreciation or hate, you can just throw some coins at my face on https://www.paypal.me/kraifpatrik/1USD!
+A collection of useful scripts/shaders/objects for GameMaker Studio 2, mainly targetting 3D math and rendering. Just scroll down a bit and see for yourself what you can grab ;) Also, you gain no financial obligations towards me for using anything from this repo, but if you want to show either your appreciation or hate, you can just throw some coins at my face on https://www.paypal.me/kraifpatrik/1USD!
 
 # Table of Contents
 - [Xpanda](#xpanda)
@@ -20,8 +20,10 @@ A collection of useful scripts/shaders/objects for GameMaker Studio 2. Just scro
 	- [xMeshCreate](#xmeshcreate)
 	- [xMeshDestroy](#xmeshdestroy)
 	- [xMeshInit](#xmeshinit)
+	- [xMeshLoadFromJson](#xmeshloadfromjson)
 	- [xMeshLoadFromObj](#xmeshloadfromobj)
-	- [xMeshRecalculateTBN](#xmeshrecalculatetbn)
+	- [xMeshRecalculateTangentW](#xmeshrecalculatetangentw)
+	- [xMeshSaveAsJson](#xmeshsaveasjson)
 	- [xMeshToVBuffer](#xmeshtovbuffer)
 	- [xQuaternionAdd](#xquaternionadd)
 	- [xQuaternionClone](#xquaternionclone)
@@ -120,7 +122,7 @@ Xpanda is a tool that allows for including shader code from other files. This ca
 
 ## How to use
  * Create a folder called `Xshaders` in the project directory (right where the `*.yyp` file is).
- * Create a new file inside the `Xshaders` folder, for example `Common.fsh`. The file extension name does not play any role here, but I recommend using `.vsh` for that is supposed to be included in vertex shaders and `.fsh` for fragment shader code.
+ * Create a new file inside the `Xshaders` folder, for example `Common.fsh`. The file extension name does not play any role here, but I recommend using `.vsh` for code that is supposed to be included in vertex shaders and `.fsh` for fragment shader code.
  * Cut some code that you want to share between fragment shaders and paste it into the `Common.fsh` (or what you have called the file).
  * Replace all occurences of the code with `#pragma include("Common.fsh")` (or what you have called the file).
  * Run `Xpanda.py` to expand the pragma includes with the contents of the included file (and repeat this every time you make any changes to the includable files, Xpanda automatically takes care of removing the old code before expanding it again).
@@ -337,6 +339,20 @@ xMeshInit()
 ```
 Initializes mesh functionality.
 
+## xMeshLoadFromJson
+```
+xMeshLoadFromJson(file)
+```
+Loads a mesh from a JSON formatted file.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+file | `string` | The file to load the mesh from.
+
+### Returns:
+`real`: The id of the mesh on success or `noone` on fail.
+
 ## xMeshLoadFromObj
 ```
 xMeshLoadFromObj(file)
@@ -351,11 +367,11 @@ file | `string` | The path to the file.
 ### Returns:
 `real`: The id of the mesh on success or `noone` on fail.
 
-## xMeshRecalculateTBN
+## xMeshRecalculateTangentW
 ```
-xMeshRecalculateTBN(mesh)
+xMeshRecalculateTangentW(mesh)
 ```
-Recalculates tangent and bitangent vectors for the mesh.
+Recalculates tangent vectors and bitangent sign for the mesh.
 
 ### Arguments:
 Name | Type | Description
@@ -365,9 +381,24 @@ mesh | `real` | The id of the mesh.
 ### Returns:
 `bool`: True on success.
 
+## xMeshSaveAsJson
+```
+xMeshSaveAsJson(mesh, file)
+```
+Saves the mesh into a JSON formatted file.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+mesh | `real` | The id of the mesh.
+file | `string` | The file to save the mesh to.
+
+### Returns:
+`bool`: True on success.
+
 ## xMeshToVBuffer
 ```
-xMeshToVBuffer(mesh)
+xMeshToVBuffer(mesh, format)
 ```
 Creates a vertex buffer from the mesh.
 
@@ -375,6 +406,7 @@ Creates a vertex buffer from the mesh.
 Name | Type | Description
 ---- | ---- | -----------
 mesh | `real` | The id of the mesh.
+format | `real` | The vertex buffer format.
 
 ### Returns:
 `real`: The id of the vertex buffer on success or `noone` on fail.

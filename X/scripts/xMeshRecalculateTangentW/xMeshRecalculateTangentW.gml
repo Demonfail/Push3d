@@ -1,5 +1,5 @@
-/// @func xMeshRecalculateTBN(mesh)
-/// @desc Recalculates tangent and bitangent vectors for the mesh.
+/// @func xMeshRecalculateTangentW(mesh)
+/// @desc Recalculates tangent vectors and bitangent sign for the mesh.
 /// @param {real} mesh The id of the mesh.
 /// @return {bool} True on success.
 var _mesh = argument0;

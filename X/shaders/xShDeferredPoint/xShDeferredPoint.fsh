@@ -1,10 +1,7 @@
 #pragma include("Common.fsh")
 float3 xEncodeDepth(float d) {
-	float3 enc = float3(1.0, 255.0, 65025.0) * d;
-	enc = frac(enc);
-	enc -= float3(enc.y, enc.z, enc.z)
-		* float3(1.0 / 255.0, 1.0 / 255.0, 1.0 / 255.0);
-	return enc;
+	float3 enc = frac(float3(1.0, 255.0, 65025.0) * d);
+	return (enc - enc.yzz * (1.0 / 255.0));
 }
 
 float xDecodeDepth(float3 c) {
@@ -12,8 +9,8 @@ float xDecodeDepth(float3 c) {
 }
 
 float3 xProject(float2 tanAspect, float2 texCoord, float depth) {
-	// tanAspect = (tanFovY * (screenWidth / screenHeight), -tanFovY), where:
-	//   tanFovY = dtan(fov * 0.5)
+	// tanAspect = (tanFovY * (screenWidth / screenHeight), -tanFovY)
+	// tanFovY = dtan(fov * 0.5)
 	return float3(tanAspect * (texCoord * 2.0 - 1.0) * depth, depth);
 }
 // include("Common.fsh")
@@ -49,7 +46,7 @@ void main(in VS_out IN, out PS_out OUT) {
 	float3 posView = xProject(u_fTanAspect, screenUV, depth);
 	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 
-	float4 lightCol = float4(0.0, 0.0, 0.0, 1.0);
+	float3 lightCol = 0.0;
 	float3 lightVec = u_fLightPos.xyz - posWorld;
 	float dist = length(lightVec);
 
@@ -60,9 +57,9 @@ void main(in VS_out IN, out PS_out OUT) {
 
 		if (NdotL > 0.0) {
 			float att = 1.0 - saturate(dist / u_fLightPos.w);
-			lightCol.rgb += u_fLightCol.rgb * u_fLightCol.a * NdotL * att;
+			lightCol += u_fLightCol.rgb * u_fLightCol.a * NdotL * att;
 		}
 	}
 
-	OUT.Target0 = base * lightCol;
+	OUT.Target0 = float4(base.rgb * lightCol, base.a);
 }

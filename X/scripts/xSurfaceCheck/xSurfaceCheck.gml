@@ -11,7 +11,7 @@ var _height = max(argument2, 1);
 if (surface_exists(_surface)) {
 	if (surface_get_width(_surface) != _width
 		|| surface_get_height(_surface) != _height) {
-	surface_resize(_surface, _width, _height);
+		surface_resize(_surface, _width, _height);
 	}
 } else {
 	_surface = surface_create(_width, _height);
