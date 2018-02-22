@@ -87,6 +87,92 @@ surface_reset_target();
 surface_copy(surGBuffer[xEGBuffer.Albedo], 0, 0, application_surface);
 
 //==============================================================================
+// SSAO
+var _ssaoWidth = _screenWidth * ssaoResolution;
+var _ssaoHeight = _screenHeight * ssaoResolution;
+surSSAO = xSurfaceCheck(surSSAO, _ssaoWidth, _ssaoHeight);
+surWork = xSurfaceCheck(surWork, _ssaoWidth, _ssaoHeight);
+
+var _aspect = _screenWidth / _screenHeight;
+var _tanFovY = dtan(fov * 0.5);
+var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
+var _texSceneNormal = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
+var _texSceneDepth = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
+
+// Make kernel
+if (!is_array(ssaoKernel)) {
+	for (var i = ssaoKernelSize - 1; i >= 0; --i) {
+		var _vec = xVec3Create(random_range(-1, 1), random_range(-1, 1), random(1));
+		xVec3Normalize(_vec);
+		var _s = i/ssaoKernelSize;
+		_s = lerp(0.1, 1.0, _s*_s);
+		xVec3Scale(_vec, _s);
+		ssaoKernel[i*3 + 2] = _vec[2];
+		ssaoKernel[i*3 + 1] = _vec[1];
+		ssaoKernel[i*3 + 0] = _vec[0];
+	}
+}
+
+// Make noise texture
+if (!surface_exists(surSSAONoise)) {
+	surSSAONoise = surface_create(ssaoNoiseTexSize, ssaoNoiseTexSize);
+	surface_set_target(surSSAONoise);
+	draw_clear(0);
+	for (var i = 0; i < ssaoNoiseTexSize; ++i) {
+		for (var j = 0; j < ssaoNoiseTexSize; ++j) {
+			var _vec = xVec3Create(random_range(-1, 1), random_range(-1, 1), 0);
+			xVec3Normalize(_vec);
+			draw_point_colour(i, j,
+				make_colour_rgb(
+					(_vec[0] * 0.5 + 0.5) * 255,
+					(_vec[1] * 0.5 + 0.5) * 255,
+					(_vec[2] * 0.5 + 0.5) * 255));
+		}
+	}
+	surface_reset_target();
+}
+
+gpu_set_tex_repeat(true);
+
+_shader = xShSSAO;
+surface_set_target(surSSAO);
+draw_clear(0);
+shader_set(_shader);
+texture_set_stage(1, _texSceneNormal);
+texture_set_stage(2, surface_get_texture(surSSAONoise));
+shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mView"), _matView); // Only when using world-space normals
+shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mProjection"), _matProj);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fTexel"), 1/_ssaoWidth, 1/_ssaoHeight);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar); 
+shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
+shader_set_uniform_i(shader_get_uniform(_shader, "u_iSampleKernelSize"), ssaoKernelSize);
+shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fSampleKernel"), ssaoKernel);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fRadius"), ssaoRadius);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fPower"), ssaoPower);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fNoiseScale"),
+	_screenWidth/ssaoNoiseTexSize, _screenHeight/ssaoNoiseTexSize);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fBias"), 4);
+draw_surface_stretched(surGBuffer[xEGBuffer.Depth], 0, 0, _ssaoWidth, _ssaoHeight);
+shader_reset();
+surface_reset_target();
+
+surface_set_target(surWork);
+draw_clear(0);
+shader_set(xShSSAOBlur);
+shader_set_uniform_f(shader_get_uniform(xShSSAOBlur, "u_fTexel"), 1/_ssaoWidth, 0);
+draw_surface(surSSAO, 0, 0);
+shader_reset();
+surface_reset_target();
+
+surface_set_target(surSSAO);
+draw_clear(0);
+shader_set(xShSSAOBlur);
+shader_set_uniform_f(shader_get_uniform(xShSSAOBlur, "u_fTexel"), 0, 1/_ssaoHeight);
+draw_surface(surWork, 0, 0);
+shader_reset();
+surface_reset_target();
+
+//==============================================================================
 // Light pass
 surface_set_target_ext(0, application_surface);
 // TODO: surface_set_target_ext(1, surEmissive);
@@ -94,11 +180,15 @@ gpu_set_zwriteenable(false);
 gpu_set_ztestenable(false);
 
 // First render base lighting to be added upon
-var _aspect = _screenWidth / _screenHeight;
-var _tanFovY = dtan(fov * 0.5);
-var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
-var _texSceneNormal = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
-var _texSceneDepth = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
+_shader = xShAmbient;
+shader_set(_shader);
+texture_set_stage(1, surface_get_texture(surSSAO));
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fAmbient"), 1, 1, 1, 0.1);
+draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
+shader_reset();
+
+// Blend other lights
+gpu_set_blendmode_ext(bm_one, bm_one);
 
 _shader = xShDeferredDirectional;
 shader_set(_shader);
@@ -116,9 +206,6 @@ texture_set_stage(2, _texSceneDepth);
 texture_set_stage(3, surface_get_texture(surShadowMap));
 draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
 shader_reset();
-
-// Blend other lights
-gpu_set_blendmode_ext(bm_one, bm_one);
 
 // Point lights
 if (instance_exists(xOLightPoint)) {

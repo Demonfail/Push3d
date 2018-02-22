@@ -63,6 +63,14 @@
             }
         },
         {
+            "Key": "05a01348-e2cb-4d81-8bea-00c37dca588c",
+            "Value": {
+                "id": "ba508480-a019-48fe-bfe6-fa53c1b420ca",
+                "resourcePath": "shaders\\xShAmbient\\xShAmbient.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "05e2d6d0-9a57-4e0f-a42a-e6e705f5d545",
             "Value": {
                 "id": "bc8e7eff-436b-498b-b82f-3a4ecd0bf79f",
@@ -295,6 +303,14 @@
             }
         },
         {
+            "Key": "36f2e594-5063-4a38-929e-5b2b7dd8bff4",
+            "Value": {
+                "id": "76b4b897-bc84-4356-bcfe-0b243c304ac1",
+                "resourcePath": "shaders\\xShSSAOBlur\\xShSSAOBlur.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "39985561-af6d-403a-af1d-9cf87d1643cf",
             "Value": {
                 "id": "88a0abf3-539a-47f4-a9d2-3ad3a007b0ba",
@@ -468,6 +484,14 @@
                 "id": "9ea91edf-399b-4748-9733-f31d597b4e6f",
                 "resourcePath": "scripts\\xVec3Maximize\\xVec3Maximize.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "5728a55c-55cc-45c1-8dca-3e0da4bec8ec",
+            "Value": {
+                "id": "b79910c0-2d8c-43d2-81cb-a7ce43b93f60",
+                "resourcePath": "shaders\\xShSSAO\\xShSSAO.yy",
+                "resourceType": "GMShader"
             }
         },
         {

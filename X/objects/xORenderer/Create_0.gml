@@ -19,6 +19,18 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
 	surGBuffer[i] = noone;
 }
 
+// SSAO
+surSSAO = noone;
+surWork = noone;
+surSSAONoise = noone;
+ssaoKernelSize = 32;
+ssaoKernel = noone;
+ssaoRadius = 20;
+ssaoPower = 2;
+ssaoNoiseTexSize = 4;
+ssaoResolution = 0.5; // In range (0, 1]. The lower the value the better performance, but lower quality.
+
+// Shadow mapping
 surShadowMap = noone;
 shadowMapRes = 512;
 shadowMapArea = 1024;
