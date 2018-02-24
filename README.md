@@ -1,5 +1,5 @@
 # X
-A collection of useful scripts/shaders/objects for GameMaker Studio 2, mainly targetting 3D math and rendering. Just scroll down a bit and see for yourself what you can grab ;) Also, you gain no financial obligations towards me for using anything from this repo, but if you want to show either your appreciation or hate, you can just throw some coins at my face on https://www.paypal.me/kraifpatrik/1USD!
+A collection of useful scripts/shaders/objects for GameMaker Studio 2, mainly targetting 3D math and rendering. Just scroll down a bit and see for yourself what you can grab ;)
 
 Maintained by: kraifpatrik
 
@@ -706,7 +706,7 @@ Name | Type | Description
 size | `real` | Number of vectors in the kernel.
 
 ### Returns:
-`array} The created kernel as `{v1X, v1Y, v1Z, v2X, v2Y, v2Z, ..., vnX, vnY, vnZ`: 
+`array`: The created kernel as `[v1X, v1Y, v1Z, v2X, v2Y, v2Z, ..., vnX, vnY, vnZ]`.
 
 ## xSsaoDraw
 ```
@@ -718,7 +718,7 @@ Renders SSAO into the `surSsao` surface.
 Name | Type | Description
 ---- | ---- | -----------
 surSsao | `real` | The surface to draw the SSAO to.
-surWork | `real` | A working surface used for blurring the SSAO. Must have the same size as `surSsao`!.
+surWork | `real` | A working surface used for blurring the SSAO. Must have the same size as `surSsao`!
 surDepth | `real` | A surface containing the scene depth.
 surNormal | `real` | A surface containing the scene normals.
 matView | `array` | The view matrix used when rendering the scene.

@@ -2,7 +2,7 @@
 /// @desc Renders SSAO into the `surSsao` surface.
 /// @param {real} surSsao   The surface to draw the SSAO to.
 /// @param {real} surWork   A working surface used for blurring the SSAO. Must have
-///                         the same size as `surSsao`!.
+///                         the same size as `surSsao`!
 /// @param {real} surDepth  A surface containing the scene depth.
 /// @param {real} surNormal A surface containing the scene normals.
 /// @param {array} matView  The view matrix used when rendering the scene.
