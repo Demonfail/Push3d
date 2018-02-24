@@ -48,6 +48,11 @@ Maintained by: kraifpatrik
 	- [xQuaternionToAngle](#xquaterniontoangle)
 	- [xQuaternionToAxis](#xquaterniontoaxis)
 	- [xQuaternionToMatrix](#xquaterniontomatrix)
+	- [xSsaoCreateKernel](#xssaocreatekernel)
+	- [xSsaoDraw](#xssaodraw)
+	- [xSsaoFree](#xssaofree)
+	- [xSsaoInit](#xssaoinit)
+	- [xSsaoMakeNoiseSurface](#xssaomakenoisesurface)
 	- [xStringSplitOnFirst](#xstringsplitonfirst)
 	- [xSurfaceCheck](#xsurfacecheck)
 	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
@@ -688,6 +693,75 @@ q | `array` | The quaternion.
 
 ### Returns:
 `array`: The created rotation matrix.
+
+## xSsaoCreateKernel
+```
+xSsaoCreateKernel(size)
+```
+Generates a kernel of random vectors to be used for the SSAO.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+size | `real` | Number of vectors in the kernel.
+
+### Returns:
+`array} The created kernel as `{v1X, v1Y, v1Z, v2X, v2Y, v2Z, ..., vnX, vnY, vnZ`: 
+
+## xSsaoDraw
+```
+xSsaoDraw(surSsao, surWork, surDepth, surNormal, clipFar, aspect, fovY, matProj, matView)
+```
+Renders SSAO into the `surSsao` surface.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+surSsao | `real` | The surface to draw the SSAO to.
+surWork | `real` | A working surface used for blurring the SSAO. Must have the same size as `surSsao`!.
+surDepth | `real` | A surface containing the scene depth.
+surNormal | `real` | A surface containing the scene normals.
+clipFar | `real` | A distance to the far clipping plane (same as in the projection used when rendering the scene).
+aspect | `real` | An aspect ratio (same as in the projection used when rendering the scene).
+fovY | `real` | A field of view (in degrees) (same as in the projection used when rendering the scene).
+matProj | `array` | 
+matView | `array` | 
+
+### Note:
+It is necessary to have the same `matrix_projection` as when rendering the scene. If you are using world-space normals (eg. X_SSAO_WORLD_SPACE_NORMALS is set to true), then the same applies for the `matrix_view`.
+
+## xSsaoFree
+```
+xSsaoFree()
+```
+Frees resources used by the SSAO from memory.
+
+## xSsaoInit
+```
+xSsaoInit(radius, bias, power)
+```
+Initializes resources necessary for the SSAO funcionality.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+radius | `real` | Radius of the occlusion effect. Anything further than that won't add to occlusion.
+bias | `real` | Depth bias to avoid too much self occlusion. Higher values mean lower self occlusion.
+power | `real` | Strength of the occlusion effect. Should be greater than 0.
+
+## xSsaoMakeNoiseSurface
+```
+xSsaoMakeNoiseSurface(size)
+```
+Creates a surface containing a random noise for the SSAO.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+size | `real` | Size of the noise surface.
+
+### Returns:
+`real`: The created noise surface.
 
 ## xStringSplitOnFirst
 ```

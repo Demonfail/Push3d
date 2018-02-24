@@ -1,4 +1,13 @@
 // Source of the SSAO shader: https://john-chapman-graphics.blogspot.cz/2013/01/ssao-tutorial.html
+
+//> Comment out if you are using view-space normals instead
+//> of world-space. This line is also present in the xSsaoInit script,
+//> so don't forget to comment out that one as well!
+#define X_SSAO_WORLD_SPACE_NORMALS
+
+//> Must be the same values as in the xSsaoInit script!
+#define X_SSAO_KERNEL_SIZE 16
+
 #pragma include("Common.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
@@ -42,25 +51,22 @@ struct PS_out {
 	float4 Target0 : SV_TARGET0;
 };
 
-#define   WORLD_SPACE_NORMALS
-
 #define   texDepth    gm_BaseTextureObject
 Texture2D texNormal : register(t1);
 Texture2D texRandom : register(t2);
 
-#ifdef WORLD_SPACE_NORMALS
+#ifdef X_SSAO_WORLD_SPACE_NORMALS
 uniform float4x4 u_mView;
 #endif
 uniform float4x4 u_mProjection;
-uniform float2   u_fTexel;            // (1/screenWidth,1/screenHeight)
-uniform float2   u_fTanAspect;        // (dtan(fov/2)*(screenWidth/screenHeight),-dtan(fov/2))
-uniform float    u_fClipFar;
-uniform int      u_iSampleKernelSize;
-uniform float3   u_fSampleKernel[32];
-uniform float2   u_fNoiseScale;
-uniform float    u_fPower;
-uniform float    u_fRadius;
-uniform float    u_fBias;
+uniform float2   u_fTexel;                            //< (1/screenWidth,1/screenHeight)
+uniform float2   u_fTanAspect;                        //< (dtan(fov/2)*(screenWidth/screenHeight),-dtan(fov/2))
+uniform float    u_fClipFar;                          //< Distance to the far clipping plane.
+uniform float3   u_fSampleKernel[X_SSAO_KERNEL_SIZE]; //< Kernel of random vectors.
+uniform float2   u_fNoiseScale;                       //< (screenWidth,screenHeight)/X_SSAO_NOISE_TEXTURE_SIZE
+uniform float    u_fPower;                            //< Strength of the occlusion effect.
+uniform float    u_fRadius;                           //< Radius of the occlusion effect.
+uniform float    u_fBias;                             //< Depth bias of the occlusion effect.
 
 void main(in VS_out IN, out PS_out OUT) {
 	// Origin
@@ -74,7 +80,7 @@ void main(in VS_out IN, out PS_out OUT) {
 
 	// Calc. TBN matrix
 	float3 normal = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).rgb * 2.0 - 1.0);
-#ifdef WORLD_SPACE_NORMALS
+#ifdef X_SSAO_WORLD_SPACE_NORMALS
 	normal = normalize(mul(u_mView, float4(normal, 0.0)).xyz);
 #endif
 	float3 random = texRandom.Sample(gm_BaseTexture, IN.TexCoord * u_fNoiseScale).xyz * 2.0 - 1.0;
@@ -84,7 +90,7 @@ void main(in VS_out IN, out PS_out OUT) {
 
 	// Occlusion
 	float occlusion = 0.0;
-	for (int i = 0; i < u_iSampleKernelSize; ++i) {
+	for (int i = 0; i < X_SSAO_KERNEL_SIZE; ++i) {
 		// Get a sample in view-space and get it's screen-space coordinates
 		float3 sampleVS = origin + mul(u_fSampleKernel[i], TBN) * u_fRadius;
 		float2 sampleUV = xUnproject(mul(u_mProjection, float4(sampleVS, 1.0)));
@@ -93,11 +99,11 @@ void main(in VS_out IN, out PS_out OUT) {
 		float sampleDepth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, sampleUV).rgb);
 		if (sampleDepth != 0.0 && sampleDepth != 1.0) {
 			sampleDepth *= u_fClipFar;
-			float attenuation = smoothstep(0.0, 1.0, u_fRadius/abs(origin.z - sampleDepth + u_fBias));
+			float attenuation = smoothstep(0.0, 1.0, u_fRadius / abs(origin.z - sampleDepth + u_fBias));
 			occlusion += attenuation * step(sampleDepth, sampleVS.z);
 		}
 	}
-	occlusion = clamp(1.0 - occlusion/float(u_iSampleKernelSize), 0.0, 1.0);
+	occlusion = clamp(1.0 - occlusion / X_SSAO_KERNEL_SIZE, 0.0, 1.0);
 	occlusion = pow(occlusion, u_fPower);
 
 	// Output
