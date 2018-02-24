@@ -1,28 +1,22 @@
-/// @func xSsaoDraw(surSsao, surWork, surDepth, surNormal, clipFar, aspect, fovY, matProj, matView)
+/// @func xSsaoDraw(surSsao, surWork, surDepth, surNormal, matView, matProj, clipFar)
 /// @desc Renders SSAO into the `surSsao` surface.
 /// @param {real} surSsao   The surface to draw the SSAO to.
 /// @param {real} surWork   A working surface used for blurring the SSAO. Must have
 ///                         the same size as `surSsao`!.
 /// @param {real} surDepth  A surface containing the scene depth.
 /// @param {real} surNormal A surface containing the scene normals.
+/// @param {array} matView  The view matrix used when rendering the scene.
+/// @param {array} matProj  The projection matrix used when rendering the scene.
 /// @param {real} clipFar   A distance to the far clipping plane (same as in the
 ///                         projection used when rendering the scene).
-/// @param {real} aspect    An aspect ratio (same as in the projection used when
-///                         rendering the scene).
-/// @param {real} fovY      A field of view (in degrees) (same as in the projection
-///                         used when rendering the scene).
-/// @param {array} matProj  The projection matrix used when rendering the scene.
-/// @param {array} matView  The view matrix used when rendering the scene.
 var _surSsao = argument0;
 var _surWork = argument1;
 var _surSceneDepth = argument2;
 var _texSceneNormal = surface_get_texture(argument3);
-var _clipFar = argument4;
-var _aspect = argument5;
-var _tanFovY = dtan(argument6 * 0.5);
-var _matProj = argument7;
-var _matView = argument8;
-var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
+var _matView = argument4;
+var _matProj = argument5;
+var _clipFar = argument6;
+var _tanAspect = [1/_matProj[0], -1/_matProj[5]];
 var _width = surface_get_width(_surSsao);
 var _height = surface_get_height(_surSsao);
 

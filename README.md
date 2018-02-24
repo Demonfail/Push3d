@@ -710,7 +710,7 @@ size | `real` | Number of vectors in the kernel.
 
 ## xSsaoDraw
 ```
-xSsaoDraw(surSsao, surWork, surDepth, surNormal, clipFar, aspect, fovY, matProj, matView)
+xSsaoDraw(surSsao, surWork, surDepth, surNormal, matView, matProj, clipFar)
 ```
 Renders SSAO into the `surSsao` surface.
 
@@ -721,11 +721,9 @@ surSsao | `real` | The surface to draw the SSAO to.
 surWork | `real` | A working surface used for blurring the SSAO. Must have the same size as `surSsao`!.
 surDepth | `real` | A surface containing the scene depth.
 surNormal | `real` | A surface containing the scene normals.
-clipFar | `real` | A distance to the far clipping plane (same as in the projection used when rendering the scene).
-aspect | `real` | An aspect ratio (same as in the projection used when rendering the scene).
-fovY | `real` | A field of view (in degrees) (same as in the projection used when rendering the scene).
-matProj | `array` | The projection matrix used when rendering the scene.
 matView | `array` | The view matrix used when rendering the scene.
+matProj | `array` | The projection matrix used when rendering the scene.
+clipFar | `real` | A distance to the far clipping plane (same as in the projection used when rendering the scene).
 
 ## xSsaoFree
 ```

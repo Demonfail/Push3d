@@ -96,9 +96,9 @@ surWork = xSurfaceCheck(surWork, _ssaoWidth, _ssaoHeight);
 xSsaoDraw(
 	surSsao, surWork,
 	surGBuffer[xEGBuffer.Depth], surGBuffer[xEGBuffer.Normal],
-	clipFar, _aspect, fov,
+	_matView,
 	_matProj,
-	_matView);
+	clipFar);
 
 //==============================================================================
 // Light pass
