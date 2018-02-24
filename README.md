@@ -724,11 +724,8 @@ surNormal | `real` | A surface containing the scene normals.
 clipFar | `real` | A distance to the far clipping plane (same as in the projection used when rendering the scene).
 aspect | `real` | An aspect ratio (same as in the projection used when rendering the scene).
 fovY | `real` | A field of view (in degrees) (same as in the projection used when rendering the scene).
-matProj | `array` | 
-matView | `array` | 
-
-### Note:
-It is necessary to have the same `matrix_projection` as when rendering the scene. If you are using world-space normals (eg. X_SSAO_WORLD_SPACE_NORMALS is set to true), then the same applies for the `matrix_view`.
+matProj | `array` | The projection matrix used when rendering the scene.
+matView | `array` | The view matrix used when rendering the scene.
 
 ## xSsaoFree
 ```

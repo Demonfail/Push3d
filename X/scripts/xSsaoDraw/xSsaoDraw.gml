@@ -11,11 +11,8 @@
 ///                         rendering the scene).
 /// @param {real} fovY      A field of view (in degrees) (same as in the projection
 ///                         used when rendering the scene).
-/// @param {array} matProj 
-/// @param {array} matView 
-/// @note It is necessary to have the same `matrix_projection` as when rendering the
-///       scene. If you are using world-space normals (eg. X_SSAO_WORLD_SPACE_NORMALS
-///       is set to true), then the same applies for the `matrix_view`.
+/// @param {array} matProj  The projection matrix used when rendering the scene.
+/// @param {array} matView  The view matrix used when rendering the scene.
 var _surSsao = argument0;
 var _surWork = argument1;
 var _surSceneDepth = argument2;
