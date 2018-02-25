@@ -8,7 +8,7 @@
 //> Must be the same values as in the xSsaoInit script!
 #define X_SSAO_KERNEL_SIZE 16
 
-#pragma include("Common.fsh")
+#pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
 float3 xEncodeDepth(float d) {
@@ -21,7 +21,8 @@ float3 xEncodeDepth(float d) {
 float xDecodeDepth(float3 c) {
 	return dot(c, float3(1.0, 1.0 / 255.0, 1.0 / 65025.0));
 }
-
+// include("DepthEncoding.fsh")
+#pragma include("Projecting.fsh")
 /// @param tanAspect (tanFovY*(screenWidth/screenHeight),-tanFovY), where
 ///                  tanFovY = dtan(fov*0.5)
 /// @param texCoord  Sceen-space UV.
@@ -40,7 +41,7 @@ float2 xUnproject(float4 p) {
 	uv.y = 1.0 - uv.y;
 	return uv;
 }
-// include("Common.fsh")
+// include("Projecting.fsh")
 
 struct VS_out {
 	float4 Position : SV_POSITION;
