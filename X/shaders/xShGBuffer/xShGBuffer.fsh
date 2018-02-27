@@ -33,7 +33,9 @@ float2 xUnproject(float4 p) {
 }
 // include("Projecting.fsh")
 
-Texture2D texNormal : register(t1);
+#define texAlbedo gm_BaseTextureObject
+Texture2D texNormal   : register(t1);
+//Texture2D texEmissive : register(t2);
 
 struct VS_out {
 	float4 Position  : SV_POSITION;
@@ -45,17 +47,24 @@ struct VS_out {
 };
 
 struct PS_out {
-	float4 Target0 : SV_TARGET0; // Albedo.rgb
-	float4 Target1 : SV_TARGET1; // Normal.xyz
-	float4 Target2 : SV_TARGET2; // Depth
+	float4 Albedo   : SV_TARGET0;
+	float4 Normal   : SV_TARGET1;
+	float4 Depth    : SV_TARGET2;
+	float4 Emissive : SV_TARGET3;
 };
 
 void main(in VS_out IN, out PS_out OUT) {
+	float4 base = texAlbedo.Sample(gm_BaseTexture, IN.TexCoord);
+	if (base.a < 1.0) {
+		discard;
+	}
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
   N = normalize(mul(N, float3x3(IN.Tangent, IN.Bitangent, IN.Normal)));
-	OUT.Target0 = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
-	OUT.Target1.rgb = N * 0.5 + 0.5;
-	OUT.Target1.a = 1.0;
-	OUT.Target2.rgb = xEncodeDepth(IN.Depth);
-	OUT.Target2.a = 1.0;
+	OUT.Albedo = base;
+	OUT.Normal.rgb = N * 0.5 + 0.5;
+	OUT.Normal.a = 1.0;
+	OUT.Depth.rgb = xEncodeDepth(IN.Depth);
+	OUT.Depth.a = 1.0;
+	OUT.Emissive.rgb = 0.0; // TODO: Sample emissive texture.
+	OUT.Emissive.a = 1.0;
 }

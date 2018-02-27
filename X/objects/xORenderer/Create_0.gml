@@ -12,6 +12,7 @@ enum xEGBuffer {
 	Albedo,
 	Normal,
 	Depth,
+	Emissive, // Used for emmisive materials and specular reflections.
 	SIZE
 };
 
@@ -30,6 +31,8 @@ xSsaoInit(12, 4, 2);
 ssaoResolution = 0.5;
 surSsao = noone;
 surWork = noone;
+
+surLightBloom = noone;
 
 // Camera
 z = 1;

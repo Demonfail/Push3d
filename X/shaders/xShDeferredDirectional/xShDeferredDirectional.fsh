@@ -45,6 +45,7 @@ uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float3   u_fLightDir;
 uniform float4   u_fLightCol;       // (r,g,b,intensity)
+uniform float3   u_fCamPos;         // Camera's (x,y,z) position in world space.
 
 struct VS_out {
 	float4 Position : SV_POSITION;
@@ -52,7 +53,8 @@ struct VS_out {
 };
 
 struct PS_out {
-	float4 Target0 : SV_TARGET0;
+	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
+	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
 // Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
@@ -85,6 +87,9 @@ void main(in VS_out IN, out PS_out OUT) {
 	float3 L = -normalize(u_fLightDir);
 	float NdotL = saturate(dot(N, L));
 	
+	float4 lightCol = float4(0.0, 0.0, 0.0, 1.0);
+	float4 specular = float4(0.0, 0.0, 0.0, 1.0);
+	
 	if (NdotL > 0.0) {
 		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
 		float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
@@ -98,11 +103,18 @@ void main(in VS_out IN, out PS_out OUT) {
 		const float lerpRegion = 2.0;
 		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);
 		shadow = lerp(shadow, 0.0, shadowLerp);
+
+		lightCol.rgb = u_fLightCol.rgb * u_fLightCol.a * NdotL * (1.0 - shadow);
+
+		// TODO: Make BRDF.
+		float smoothness = 1.0;
+		float3 V = normalize(u_fCamPos - posWorld);
+		float3 H = normalize(L + V);
+		float NdotH = max(dot(N, H), 0.0);
+		float specPower = pow(2.0, 1.0 + smoothness * 10.0);
+		specular.rgb = lightCol.rgb * pow(NdotH, (specPower + 8.0) / 8.0);
 	}
 
-	float4 lightCol;
-	lightCol.rgb = u_fLightCol.rgb * u_fLightCol.a * NdotL * (1.0 - shadow);
-	lightCol.a = 1.0;
-
-	OUT.Target0 = base * lightCol;
+	OUT.Total = base * lightCol + float4(specular.rgb, 0.0);
+	OUT.Specular = specular;
 }

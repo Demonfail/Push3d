@@ -41,6 +41,7 @@ uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
 uniform float4   u_fLightPos;  // (x,y,z,radius)
 uniform float4   u_fLightCol;  // (r,g,b,intensity)
+uniform float3   u_fCamPos;    // Camera's (x,y,z) position in world space
 
 struct VS_out {
 	float4 Position : SV_POSITION;
@@ -48,7 +49,8 @@ struct VS_out {
 };
 
 struct PS_out {
-	float4 Target0 : SV_TARGET0;
+	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
+	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
 void main(in VS_out IN, out PS_out OUT) {
@@ -66,6 +68,7 @@ void main(in VS_out IN, out PS_out OUT) {
 	float3 lightCol = 0.0;
 	float3 lightVec = u_fLightPos.xyz - posWorld;
 	float dist = length(lightVec);
+	float3 specular = 0.0;
 
 	if (dist < u_fLightPos.w) {
 		float3 N = normalize(texNormal.Sample(gm_BaseTexture, screenUV).xyz * 2.0 - 1.0);
@@ -75,8 +78,17 @@ void main(in VS_out IN, out PS_out OUT) {
 		if (NdotL > 0.0) {
 			float att = 1.0 - saturate(dist / u_fLightPos.w);
 			lightCol += u_fLightCol.rgb * u_fLightCol.a * NdotL * att;
+
+			// TODO: Make BRDF.
+			float smoothness = 1.0;
+			float3 V = normalize(u_fCamPos - posWorld);
+			float3 H = normalize(L + V);
+			float NdotH = max(dot(N, H), 0.0);
+			float specPower = pow(2.0, 1.0 + smoothness * 10.0);
+			specular = lightCol * pow(NdotH, (specPower + 8.0) / 8.0);
 		}
 	}
 
-	OUT.Target0 = float4(base.rgb * lightCol, base.a);
+	OUT.Total = float4(base.rgb * lightCol + specular, 1.0);
+	OUT.Specular = float4(specular.rgb, 1.0);
 }
