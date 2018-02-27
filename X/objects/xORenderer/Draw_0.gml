@@ -4,6 +4,7 @@ var _screenWidth = window_get_width();
 var _screenHeight = window_get_height();
 var _texAlbedo = sprite_get_texture(xSprDefault, 0);
 var _texNormal = sprite_get_texture(xSprDefault, 1);
+var _texEmissive = sprite_get_texture(xSprDefault, 2);
 
 // Check surfaces
 xSurfaceCheck(application_surface, _screenWidth, _screenHeight);
@@ -83,7 +84,8 @@ var _matProj = matrix_build_projection_perspective_fov(
 matrix_set(matrix_view, _matView);
 matrix_set(matrix_projection, _matProj);
 
-texture_set_stage(1, _texNormal); // Set normal map
+texture_set_stage(1, _texNormal);
+texture_set_stage(2, _texEmissive);
 matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40));
 vertex_submit(vBuffer, pr_trianglelist, _texAlbedo);
 matrix_set(matrix_world, matrix_build_identity());
@@ -117,20 +119,23 @@ var _tanFovY = dtan(fov * 0.5);
 var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
 var _texSceneNormal = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
 var _texSceneDepth = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
+var _texSceneEmissive = surface_get_texture(surGBuffer[xEGBuffer.Emissive]);
 
 surface_set_target_ext(0, application_surface);
-surface_set_target_ext(1, surGBuffer[xEGBuffer.Emissive]);
 
 gpu_set_zwriteenable(false);
 gpu_set_ztestenable(false);
 
 // First render base lighting to be added upon
-_shader = xShAmbient;
+_shader = xShAmbientEmissive;
 shader_set(_shader);
 texture_set_stage(1, surface_get_texture(surSsao));
+texture_set_stage(2, _texSceneEmissive);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fAmbient"), 1, 1, 1, 0.1);
 draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
 shader_reset();
+
+surface_set_target_ext(1, surGBuffer[xEGBuffer.Emissive]);
 
 // Blend other lights
 gpu_set_blendmode_ext(bm_one, bm_one);

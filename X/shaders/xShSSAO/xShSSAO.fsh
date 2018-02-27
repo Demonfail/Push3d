@@ -1,4 +1,4 @@
-// Source of the SSAO shader: https://john-chapman-graphics.blogspot.cz/2013/01/ssao-tutorial.html
+// Source: https://john-chapman-graphics.blogspot.cz/2013/01/ssao-tutorial.html
 
 //> Comment out if you are using view-space normals instead
 //> of world-space. This line is also present in the xSsaoInit script,

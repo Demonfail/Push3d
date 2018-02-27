@@ -35,7 +35,7 @@ float2 xUnproject(float4 p) {
 
 #define texAlbedo gm_BaseTextureObject
 Texture2D texNormal   : register(t1);
-//Texture2D texEmissive : register(t2);
+Texture2D texEmissive : register(t2);
 
 struct VS_out {
 	float4 Position  : SV_POSITION;
@@ -65,6 +65,5 @@ void main(in VS_out IN, out PS_out OUT) {
 	OUT.Normal.a = 1.0;
 	OUT.Depth.rgb = xEncodeDepth(IN.Depth);
 	OUT.Depth.a = 1.0;
-	OUT.Emissive.rgb = 0.0; // TODO: Sample emissive texture.
-	OUT.Emissive.a = 1.0;
+	OUT.Emissive = texEmissive.Sample(gm_BaseTexture, IN.TexCoord);
 }
