@@ -54,6 +54,7 @@ Maintained by: kraifpatrik
 	- [xSsaoInit](#xssaoinit)
 	- [xSsaoMakeNoiseSurface](#xssaomakenoisesurface)
 	- [xStringSplitOnFirst](#xstringsplitonfirst)
+	- [xSurfaceBlur](#xsurfaceblur)
 	- [xSurfaceCheck](#xsurfacecheck)
 	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
 	- [xVec2Abs](#xvec2abs)
@@ -772,6 +773,19 @@ delimiter | `string` | The delimiter.
 
 ### Returns:
 `array`: An array containing [firstHalf, secondHalf]. If the delimiter is not found in the string, then secondHalf equals empty string and firstHalf is the original string.
+
+## xSurfaceBlur
+```
+xSurfaceBlur(target, work, scale)
+```
+Blurs the target surface.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+target | `real` | The id of the surface to be blurred.
+work | `real` | The id of the working surface. Must have the same size as the target surface.
+scale | `real` | The scale of the blur kernel.
 
 ## xSurfaceCheck
 ```
