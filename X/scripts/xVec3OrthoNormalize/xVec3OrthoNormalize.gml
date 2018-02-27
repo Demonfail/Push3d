@@ -11,7 +11,8 @@ xVec3Scale(_proj, xVec3Dot(argument1, _v1));
 var _v2 = xVec3Clone(argument1);
 xVec3Subtract(_v2, _proj);
 
-if (xVec3LengthSqr(_v2) <= 0) {
+if (xVec3LengthSqr(_v2) <= 0)
+{
 	return false;
 }
 

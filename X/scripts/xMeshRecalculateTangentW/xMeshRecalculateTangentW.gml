@@ -14,17 +14,23 @@ xAssert(!is_undefined(_texture), "Trying to recalculate TBN for mesh without UVs
 xAssert(!is_undefined(_normal), "Trying to recalculate TBN for mesh without normals!");
 
 // Clear tangent and bitangent data
-if (is_undefined(_tangent)) {
+if (is_undefined(_tangent))
+{
 	_tangent = ds_list_create(); // [x, y, z, ...]
 	ds_map_add_list(_mesh, "tangent", _tangent);
-} else {
+}
+else
+{
 	ds_list_clear(_tangent);
 }
 
-if (is_undefined(_bitangent)) {
+if (is_undefined(_bitangent))
+{
 	_bitangent = ds_list_create(); // [sign, ...]
 	ds_map_add_list(_mesh, "bitangent", _bitangent);
-} else {
+}
+else
+{
 	ds_list_clear(_bitangent);
 }
 
@@ -36,7 +42,8 @@ var tInd = 0;
 var bInd = 0;
 var _temp;
 
-while (i < _size) {
+while (i < _size)
+{
 	// First vertex data
 	var _f0 = _face[| i++];
 	var _v0  = _f0[? "vertex"];
@@ -154,19 +161,22 @@ while (i < _size) {
 
 	_temp = xVec3Clone(_vecN0);
 	xVec3Cross(_temp, _T0);
-	if (xVec3Dot(_temp, _B0) < 0) {
+	if (xVec3Dot(_temp, _B0) < 0)
+	{
 		_B0s = -1;
 	}
 
 	_temp = xVec3Clone(_vecN1);
 	xVec3Cross(_temp, _T1);
-	if (xVec3Dot(_temp, _B1) < 0) {
+	if (xVec3Dot(_temp, _B1) < 0)
+	{
 		_B1s = -1;
 	}
 
 	_temp = xVec3Clone(_vecN2);
 	xVec3Cross(_temp, _T2);
-	if (xVec3Dot(_temp, _B2) < 0) {
+	if (xVec3Dot(_temp, _B2) < 0)
+	{
 		 _B2s = -1;
 	}
 

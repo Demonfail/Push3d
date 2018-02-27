@@ -5,8 +5,8 @@
 /// @return {array} The created quaternion.
 var _sinHalfAngle = dsin(argument1 * 0.5);
 return [
-  argument0[0] * _sinHalfAngle,
-  argument0[1] * _sinHalfAngle,
-  argument0[2] * _sinHalfAngle,
-  dcos(argument1 * 0.5)
+	argument0[0] * _sinHalfAngle,
+	argument0[1] * _sinHalfAngle,
+	argument0[2] * _sinHalfAngle,
+	dcos(argument1 * 0.5)
 ];

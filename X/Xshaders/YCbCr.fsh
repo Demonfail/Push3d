@@ -1,5 +1,6 @@
 /// @desc Converts RGB space color to YCbCr space color.
-float3 xRGBtoYCbCr(float3 rgb) {
+float3 xRGBtoYCbCr(float3 rgb)
+{
 	return float3(
 		0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b,
 		0.5 + (-0.168 * rgb.r - 0.331 * rgb.g + 0.5 * rgb.b,
@@ -7,7 +8,8 @@ float3 xRGBtoYCbCr(float3 rgb) {
 }
 
 /// @desc Converts YCbCr space color to RGB space color.
-float3 xYCbCrToRGB(float3 YCbCr) {
+float3 xYCbCrToRGB(float3 YCbCr)
+{
 	return float3(
 		YCbCr.r + 1.402 * (YCbCr.b - 0.5),
 		YCbCr.r - 0.344 * (YCbCr.g - 0.5) - 0.714 * (YCbCr.b - 0.5),

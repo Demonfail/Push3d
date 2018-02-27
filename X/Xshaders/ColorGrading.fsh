@@ -1,7 +1,8 @@
 /// @param color The original RGB color.
 /// @param lut   Texture of color-grading lookup tables.
 /// @param index The index of the lut to use.
-float3 xColorGrade(float3 color, Texture2D lut, float index) {
+float3 xColorGrade(float3 color, Texture2D lut, float index)
+{
 	float2 size = 16.0;
 	float2 texel = 1.0 / 256.0;
 	float2 tile = (size - 1.0) * texel; 

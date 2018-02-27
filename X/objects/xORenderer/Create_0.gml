@@ -8,7 +8,8 @@ gpu_set_texfilter(true);
 application_surface_enable(true);
 application_surface_draw_enable(false);
 
-enum xEGBuffer {
+enum xEGBuffer
+{
 	Albedo,
 	Normal,
 	Depth,
@@ -16,7 +17,8 @@ enum xEGBuffer {
 	SIZE
 };
 
-for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
+for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
+{
 	surGBuffer[i] = noone;
 }
 

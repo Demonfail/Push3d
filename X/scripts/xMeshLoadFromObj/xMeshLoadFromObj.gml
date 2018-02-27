@@ -3,7 +3,8 @@
 /// @param {string} file The path to the file.
 /// @return {real} The id of the mesh on success or `noone` on fail.
 var _file = file_text_open_read(argument0);
-if (_file == -1) {
+if (_file == -1)
+{
 	return noone;
 }
 
@@ -19,11 +20,13 @@ var _hasTexture = ds_map_exists(_mesh, "texture");
 var _texture = _hasTexture ? _mesh[? "texture"] : ds_list_create();
 
 // Laod mesh data
-while (!file_text_eof(_file)) {
+while (!file_text_eof(_file))
+{
 	var _line = file_text_read_string(_file);
 	var _split = xStringExplode(_line, " ");
 
-	switch (_split[0]) {
+	switch (_split[0])
+	{
 		// Vertex
 		case "v":
 			ds_list_add(_vertex, real(_split[1]));
@@ -46,13 +49,16 @@ while (!file_text_eof(_file)) {
 
 		// Face
 		case "f":
-			for (var i = 1; i < 4; ++i) {
+			for (var i = 1; i < 4; ++i)
+			{
 				var _f = xStringExplode(_split[i], "/");
 				var _faceMap = ds_map_create();
 
 				_faceMap[? "vertex"] = (real(_f[0]) - 1) * 3;
-				if (array_length_1d(_f) == 3) {
-					if (_f[1] != "") {
+				if (array_length_1d(_f) == 3)
+				{
+					if (_f[1] != "")
+					{
 						_faceMap[? "texture"] = (real(_f[1]) - 1) * 2;
 					}
 					_faceMap[? "normal"] = (real(_f[2]) - 1) * 3;
@@ -68,18 +74,26 @@ while (!file_text_eof(_file)) {
 }
 file_text_close(_file);
 
-if (!_hasNormal) {
-	if (ds_list_empty(_normal)) {
+if (!_hasNormal)
+{
+	if (ds_list_empty(_normal))
+	{
 		ds_list_destroy(_normal);
-	} else {
+	}
+	else
+	{
 		ds_map_add_list(_mesh, "normal", _normal);
 	}
 }
 
-if (!_hasTexture) {
-	if (ds_list_empty(_texture)) {
+if (!_hasTexture)
+{
+	if (ds_list_empty(_texture))
+	{
 		ds_list_destroy(_texture);
-	} else {
+	}
+	else
+	{
 		ds_map_add_list(_mesh, "texture", _texture);
 	}
 }

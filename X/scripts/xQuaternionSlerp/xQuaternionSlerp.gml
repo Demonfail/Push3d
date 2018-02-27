@@ -10,20 +10,26 @@ var _s = argument2;
 var _q3;
 
 var _dot = xQuaternionDot(_q1, _q2);
-if (_dot < 0) {
+if (_dot < 0)
+{
 	_dot = -_dot;
 	_q3 = xQuaternionClone(_q2);
 	xQuaternionScale(_q3, -1); 
-} else {
+}
+else
+{
 	_q3 = _q2;
 }
 
-if (_dot < 0.95) {
+if (_dot < 0.95)
+{
 	var _angle = arccos(_dot);
 	xQuaternionScale(_q1, dsin(_angle * (1 - _s)));
 	xQuaternionScale(_q3, dsin(_angle * _s));
 	xQuaternionAdd(_q1, _q3);
 	xQuaternionMultiply(_q1, dsin(_angle));
-} else {
+}
+else
+{
 	xQuaternionLerp(_q1, _q2, _s);
 }

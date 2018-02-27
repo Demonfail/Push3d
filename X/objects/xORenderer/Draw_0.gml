@@ -8,7 +8,8 @@ var _texEmissive = sprite_get_texture(xSprDefault, 2);
 
 // Check surfaces
 xSurfaceCheck(application_surface, _screenWidth, _screenHeight);
-for (var i = xEGBuffer.SIZE - 1; i >= 0; --i) {
+for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
+{
 	surGBuffer[i] = xSurfaceCheck(surGBuffer[i], _screenWidth, _screenHeight);
 }
 surShadowMap = xSurfaceCheck(surShadowMap, shadowMapRes, shadowMapRes);
@@ -160,7 +161,8 @@ draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
 shader_reset();
 
 // Point lights
-if (instance_exists(xOLightPoint)) {
+if (instance_exists(xOLightPoint))
+{
 	var _cullMode = gpu_get_cullmode();
 	_shader = xShDeferredPoint;
 	shader_set(_shader);
@@ -182,7 +184,8 @@ if (instance_exists(xOLightPoint)) {
 	var _uLightPos = shader_get_uniform(_shader, "u_fLightPos");
 	var _uLightCol = shader_get_uniform(_shader, "u_fLightCol");
 
-	with (xOLightPoint) {
+	with (xOLightPoint)
+	{
 		shader_set_uniform_f(_uLightPos, x, y, z, radius);
 		shader_set_uniform_f(_uLightCol,
 			color_get_red(color) * _1by255,

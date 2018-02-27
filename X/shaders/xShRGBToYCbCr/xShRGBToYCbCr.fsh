@@ -2,7 +2,8 @@ uniform vec2 u_vScreenSize; // (screenWidth,screenHeight)
 
 varying vec2 v_vTexCoord;
 
-void main() {
+void main()
+{
 	vec4 base = texture2D(gm_BaseTexture, v_vTexCoord);
 
 	// RGB to YCbCr

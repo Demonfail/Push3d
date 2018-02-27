@@ -6,7 +6,8 @@
 ///                 is not found in the string, then secondHalf equals empty string
 ///                 and firstHalf is the original string.
 var i = string_pos(argument1, argument0);
-if (i == 0) {
+if (i == 0)
+{
 	return [argument0, ""];
 }
 return [

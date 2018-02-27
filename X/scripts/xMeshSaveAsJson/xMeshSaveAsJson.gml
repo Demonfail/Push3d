@@ -4,7 +4,8 @@
 /// @param {string} file The file to save the mesh to.
 /// @return {bool} True on success.
 var _file = file_text_open_write(argument1);
-if (_file == -1) {
+if (_file == -1)
+{
 	return false;
 }
 file_text_write_string(_file, json_encode(argument0));

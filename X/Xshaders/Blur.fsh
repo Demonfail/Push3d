@@ -23,7 +23,8 @@
 /// @param texel `(1/imageWidth,1/imageHeight)*direction`, where
 ///        `direction` is `(1.0,0.0)` for horizontal or `(0.0,1.0)` for
 ///        vertical blur.
-float4 xBlur9(Texture2D image, float2 uv, float2 texel) {
+float4 xBlur9(Texture2D image, float2 uv, float2 texel)
+{
 	float4 color = 0.0;
 	float2 off1 = texel * 1.3846153846;
 	float2 off2 = texel * 3.2307692308;

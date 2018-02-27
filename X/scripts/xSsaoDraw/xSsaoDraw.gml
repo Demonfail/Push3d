@@ -20,7 +20,8 @@ var _tanAspect = [1/_matProj[0], -1/_matProj[5]];
 var _width = surface_get_width(_surSsao);
 var _height = surface_get_height(_surSsao);
 
-if (!surface_exists(xSurSsaoNoise)) {
+if (!surface_exists(xSurSsaoNoise))
+{
 	xSurSsaoNoise = xSsaoMakeNoiseSurface(X_SSAO_NOISE_TEXTURE_SIZE);
 }
 
@@ -35,7 +36,8 @@ draw_clear(0);
 shader_set(_shader);
 texture_set_stage(1, _texSceneNormal);
 texture_set_stage(2, surface_get_texture(xSurSsaoNoise));
-if (X_SSAO_WORLD_SPACE_NORMALS) {
+if (X_SSAO_WORLD_SPACE_NORMALS)
+{
 	shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mView"),_matView);
 }
 shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mProjection"), _matProj);

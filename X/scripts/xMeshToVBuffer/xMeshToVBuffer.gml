@@ -12,9 +12,11 @@ var i = 0;
 var _vBuffer = vertex_create_buffer();
 vertex_begin(_vBuffer, argument1);
 
-switch (argument1) {
+switch (argument1)
+{
 	case global.vBufferFormatBare:
-		while (i < _size) {
+		while (i < _size)
+		{
 			var f = _face[| i++];
 			var v = f[? "vertex"];
 			vertex_position_3d(_vBuffer, _vertex[| v], _vertex[| v + 1], _vertex[| v + 2]);
@@ -26,7 +28,8 @@ switch (argument1) {
 		var _normal = _mesh[? "normal"];
 		var _tangent = _mesh[? "tangent"];
 		var _bitangent = _mesh[? "bitangent"];
-		while (i < _size) {
+		while (i < _size)
+		{
 			var f = _face[| i++];
 			var v = f[? "vertex"];
 			var uv = f[? "texture"];

@@ -11,14 +11,16 @@
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
-float3 xEncodeDepth(float d) {
+float3 xEncodeDepth(float d)
+{
 	float3 enc = frac(float3(1.0, 255.0, 65025.0) * d);
 	return (enc - enc.yzz * (1.0 / 255.0));
 }
 
 /// @param c Encoded depth.
 /// @return Docoded linear depth.
-float xDecodeDepth(float3 c) {
+float xDecodeDepth(float3 c)
+{
 	return dot(c, float3(1.0, 1.0 / 255.0, 1.0 / 65025.0));
 }
 // include("DepthEncoding.fsh")
@@ -28,14 +30,16 @@ float xDecodeDepth(float3 c) {
 /// @param texCoord  Sceen-space UV.
 /// @param depth     Scene depth at texCoord.
 /// @return Point projected to view-space.
-float3 xProject(float2 tanAspect, float2 texCoord, float depth) {
+float3 xProject(float2 tanAspect, float2 texCoord, float depth)
+{
 	return float3(tanAspect * (texCoord * 2.0 - 1.0) * depth, depth);
 }
 
 /// @param p A point in clip space (transformed by projection matrix, but not
 ///          normalized).
 /// @return P's UV coordinates on the screen.
-float2 xUnproject(float4 p) {
+float2 xUnproject(float4 p)
+{
 	float2 uv = p.xy / p.w;
 	uv = uv * 0.5 + 0.5;
 	uv.y = 1.0 - uv.y;
@@ -43,12 +47,14 @@ float2 xUnproject(float4 p) {
 }
 // include("Projecting.fsh")
 
-struct VS_out {
+struct VS_out
+{
 	float4 Position : SV_POSITION;
 	float2 TexCoord : TEXCOORD0;
 };
 
-struct PS_out {
+struct PS_out
+{
 	float4 Target0 : SV_TARGET0;
 };
 
@@ -69,10 +75,12 @@ uniform float    u_fPower;                            //< Strength of the occlus
 uniform float    u_fRadius;                           //< Radius of the occlusion effect.
 uniform float    u_fBias;                             //< Depth bias of the occlusion effect.
 
-void main(in VS_out IN, out PS_out OUT) {
+void main(in VS_out IN, out PS_out OUT)
+{
 	// Origin
 	float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).rgb);
-	if (depth == 0.0 || depth == 1.0) {
+	if (depth == 0.0 || depth == 1.0)
+	{
 		OUT.Target0 = 1.0;
 		return;
 	}
@@ -91,14 +99,16 @@ void main(in VS_out IN, out PS_out OUT) {
 
 	// Occlusion
 	float occlusion = 0.0;
-	for (int i = 0; i < X_SSAO_KERNEL_SIZE; ++i) {
+	for (int i = 0; i < X_SSAO_KERNEL_SIZE; ++i)
+	{
 		// Get a sample in view-space and get it's screen-space coordinates
 		float3 sampleVS = origin + mul(u_fSampleKernel[i], TBN) * u_fRadius;
 		float2 sampleUV = xUnproject(mul(u_mProjection, float4(sampleVS, 1.0)));
 
 		// Calc. occlusion
 		float sampleDepth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, sampleUV).rgb);
-		if (sampleDepth != 0.0 && sampleDepth != 1.0) {
+		if (sampleDepth != 0.0 && sampleDepth != 1.0)
+		{
 			sampleDepth *= u_fClipFar;
 			float attenuation = smoothstep(0.0, 1.0, u_fRadius / abs(origin.z - sampleDepth + u_fBias));
 			occlusion += attenuation * step(sampleDepth, sampleVS.z);
