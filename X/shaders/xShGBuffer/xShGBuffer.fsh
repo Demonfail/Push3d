@@ -67,6 +67,7 @@ void main(in VS_out IN, out PS_out OUT)
 		discard;
 	}
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
+	N.y = -N.y;
 	N = normalize(mul(N, float3x3(IN.Tangent, IN.Bitangent, IN.Normal)));
 	OUT.Albedo = base;
 	OUT.Normal.rgb = N * 0.5 + 0.5;
