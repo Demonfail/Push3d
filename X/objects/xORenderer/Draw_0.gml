@@ -142,7 +142,7 @@ shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
 var _texel = 1 / shadowMapRes;
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 0.8, 0.8, 0.5, 1.0);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 1.0, 1.0, 1.0, 1.0);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
 shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
