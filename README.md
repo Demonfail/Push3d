@@ -59,12 +59,15 @@ Maintained by: kraifpatrik
 	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
 	- [xVec2Abs](#xvec2abs)
 	- [xVec2Add](#xvec2add)
+	- [xVec2Ceil](#xvec2ceil)
 	- [xVec2ClampLength](#xvec2clamplength)
 	- [xVec2Clone](#xvec2clone)
 	- [xVec2Create](#xvec2create)
 	- [xVec2CreateBarycentric](#xvec2createbarycentric)
 	- [xVec2Dot](#xvec2dot)
 	- [xVec2Equals](#xvec2equals)
+	- [xVec2Floor](#xvec2floor)
+	- [xVec2Frac](#xvec2frac)
 	- [xVec2Length](#xvec2length)
 	- [xVec2LengthSqr](#xvec2lengthsqr)
 	- [xVec2Lerp](#xvec2lerp)
@@ -80,6 +83,7 @@ Maintained by: kraifpatrik
 	- [xVec2Transform](#xvec2transform)
 	- [xVec3Abs](#xvec3abs)
 	- [xVec3Add](#xvec3add)
+	- [xVec3Ceil](#xvec3ceil)
 	- [xVec3ClampLength](#xvec3clamplength)
 	- [xVec3Clone](#xvec3clone)
 	- [xVec3Create](#xvec3create)
@@ -87,6 +91,8 @@ Maintained by: kraifpatrik
 	- [xVec3Cross](#xvec3cross)
 	- [xVec3Dot](#xvec3dot)
 	- [xVec3Equals](#xvec3equals)
+	- [xVec3Floor](#xvec3floor)
+	- [xVec3Frac](#xvec3frac)
 	- [xVec3Length](#xvec3length)
 	- [xVec3LengthSqr](#xvec3lengthsqr)
 	- [xVec3Lerp](#xvec3lerp)
@@ -106,12 +112,15 @@ Maintained by: kraifpatrik
 	- [xVec3Unproject](#xvec3unproject)
 	- [xVec4Abs](#xvec4abs)
 	- [xVec4Add](#xvec4add)
+	- [xVec4Ceil](#xvec4ceil)
 	- [xVec4ClampLength](#xvec4clamplength)
 	- [xVec4Clone](#xvec4clone)
 	- [xVec4Create](#xvec4create)
 	- [xVec4CreateBarycentric](#xvec4createbarycentric)
 	- [xVec4Dot](#xvec4dot)
 	- [xVec4Equals](#xvec4equals)
+	- [xVec4Floor](#xvec4floor)
+	- [xVec4Frac](#xvec4frac)
 	- [xVec4Length](#xvec4length)
 	- [xVec4LengthSqr](#xvec4lengthsqr)
 	- [xVec4Lerp](#xvec4lerp)
@@ -841,6 +850,17 @@ Name | Type | Description
 v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
+## xVec2Ceil
+```
+xVec2Ceil(v)
+```
+Ceils each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to ceil.
+
 ## xVec2ClampLength
 ```
 xVec2ClampLength(v, min, max)
@@ -870,9 +890,9 @@ v | `array` | The vector.
 
 ## xVec2Create
 ```
-xVec2Create(x, y)
+xVec2Create(x[, y])
 ```
-Creates a new vector with given components.
+Creates a new vector with given components. If only the first value is supplied, then it is used for every component.
 
 ### Arguments:
 Name | Type | Description
@@ -933,6 +953,28 @@ v2 | `array` | The second vector.
 
 ### Returns:
 `bool`: True if the vectors are equal.
+
+## xVec2Floor
+```
+xVec2Floor(v)
+```
+Floors each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to floor.
+
+## xVec2Frac
+```
+xVec2Frac(v)
+```
+Sets each component of the input vector to it's decimal part.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The input vector.
 
 ## xVec2Length
 ```
@@ -1155,6 +1197,17 @@ Name | Type | Description
 v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
+## xVec3Ceil
+```
+xVec3Ceil(v)
+```
+Ceils each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to ceil.
+
 ## xVec3ClampLength
 ```
 xVec3ClampLength(v, min, max)
@@ -1184,9 +1237,9 @@ v | `array` | The vector.
 
 ## xVec3Create
 ```
-xVec3Create(x, y, z)
+xVec3Create(x[, y, z])
 ```
-Creates a new vector with given components.
+Creates a new vector with given components. If only the first value is supplied, then it is used for every component.
 
 ### Arguments:
 Name | Type | Description
@@ -1260,6 +1313,28 @@ v2 | `array` | The second vector.
 
 ### Returns:
 `bool`: True if the vectors are equal.
+
+## xVec3Floor
+```
+xVec3Floor(v)
+```
+Floors each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to floor.
+
+## xVec3Frac
+```
+xVec3Frac(v)
+```
+Sets each component of the input vector to it's decimal part.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The input vector.
 
 ## xVec3Length
 ```
@@ -1540,6 +1615,17 @@ Name | Type | Description
 v1 | `array` | The first vector.
 v2 | `array` | The second vector.
 
+## xVec4Ceil
+```
+xVec4Ceil(v)
+```
+Ceils each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to ceil.
+
 ## xVec4ClampLength
 ```
 xVec4ClampLength(v, min, max)
@@ -1571,7 +1657,7 @@ v | `array` | The vector.
 ```
 xVec4Create(x, y, z, w)
 ```
-Creates a new vector with given components.
+Creates a new vector with given components. If only the first value is supplied, then it is used for every component.
 
 ### Arguments:
 Name | Type | Description
@@ -1634,6 +1720,28 @@ v2 | `array` | The second vector.
 
 ### Returns:
 `bool`: True if the vectors are equal.
+
+## xVec4Floor
+```
+xVec4Floor(v)
+```
+Floors each component of the vector.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+The | `array` | vector to floor.
+
+## xVec4Frac
+```
+xVec4Frac(v)
+```
+Sets each component of the input vector to it's decimal part.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+v | `array` | The input vector.
 
 ## xVec4Length
 ```

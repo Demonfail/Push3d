@@ -3,15 +3,25 @@
 /// @return Encoded depth.
 float3 xEncodeDepth(float d)
 {
-	float3 enc = frac(float3(1.0, 255.0, 65025.0) * d);
-	return (enc - enc.yzz * (1.0 / 255.0));
+	const float inv255 = 1.0 / 255.0;
+	float3 enc;
+	enc.x = d;
+	enc.y = d * 255.0;
+	enc.z = enc.y * 255.0;
+	enc = frac(enc);
+	float temp = enc.z * inv255;
+	enc.x -= enc.y * inv255;
+	enc.y -= temp;
+	enc.z -= temp;
+	return enc;
 }
 
 /// @param c Encoded depth.
 /// @return Docoded linear depth.
 float xDecodeDepth(float3 c)
 {
-	return dot(c, float3(1.0, 1.0 / 255.0, 1.0 / 65025.0));
+	const float inv255 = 1.0 / 255.0;
+	return c.x + c.y*inv255 + c.z*inv255*inv255;
 }
 // include("DepthEncoding.fsh")
 #pragma include("Projecting.fsh")
@@ -74,14 +84,18 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float2 temp = uv.xy / texel + 0.5;
 	float2 f = frac(temp);
 	float2 centroidUV = floor(temp) * texel;
-	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV).xyz), compareZ);
-	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(0.0, 1.0)).xyz), compareZ);
-	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 0.0)).xyz), compareZ);
-	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, centroidUV + texel * float2(1.0, 1.0)).xyz), compareZ);
-	return lerp(
-		lerp(lb, lt, f.y),
-		lerp(rb, rt, f.y),
-		f.x);
+	float2 pos = centroidUV;
+	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,0
+	pos.y += texel.y;
+	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,1
+	pos.x += texel.x;
+	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,1
+	pos.y -= texel.y;
+	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,0
+	float a = lerp(lb, lt, f.y);
+	float b = lerp(rb, rt, f.y);
+	float c = lerp(a, b, f.x);
+	return c;
 }
 
 void main(in VS_out IN, out PS_out OUT)

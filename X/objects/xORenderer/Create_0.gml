@@ -24,7 +24,7 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
 
 // Shadow mapping
 surShadowMap = noone;
-shadowMapRes = 512;
+shadowMapRes = 1024;
 shadowMapArea = 1024;
 sunDir = [0.5, 0.5, -0.5];
 
