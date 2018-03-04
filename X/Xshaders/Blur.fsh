@@ -23,15 +23,15 @@
 /// @param texel `(1/imageWidth,1/imageHeight)*direction`, where
 ///        `direction` is `(1.0,0.0)` for horizontal or `(0.0,1.0)` for
 ///        vertical blur.
-float4 xBlur9(Texture2D image, float2 uv, float2 texel)
+Vec4 xBlur9(Texture2D image, Vec2 uv, Vec2 texel)
 {
-	float4 color = 0.0;
-	float2 off1 = texel * 1.3846153846;
-	float2 off2 = texel * 3.2307692308;
-	color += image.Sample(gm_BaseTexture, uv) * 0.2270270270;
-	color += image.Sample(gm_BaseTexture, uv + off1) * 0.3162162162;
-	color += image.Sample(gm_BaseTexture, uv - off1) * 0.3162162162;
-	color += image.Sample(gm_BaseTexture, uv + off2) * 0.0702702703;
-	color += image.Sample(gm_BaseTexture, uv - off2) * 0.0702702703;
+	Vec4 color = 0.0;
+	Vec2 off1 = texel * 1.3846153846;
+	Vec2 off2 = texel * 3.2307692308;
+	color += Sample(image, uv) * 0.2270270270;
+	color += Sample(image, uv + off1) * 0.3162162162;
+	color += Sample(image, uv - off1) * 0.3162162162;
+	color += Sample(image, uv + off2) * 0.0702702703;
+	color += Sample(image, uv - off2) * 0.0702702703;
 	return color;
 }
