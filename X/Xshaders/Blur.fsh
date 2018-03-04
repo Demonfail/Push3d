@@ -25,7 +25,7 @@
 ///        vertical blur.
 Vec4 xBlur9(Texture2D image, Vec2 uv, Vec2 texel)
 {
-	Vec4 color = 0.0;
+	Vec4 color = Vec4(0.0, 0.0, 0.0, 0.0);
 	Vec2 off1 = texel * 1.3846153846;
 	Vec2 off2 = texel * 3.2307692308;
 	color += Sample(image, uv) * 0.2270270270;
