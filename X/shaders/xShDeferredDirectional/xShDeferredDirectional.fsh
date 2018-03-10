@@ -124,7 +124,7 @@ void main(in VS_out IN, out PS_out OUT)
 		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
 		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);
 		texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
-		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, texCoordShadowMap, posShadowMap.z - bias);
+		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, texCoordShadowMap, posShadowMap.z);
 		const float lerpRegion = 2.0;
 		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);
 		shadow = lerp(shadow, 0.0, shadowLerp);
