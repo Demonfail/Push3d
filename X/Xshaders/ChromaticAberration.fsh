@@ -1,6 +1,6 @@
-// Source: http://john-chapman-graphics.blogspot.cz/2013/02/pseudo-lens-flare.html
 /// @param direction  Direction of distortion.
 /// @param distortion Per-channel distortion factor.
+/// @source http://john-chapman-graphics.blogspot.cz/2013/02/pseudo-lens-flare.html
 Vec3 xChromaticAberration(
 	Texture2D tex,
 	Vec2 uv, 

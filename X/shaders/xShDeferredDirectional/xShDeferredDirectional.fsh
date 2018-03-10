@@ -119,11 +119,11 @@ void main(in VS_out IN, out PS_out OUT)
 		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
 		float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
 		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
-		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld, 1.0)).xyz;
+		float bias = 1.5;
+		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld + N * bias, 1.0)).xyz;
 		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
 		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);
 		texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
-		float bias = clamp(u_fShadowMapArea * u_fShadowMapTexel * tan(acos(NdotL)) / u_fShadowMapArea, 0.0, 0.125);
 		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, texCoordShadowMap, posShadowMap.z - bias);
 		const float lerpRegion = 2.0;
 		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);

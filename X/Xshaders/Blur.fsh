@@ -1,6 +1,4 @@
-// Source: https://github.com/Jam3/glsl-fast-gaussian-blur
-
-// The MIT License (MIT) Copyright (c) 2015 Jam3
+ // The MIT License (MIT) Copyright (c) 2015 Jam3
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +21,7 @@
 /// @param texel `(1/imageWidth,1/imageHeight)*direction`, where
 ///        `direction` is `(1.0,0.0)` for horizontal or `(0.0,1.0)` for
 ///        vertical blur.
+/// @source https://github.com/Jam3/glsl-fast-gaussian-blur
 Vec4 xBlur9(Texture2D image, Vec2 uv, Vec2 texel)
 {
 	Vec4 color = Vec4(0.0, 0.0, 0.0, 0.0);
