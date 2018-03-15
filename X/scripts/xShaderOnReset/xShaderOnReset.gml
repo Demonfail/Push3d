@@ -1,2 +1,2 @@
 /// @func xShaderOnReset(shader, script)
-xxORenderCache.shaderOnReset[? argument0] = argument1;
+xORenderCache.shaderOnReset[? argument0] = argument1;
