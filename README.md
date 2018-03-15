@@ -29,6 +29,18 @@ Since the reference is getting quite long, I will try to keep here a compressed 
 # Table of Contents
 - [Reference](#reference) 
 	- [xAssert](#xassert)
+	- [xAssertDsExists](#xassertdsexists)
+	- [xColorAlphaToArgb](#xcoloralphatoargb)
+	- [xColorArgbToAlpha](#xcolorargbtoalpha)
+	- [xColorFromArgb](#xcolorfromargb)
+	- [xColorRgbToBgr](#xcolorrgbtobgr)
+	- [xCubemapCreate](#xcubemapcreate)
+	- [xDsListAddList](#xdslistaddlist)
+	- [xDsListAddMap](#xdslistaddmap)
+	- [xDsListAddUnique](#xdslistaddunique)
+	- [xDsListInsertList](#xdslistinsertlist)
+	- [xDsListInsertMap](#xdslistinsertmap)
+	- [xDsListInsertUnique](#xdslistinsertunique)
 	- [xMatrixAddComponentwise](#xmatrixaddcomponentwise)
 	- [xMatrixClone](#xmatrixclone)
 	- [xMatrixCreate](#xmatrixcreate)
@@ -70,11 +82,16 @@ Since the reference is getting quite long, I will try to keep here a compressed 
 	- [xQuaternionToAngle](#xquaterniontoangle)
 	- [xQuaternionToAxis](#xquaterniontoaxis)
 	- [xQuaternionToMatrix](#xquaterniontomatrix)
+	- [xSmoothstep](#xsmoothstep)
 	- [xSsaoCreateKernel](#xssaocreatekernel)
 	- [xSsaoDraw](#xssaodraw)
 	- [xSsaoFree](#xssaofree)
 	- [xSsaoInit](#xssaoinit)
 	- [xSsaoMakeNoiseSurface](#xssaomakenoisesurface)
+	- [xStringJoin](#xstringjoin)
+	- [xStringJoinArray](#xstringjoinarray)
+	- [xStringJoinList](#xstringjoinlist)
+	- [xStringRemovePart](#xstringremovepart)
 	- [xStringSplitOnFirst](#xstringsplitonfirst)
 	- [xSurfaceBlur](#xsurfaceblur)
 	- [xSurfaceCheck](#xsurfacecheck)
@@ -155,6 +172,30 @@ Since the reference is getting quite long, I will try to keep here a compressed 
 	- [xVec4Scale](#xvec4scale)
 	- [xVec4Subtract](#xvec4subtract)
 	- [xVec4Transform](#xvec4transform)
+	- [xXmlElementAddChild](#xxmlelementaddchild)
+	- [xXmlElementCreate](#xxmlelementcreate)
+	- [xXmlElementDestroy](#xxmlelementdestroy)
+	- [xXmlElementFind](#xxmlelementfind)
+	- [xXmlElementFindAll](#xxmlelementfindall)
+	- [xXmlElementFindFirstAttribute](#xxmlelementfindfirstattribute)
+	- [xXmlElementFindNextAttribute](#xxmlelementfindnextattribute)
+	- [xXmlElementGetAttribute](#xxmlelementgetattribute)
+	- [xXmlElementGetAttributeCount](#xxmlelementgetattributecount)
+	- [xXmlElementGetChild](#xxmlelementgetchild)
+	- [xXmlElementGetChildCount](#xxmlelementgetchildcount)
+	- [xXmlElementGetName](#xxmlelementgetname)
+	- [xXmlElementGetParent](#xxmlelementgetparent)
+	- [xXmlElementGetValue](#xxmlelementgetvalue)
+	- [xXmlElementHasAttribute](#xxmlelementhasattribute)
+	- [xXmlElementHasValue](#xxmlelementhasvalue)
+	- [xXmlElementRemoveAttribute](#xxmlelementremoveattribute)
+	- [xXmlElementSetAttribute](#xxmlelementsetattribute)
+	- [xXmlElementSetName](#xxmlelementsetname)
+	- [xXmlElementSetValue](#xxmlelementsetvalue)
+	- [xXmlParse](#xxmlparse)
+	- [xXmlRead](#xxmlread)
+	- [xXmlString](#xxmlstring)
+	- [xXmlWrite](#xxmlwrite)
 
 # Reference
 ## xAssert
@@ -168,6 +209,184 @@ Name | Type | Description
 ---- | ---- | -----------
 exp | `any` | The expression to assert.
 msg | `string` | The error message.
+
+## xAssertDsExists
+```
+xAssertDsExists(id, type, msg)
+```
+Checks if the ds of given id and type exists. If it does not, then aborts the game, showing the error message.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+id | `real` | The id of the ds.
+type | `real` | The ds type (`ds_type_map`, `ds_type_list`, ...).
+msg | `string` | The error message.
+
+### Example:
+```
+var _map = ds_map_create();
+xAssertDsExists(_map, ds_type_map, "This should pass, since we just created it.");
+ds_map_destroy(_map);
+xAssertDsExists(_map, ds_type_map, "This will abort the game just as expected.");
+```
+
+## xColorAlphaToArgb
+```
+xColorAlphaToArgb(color, alpha)
+```
+Converts the color and aplha into a ARGB color.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+color | `real` | The color.
+alpha | `real` | The alpha.
+
+### Returns:
+`real`: The ARGB color.
+
+## xColorArgbToAlpha
+```
+xColorArgbToAlpha(argb)
+```
+Converts ARGB color to alpha.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+argb | `real` | The ARGB color.
+
+### Returns:
+`real`: The alpha.
+
+## xColorFromArgb
+```
+xColorFromArgb(argb)
+```
+Converts ARGB color to BGR color.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+argb | `real` | The ARGB color.
+
+### Returns:
+`real`: The BGR color.
+
+## xColorRgbToBgr
+```
+xColorRgbToBgr(color)
+```
+Converts between RGB and BGR color format.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+color | `real` | The BGR or RGB color.
+
+### Returns:
+`real`: The resulting color.
+
+## xCubemapCreate
+```
+xCubemapCreate(posX, negX, posY, negY, posZ, negZ)
+```
+Creates a cubemap.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+posX | `real` | The surface used for the +X (front) side of the cubemap.
+negX | `real` | The surface used for the -X (back) side of the cubemap.
+posY | `real` | The surface used for the +Y (right) side of the cubemap.
+negY | `real` | The surface used for the -Y (left) side of the cubemap.
+posZ | `real` | The surface used for the +Z (top) side of the cubemap.
+negZ | `real` | The surface used for the -Z (bottom) side of the cubemap.
+
+### Returns:
+`array`: An array representing the cubemap.
+
+## xDsListAddList
+```
+xDsListAddList(l1, l2)
+```
+Adds the list l2 into the list l1.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+l1 | `real` | The list to add into.
+l2 | `real` | The list to be added.
+
+## xDsListAddMap
+```
+xDsListAddMap(list, map)
+```
+Adds the map into the list.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+list | `real` | The list to add into.
+map | `real` | The map to be added.
+
+## xDsListAddUnique
+```
+xDsListAddUnique(list, value)
+```
+If the value is not in the list, it is added to it.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+list | `real` | The id of the list.
+value | `any` | The value to be added.
+
+### Returns:
+`real`: The index on which has been the value found or -1.
+
+## xDsListInsertList
+```
+xDsListInsertList(l1, pos, l2)
+```
+Inserts the list l2 into the list t1 at the given position.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+l1 | `real` | The list to inserted into.
+pos | `real` | The index to insert the list at.
+l2 | `real` | The list to be inserted.
+
+## xDsListInsertMap
+```
+xDsListInsertMap(list, pos, map)
+```
+Inserts the map into the list at the given position.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+list | `real` | The list to inserted into.
+pos | `real` | The index to insert the list at.
+map | `real` | The map to be inserted.
+
+## xDsListInsertUnique
+```
+xDsListInsertUnique(list, value, position)
+```
+If the value is not in the list, it is inserted to it at given position.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+list | `real` | The id of the list.
+value | `any` | The value to be added.
+position | `real` | The index to insert the value at.
+
+### Returns:
+`real`: The index on which has been the value found or -1.
 
 ## xMatrixAddComponentwise
 ```
@@ -706,6 +925,22 @@ q | `array` | The quaternion.
 ### Returns:
 `array`: The created rotation matrix.
 
+## xSmoothstep
+```
+xSmoothstep(e0, e1, x)
+```
+Performs smooth Hermite interpolation between 0 and 1 when e0 < x < e1.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+e0 | `real` | The lower edge of the Hermite function.
+e1 | `real` | The upper edge of the Hermite function.
+x | `real` | The source value for interpolation.
+
+### Returns:
+`real`: The resulting interpolated value.
+
 ## xSsaoCreateKernel
 ```
 xSsaoCreateKernel(size)
@@ -769,6 +1004,89 @@ size | `real` | Size of the noise surface.
 
 ### Returns:
 `real`: The created noise surface.
+
+## xStringJoin
+```
+xStringJoin(string, values...)
+```
+Joins given values together putting the string between each consecutive two.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to put between two consecutive values.
+values | `any` | Any number of values to be joined.
+
+### Returns:
+`string`: The resulting string.
+
+### Example:
+```
+show_debug_message(
+  xStringJoin(" ", "Player", player.name, "took", _damage, "damage!")
+);
+```
+This could show a debug message saying "Player Patrik took 60 damage!".
+
+## xStringJoinArray
+```
+xStringJoinArray(string, array)
+```
+Joins values in the array putting the string between each two consecutive values.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to put between two consecutive values.
+array | `array` | An array of values that you want to join.
+
+### Returns:
+`string`: The resulting string.
+
+### Example:
+```
+show_message("Numbers: " + xStringJoinArray(", ", [1, 2, 3, 4]));
+```
+This will show a message saying "Numbers: 1, 2, 3, 4".
+
+## xStringJoinList
+```
+xStringJoinList(string, list)
+```
+Joins values in the list putting the string between each two consecutive values.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to put between two consecutive values.
+list | `real` | The id of the list of values that you want to join.
+
+### Returns:
+`string`: The resulting string.
+
+### Example:
+```
+var _numbers = ds_list_create();
+ds_list_add(_numbers, 1, 2, 3, 4);
+show_message("Numbers: " + xStringJoinList(", ", _numbers));
+```
+This will show a message saying "Numbers: 1, 2, 3, 4".
+
+## xStringRemovePart
+```
+xStringRemovePart(string, startStr, endStr)
+```
+Removes part beginning with startStr and ending with endStr from the string.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+startStr | `string` | The start of the part to remove.
+endStr | `string` | The end of the part to remove.
+string | `string` | The string to remove the part from.
+
+### Returns:
+`string`: The string with the given part removed.
 
 ## xStringSplitOnFirst
 ```
@@ -1930,4 +2248,334 @@ Name | Type | Description
 ---- | ---- | -----------
 v | `array` | The vector to transform.
 m | `array` | The transform matrix.
+
+## xXmlElementAddChild
+```
+xXmlElementAddChild(element, child)
+```
+Adds child to the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element to add the child to.
+child | `real` | The id of the child element.
+
+## xXmlElementCreate
+```
+xXmlElementCreate([name])
+```
+Creates a new element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+name | `string` | The name of the element.
+
+### Returns:
+`real`: The id of the created element.
+
+## xXmlElementDestroy
+```
+xXmlElementDestroy(element)
+```
+Destroys the element and all its children.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element to be destroyed.
+
+## xXmlElementFind
+```
+xXmlElementFind(rootElement, name)
+```
+Finds the first element with given name in the given tree of elements.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+rootElement | `real` | The root element of the tree.
+name | `string` | The name of the element to be found.
+
+### Returns:
+`real`: The id of the found element or noone, if no such element has been found.
+
+## xXmlElementFindAll
+```
+xXmlElementFindAll(rootElement, name)
+```
+Finds all elements with given name in the given tree of elements.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+rootElement | `real` | The root element of the tree.
+name | `string` | The name of elements to be found.
+
+### Returns:
+`real`: A ds_list containing all found elements.
+
+## xXmlElementFindFirstAttribute
+```
+xXmlElementFindFirstAttribute(element)
+```
+Finds the first attribute of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`string/undefiend`: The name of the first attribute or undefined, if the element does not have any.
+
+## xXmlElementFindNextAttribute
+```
+xXmlElementFindNextAttribute(element, attribute)
+```
+Finds next element attribute.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+attribute | `string` | Name of the current atribute.
+
+### Returns:
+`string/undefined`: Name of the next attribute or undefined, if the element does not have more attributes.
+
+## xXmlElementGetAttribute
+```
+xXmlElementGetAttribute(element, attribute)
+```
+Gets value of the element attribute.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+attribute | `string` | The name of the attribute.
+
+### Returns:
+`real/string/undefiend`: The attribute value.
+
+## xXmlElementGetAttributeCount
+```
+xXmlElementGetAttributeCount(element)
+```
+Gets the number of attributes of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`real`: The number of attributes of the given element.
+
+## xXmlElementGetChild
+```
+xXmlElementGetChild(element, n)
+```
+Gets n-th child of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+n | `real` | The index (0...numberOfChildren - 1) of the child element.
+
+### Returns:
+`real`: The id of the n-th child of the given element.
+
+## xXmlElementGetChildCount
+```
+xXmlElementGetChildCount(element)
+```
+Gets number of children of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`real`: Number of children of the given element.
+
+## xXmlElementGetName
+```
+xXmlElementGetName(element)
+```
+Gets the name of the element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`string`: The name of the element.
+
+## xXmlElementGetParent
+```
+xXmlElementGetParent(element)
+```
+Gets the parent of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`real`: The parent of the element or noone, if the element does not have a parent.
+
+## xXmlElementGetValue
+```
+xXmlElementGetValue(element)
+```
+Gets the value of the given element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`real/string/undefined`: The element value or undefined, if the element does not have any value.
+
+## xXmlElementHasAttribute
+```
+xXmlElementHasAttribute(element, attName)
+```
+Finds the attribute with given name in the element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+attName | `string` | The name of the attribute.
+
+### Returns:
+`boolean`: True if the element has an attribute with given name.
+
+## xXmlElementHasValue
+```
+xXmlElementHasValue(element)
+```
+Finds out if the given element has a value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+
+### Returns:
+`boolean`: True if the element has a value.
+
+## xXmlElementRemoveAttribute
+```
+xXmlElementRemoveAttribute(element, attribute)
+```
+Removes given attribute from the element.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+attribute | `string` | The name of the attribute.
+
+## xXmlElementSetAttribute
+```
+xXmlElementSetAttribute(element, attribute, value)
+```
+Sets value of the given element attribute to the given value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+attribute | `string` | The name of the attribute.
+value | `real/string/undefined` | The value of the attribute.
+
+## xXmlElementSetName
+```
+xXmlElementSetName(element, name)
+```
+Sets name of the element to the given value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+name | `string` | The new name of the element.
+
+## xXmlElementSetValue
+```
+xXmlElementSetValue(element, value)
+```
+Sets value of the element to the given value.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+element | `real` | The id of the element.
+value | `real/string/undefined` | The new element value.
+
+## xXmlParse
+```
+xXmlParse(string)
+```
+Parses value from the string.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to parse.
+
+### Returns:
+`real/string`: Real value or a string, where XML character entities are replaced with their original form.
+
+## xXmlRead
+```
+xXmlRead(fileName)
+```
+Reads the XML formatted file and stores the contained data into a tree of elements.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+fileName | `string` | The name of the XML formatted file.
+
+### Returns:
+`real`: The root element of the tree on success or noone on fail.
+
+## xXmlString
+```
+xXmlString(value)
+```
+Turns given value into a string. Replaces characters with their XML-safe form.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+value | `any` | The value to be turned into a string.
+
+### Returns:
+`string`: The resulting string.
+
+## xXmlWrite
+```
+xXmlWrite(rootElement)
+```
+Writes the tree of elements into a string.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+rootElement | `real` | The root element of the tree.
+
+### Returns:
+`string`: The string.
 

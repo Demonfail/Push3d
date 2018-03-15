@@ -50,11 +50,8 @@ surface_reset_target();
 surface_set_target_ext(0, application_surface);
 surface_set_target_ext(1, surGBuffer[xEGBuffer.Normal]);
 surface_set_target_ext(2, surGBuffer[xEGBuffer.Depth]);
+surface_set_target_ext(3, surGBuffer[xEGBuffer.Emissive]);
 draw_clear_alpha(0, 0);
-surface_reset_target();
-
-surface_set_target(surGBuffer[xEGBuffer.Emissive]);
-draw_clear(0);
 surface_reset_target();
 
 //==============================================================================
@@ -139,7 +136,8 @@ shader_reset();
 surface_set_target_ext(1, surGBuffer[xEGBuffer.Emissive]);
 
 // Blend other lights
-gpu_set_blendmode_ext(bm_one, bm_one);
+gpu_set_colorwriteenable(true, true, true, false);
+gpu_set_blendmode(bm_add);
 
 // Directional light
 _shader = xShDeferredDirectional;
@@ -204,6 +202,7 @@ if (instance_exists(xOLightPoint))
 	shader_reset();
 }
 
+gpu_set_colorwriteenable(true, true, true, true);
 gpu_set_blendmode(bm_normal);
 
 gpu_set_ztestenable(true);

@@ -85,4 +85,5 @@ void main(in VS_out IN, out PS_out OUT)
 	OUT.Depth.rgb = xEncodeDepth(IN.Depth);
 	OUT.Depth.a = 1.0;
 	OUT.Emissive = texEmissive.Sample(gm_BaseTexture, IN.TexCoord);
+	OUT.Emissive.a = N.x;
 }
