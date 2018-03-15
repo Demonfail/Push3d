@@ -1,25 +1,22 @@
-/// @func xCubemapCreate(posX, negX, posY, negY, posZ, negZ)
-/// @desc Creates a cubemap.
-/// @param {real} posX The surface used for the +X (front) side of the cubemap.
-/// @param {real} negX The surface used for the -X (back) side of the cubemap.
-/// @param {real} posY The surface used for the +Y (right) side of the cubemap.
-/// @param {real} negY The surface used for the -Y (left) side of the cubemap.
-/// @param {real} posZ The surface used for the +Z (top) side of the cubemap.
-/// @param {real} negZ The surface used for the -Z (bottom) side of the cubemap.
+/// @func xCubemapCreate(resolution)
+/// @desc Creates an empty cubemap, where each side is a separate surface.
+/// @param {real} resolution Size of one cube side.
 /// @return {array} An array representing the cubemap.
-#macro X_CUBEMAP_SIDE_POSITIVE_X 0
-#macro X_CUBEMAP_SIDE_NEGATIVE_X 1
-#macro X_CUBEMAP_SIDE_POSITIVE_Y 2
-#macro X_CUBEMAP_SIDE_NEGATIVE_Y 3
-#macro X_CUBEMAP_SIDE_POSITIVE_Z 4
-#macro X_CUBEMAP_SIDE_NEGATIVE_Z 5
+#macro X_CUBEMAP_POS_X 0 //< Index at which the +X (front) cubemap surface is stored.
+#macro X_CUBEMAP_NEG_X 1 //< Index at which the -X (back) cubemap surface is stored.
+#macro X_CUBEMAP_POS_Y 2 //< Index at which the +Y (right) cubemap surface is stored.
+#macro X_CUBEMAP_NEG_Y 3 //< Index at which the -Y (left) cubemap surface is stored.
+#macro X_CUBEMAP_POS_Z 4 //< Index at which the +Z (top) cubemap surface is stored.
+#macro X_CUBEMAP_NEG_Z 5 //< Index at which the -Z (bottom) cubemap surface is stored.
+#macro X_CUBEMAP_SIZE  6 //< Index at which the cubemap resolution is stored.
 
 gml_pragma("forceinline");
 return [
-	argument0,
-	argument1,
-	argument2,
-	argument3,
-	argument4,
-	argument5
+	noone,
+	noone,
+	noone,
+	noone,
+	noone,
+	noone,
+	argument0
 ];

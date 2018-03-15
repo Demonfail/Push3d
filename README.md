@@ -16,6 +16,10 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xColorFromArgb](#xcolorfromargb)
 	- [xColorRgbToBgr](#xcolorrgbtobgr)
 	- [xCubemapCreate](#xcubemapcreate)
+	- [xCubemapFreeSurfaces](#xcubemapfreesurfaces)
+	- [xCubemapGetProjectionMatrix](#xcubemapgetprojectionmatrix)
+	- [xCubemapGetSurface](#xcubemapgetsurface)
+	- [xCubemapGetViewMatrix](#xcubemapgetviewmatrix)
 	- [xDsListAddList](#xdslistaddlist)
 	- [xDsListAddMap](#xdslistaddmap)
 	- [xDsListAddUnique](#xdslistaddunique)
@@ -23,6 +27,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xDsListInsertMap](#xdslistinsertmap)
 	- [xDsListInsertUnique](#xdslistinsertunique)
 	- [xMatrixAddComponentwise](#xmatrixaddcomponentwise)
+	- [xMatrixBuildLookAt](#xmatrixbuildlookat)
 	- [xMatrixClone](#xmatrixclone)
 	- [xMatrixCreate](#xmatrixcreate)
 	- [xMatrixCreateFromColumns](#xmatrixcreatefromcolumns)
@@ -272,22 +277,73 @@ color | `real` | The BGR or RGB color.
 
 ## xCubemapCreate
 ```
-xCubemapCreate(posX, negX, posY, negY, posZ, negZ)
+xCubemapCreate(resolution)
 ```
-Creates a cubemap.
+Creates an empty cubemap, where each side is a separate surface.
 
 ### Arguments:
 Name | Type | Description
 ---- | ---- | -----------
-posX | `real` | The surface used for the +X (front) side of the cubemap.
-negX | `real` | The surface used for the -X (back) side of the cubemap.
-posY | `real` | The surface used for the +Y (right) side of the cubemap.
-negY | `real` | The surface used for the -Y (left) side of the cubemap.
-posZ | `real` | The surface used for the +Z (top) side of the cubemap.
-negZ | `real` | The surface used for the -Z (bottom) side of the cubemap.
+resolution | `real` | Size of one cube side.
 
 ### Returns:
 `array`: An array representing the cubemap.
+
+## xCubemapFreeSurfaces
+```
+xCubemapFreeSurfaces(cubemap)
+```
+Frees surfaces used by the cubemap from memory.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+cubemap | `array` | The cubemap.
+
+## xCubemapGetProjectionMatrix
+```
+xCubemapGetProjectionMatrix(znear, zfar)
+```
+Creates a projection matrix for the cubemap.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+znear | `real` | Distance to the near clipping plane of the projection.
+zfar | `real` | Distance to the far clipping plane of the projection.
+
+### Returns:
+`array`: The projection matrix.
+
+## xCubemapGetSurface
+```
+xCubemapGetSurface(cubemap, side)
+```
+Gets a surface for given cubemap side. If the surface is corrupted, then a new one is created.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+cubemap | `array` | The cubemap.
+side | `real` | The cubemap side.
+
+### Returns:
+`real`: The surface.
+
+## xCubemapGetViewMatrix
+```
+xCubemapGetViewMatrix(side, position)
+```
+Creates a view matrix for given cubemap side.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+side | `real` | The cubemap side.
+position | `array` | The center position of the cubemap in the world space (vec3).
+
+### Returns:
+`array`: The created view matrix.
 
 ## xDsListAddList
 ```
@@ -381,6 +437,22 @@ Name | Type | Description
 ---- | ---- | -----------
 m1 | `array` | The first matrix.
 m2 | `array` | The second matrix.
+
+## xMatrixBuildLookAt
+```
+xMatrixBuildLookAt(from, to, up)
+```
+Builds a look-at matrix from given vec3.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+from | `array` | Camera's position vector.
+to | `array` | Camera's target position.
+up | `array` | Camera's up vector.
+
+### Returns:
+`array`: The created matrix.
 
 ## xMatrixClone
 ```

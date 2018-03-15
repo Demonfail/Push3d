@@ -151,6 +151,14 @@
             }
         },
         {
+            "Key": "1488f661-c934-4de5-b77b-2c2482b12a94",
+            "Value": {
+                "id": "4da6f99c-9620-4ad3-9dd8-cb2a7f6542a3",
+                "resourcePath": "scripts\\xCubemapFreeSurfaces\\xCubemapFreeSurfaces.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "14e70396-2624-43e1-b630-4b1daeff2a1b",
             "Value": {
                 "id": "b1197bf3-cf81-4996-a355-5dc29a61584c",
@@ -375,6 +383,14 @@
             }
         },
         {
+            "Key": "2f305c7e-3a1e-48a2-a472-70c758a8b5bd",
+            "Value": {
+                "id": "23e80903-cb29-44f9-abc3-ddf70b63e226",
+                "resourcePath": "shaders\\xShShadowMap\\xShShadowMap.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "2f526548-12db-413b-81ca-5800b7363c78",
             "Value": {
                 "id": "5ad437d5-052f-4ea4-8a50-3dd84337fd24",
@@ -428,6 +444,14 @@
                 "id": "0d572600-b8eb-4077-af87-6a7f79f47128",
                 "resourcePath": "shaders\\xShDeferredPoint\\xShDeferredPoint.yy",
                 "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "365067be-2afc-4e39-be8f-2f13992c75e5",
+            "Value": {
+                "id": "eb80f0d0-1b48-42c6-9724-f5817d470477",
+                "resourcePath": "scripts\\xCubemapGetViewMatrix\\xCubemapGetViewMatrix.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -783,6 +807,14 @@
             }
         },
         {
+            "Key": "63009f08-3339-421c-96a7-9a4909519b99",
+            "Value": {
+                "id": "a0e5c9c9-2ded-421c-9abd-7c54e9010a61",
+                "resourcePath": "scripts\\xCubemapGetProjectionMatrix\\xCubemapGetProjectionMatrix.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "63f63dd1-22d0-425f-8703-40760f8a0bfc",
             "Value": {
                 "id": "bcb69f33-9988-4b06-a4d0-bfcc02ce5cca",
@@ -858,7 +890,7 @@
             "Key": "6de46218-0978-44da-ba6a-de27f4bf7da9",
             "Value": {
                 "id": "633d22ad-1e2b-4016-a988-471b826f8e00",
-                "resourcePath": "shaders\\xShShadowMap\\xShShadowMap.yy",
+                "resourcePath": "shaders\\xShShadowMapOrtho\\xShShadowMapOrtho.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -1179,6 +1211,14 @@
             "Value": {
                 "id": "abe9bd00-3116-460a-90cb-25c9aa7ad8f4",
                 "resourcePath": "scripts\\xXmlElementRemoveAttribute\\xXmlElementRemoveAttribute.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "98e01ee4-0be0-4eec-bb4e-e4e86ed2950d",
+            "Value": {
+                "id": "3f1a5f8d-78b0-481f-a1e1-0c95a3382af2",
+                "resourcePath": "scripts\\xMatrixBuildLookAt\\xMatrixBuildLookAt.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -1687,6 +1727,14 @@
             }
         },
         {
+            "Key": "d4a97094-e6bd-4ca6-b6dc-d14c24e917a0",
+            "Value": {
+                "id": "197b024f-b29d-4576-b4ad-2488d8be84b6",
+                "resourcePath": "scripts\\xCubemapGetSurface\\xCubemapGetSurface.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "d6f36792-1bc8-4990-9641-2a6ba816ce7c",
             "Value": {
                 "id": "a8ae1e07-6fb7-4291-8f02-1b60a449d7e0",
@@ -2051,7 +2099,12 @@
         "eefefafb-89fc-44dc-a2bc-eec65d21a1ff",
         "14e70396-2624-43e1-b630-4b1daeff2a1b",
         "b5c1520f-5891-4eb3-9cfb-c11182fcc207",
+        "1488f661-c934-4de5-b77b-2c2482b12a94",
+        "d4a97094-e6bd-4ca6-b6dc-d14c24e917a0",
+        "63009f08-3339-421c-96a7-9a4909519b99",
+        "365067be-2afc-4e39-be8f-2f13992c75e5",
         "f3b07a3b-9c48-4e48-806f-9133257fd3f7",
+        "98e01ee4-0be0-4eec-bb4e-e4e86ed2950d",
         "1d4013ab-c222-4cd7-aa59-00691d78ae99",
         "b73250d9-7d49-4e33-bd17-2d3e7c235444",
         "caa1b0bc-37e8-4c03-9694-a3496a6c9d59",

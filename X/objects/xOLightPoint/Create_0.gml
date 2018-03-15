@@ -1,5 +1,7 @@
 /// @desc Init
 z = 0;
-radius = 128;
+radius = 512;
 color = make_color_hsv(random(255), 255, 255);
 intensity = 1;
+cubemap = xCubemapCreate(128);
+shadowmap = noone;

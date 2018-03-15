@@ -29,11 +29,7 @@ struct VS_out
 {
 	float4 Position : SV_POSITION;
 	float2 TexCoord : TEXCOORD0;
-	float3 PosWorld : TEXCOORD1;
 };
-
-uniform float3 u_fLightPos;
-uniform float  u_fClipFar;
 
 float4 main(in VS_out IN) : SV_TARGET0
 {
@@ -42,6 +38,5 @@ float4 main(in VS_out IN) : SV_TARGET0
 	{
 		discard;
 	}
-	float depth = min(length(IN.PosWorld - u_fLightPos) / u_fClipFar, 1.0);
-	return float4(xEncodeDepth(depth).xyz, 1.0);
+	return float4(xEncodeDepth(IN.Position.z).xyz, 1.0);
 }
