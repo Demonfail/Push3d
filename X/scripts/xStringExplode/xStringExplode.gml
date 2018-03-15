@@ -1,5 +1,9 @@
 /// @func xStringExplode(string, char)
-// TODO: Write script documentation.
+/// @desc Splits given string on every `char` and puts
+///       created parts into an array.
+/// @param {string} string The string to explode.
+/// @param {string} char   The character to split the string on.
+/// @return {array} The created array.
 var a = [];
 var i = 0;
 var s;

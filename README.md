@@ -69,6 +69,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xSsaoFree](#xssaofree)
 	- [xSsaoInit](#xssaoinit)
 	- [xSsaoMakeNoiseSurface](#xssaomakenoisesurface)
+	- [xStringExplode](#xstringexplode)
 	- [xStringJoin](#xstringjoin)
 	- [xStringJoinArray](#xstringjoinarray)
 	- [xStringJoinList](#xstringjoinlist)
@@ -985,6 +986,21 @@ size | `real` | Size of the noise surface.
 
 ### Returns:
 `real`: The created noise surface.
+
+## xStringExplode
+```
+xStringExplode(string, char)
+```
+Splits given string on every `char` and puts created parts into an array.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+string | `string` | The string to explode.
+char | `string` | The character to split the string on.
+
+### Returns:
+`array`: The created array.
 
 ## xStringJoin
 ```

@@ -2,7 +2,7 @@
     "id": "b27f27ed-7501-4411-b834-4d9fe9534bc8",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "xORenderer",
+    "name": "xODeferredRenderer",
     "eventList": [
         {
             "id": "d3d011ca-0034-428c-b512-fecab9f2be08",
