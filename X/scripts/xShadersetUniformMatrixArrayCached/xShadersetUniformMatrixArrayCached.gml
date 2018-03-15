@@ -1,4 +1,4 @@
-/// @func xShadersetUniformMatrixArrayCached(uniformId, array)
+/// @func xShaderSetUniformMatrixArrayCached(uniformId, array)
 var _currentUniforms = xORenderCache.currentUniforms;
 if (!ds_map_exists(_currentUniforms, argument0)
 	|| !array_equals(_currentUniforms[? argument0], argument1))
