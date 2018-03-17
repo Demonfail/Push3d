@@ -51,6 +51,7 @@ Texture2D texNormal    : register(t1);
 Texture2D texDepth     : register(t2);
 Texture2D texShadowMap : register(t3);
 
+uniform float2   u_fShadowMapTexel;
 uniform float4x4 u_mInverse;
 uniform float    u_fClipFar;
 uniform float2   u_fTanAspect;
@@ -70,7 +71,11 @@ struct PS_out
 	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
-float4 xSampleCube(Texture2D tex, float3 dir)
+// @return UV coordinates for the following cubemap layout:
+// +---------------------------+
+// |+X|-X|+Y|-Y|+Z|-Z|None|None|
+// +---------------------------+
+float2 xVec3ToCubeUv(float3 dir)
 {
 	float3 dirAbs = abs(dir);
 
@@ -130,8 +135,32 @@ float4 xSampleCube(Texture2D tex, float3 dir)
 	float invL = 1.0 / length(ma);
 	float2 st = (float2(sc, tc) * invL + 1.0) * 0.5;
 	st.x = (float(i) * 2.0 + o + st.x) * 0.125;
-	return tex.Sample(gm_BaseTexture, st);
-	return float4(st.xy, 0.0, 1.0);
+	return st;
+}
+
+// Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
+float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)
+{
+	if (uv.x < 0.0 || uv.y < 0.0
+		|| uv.x > 1.0 || uv.y > 1.0)
+	{
+		return 0.0;
+	}
+	float2 temp = uv.xy / texel + 0.5;
+	float2 f = frac(temp);
+	float2 centroidUV = floor(temp) * texel;
+	float2 pos = centroidUV;
+	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,0
+	pos.y += texel.y;
+	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,1
+	pos.x += texel.x;
+	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,1
+	pos.y -= texel.y;
+	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,0
+	float a = lerp(lb, lt, f.y);
+	float b = lerp(rb, rt, f.y);
+	float c = lerp(a, b, f.x);
+	return c;
 }
 
 void main(in VS_out IN, out PS_out OUT)
@@ -161,10 +190,12 @@ void main(in VS_out IN, out PS_out OUT)
 
 		if (NdotL > 0.0)
 		{
-			float shadowmapDepth = xDecodeDepth(xSampleCube(texShadowMap, -lightVec).xyz) * u_fLightPos.w;
-			float shadow = dist > shadowmapDepth ? 1.0 : 0.0;
+			float bias = 0.1 * tan(acos(NdotL));
+			bias = clamp(bias, 0.0, 0.05);
+			float distLinear = saturate(dist / u_fLightPos.w);
 
-			float att = 1.0 - saturate(dist / u_fLightPos.w);
+			float shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, xVec3ToCubeUv(-lightVec), distLinear - bias);
+			float att = 1.0 - distLinear;
 			lightCol += u_fLightCol.rgb * u_fLightCol.a * NdotL * att * (1.0 - shadow);
 
 			// TODO: Make BRDF.

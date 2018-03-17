@@ -535,6 +535,14 @@
             }
         },
         {
+            "Key": "3f600a8a-d9fb-4ae4-ab32-0f44a6bd7a3b",
+            "Value": {
+                "id": "57cd2b9e-35da-4143-a70f-e5a95aa30b50",
+                "resourcePath": "scripts\\xCubemapToSingleSurface\\xCubemapToSingleSurface.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "3fdee841-dc6c-4682-9fbd-8649afa50cbd",
             "Value": {
                 "id": "4bba0ba7-e23b-4f3e-ba37-6ae0cfb87361",
@@ -2103,6 +2111,7 @@
         "d4a97094-e6bd-4ca6-b6dc-d14c24e917a0",
         "63009f08-3339-421c-96a7-9a4909519b99",
         "365067be-2afc-4e39-be8f-2f13992c75e5",
+        "3f600a8a-d9fb-4ae4-ab32-0f44a6bd7a3b",
         "f3b07a3b-9c48-4e48-806f-9133257fd3f7",
         "98e01ee4-0be0-4eec-bb4e-e4e86ed2950d",
         "1d4013ab-c222-4cd7-aa59-00691d78ae99",

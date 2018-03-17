@@ -1,10 +1,10 @@
 /// @desc Render
 var _shader;
-var _screenWidth = window_get_width();
+var _screenWidth  = window_get_width();
 var _screenHeight = window_get_height();
-var _texAlbedo = sprite_get_texture(xSprDefault, 0);
-var _texNormal = sprite_get_texture(xSprDefault, 1);
-var _texEmissive = sprite_get_texture(xSprDefault, 2);
+var _texAlbedo    = sprite_get_texture(xSprDefault, 0);
+var _texNormal    = sprite_get_texture(xSprDefault, 1);
+var _texEmissive  = sprite_get_texture(xSprDefault, 2);
 
 // Check surfaces
 xSurfaceCheck(application_surface, _screenWidth, _screenHeight);
@@ -55,23 +55,26 @@ var _vBuffer = vBuffer;
 
 with (xOLightPoint)
 {
-	var _world = matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40);
-	var _proj = xCubemapGetProjectionMatrix(0.001, radius);
-	var _pos = [x, y, z];
-	for (var i = 0; i < 6; ++i)
+	if (!surface_exists(shadowmap))
 	{
-		surface_set_target(xCubemapGetSurface(cubemap, i));
-		draw_clear(c_red);
-		matrix_set(matrix_view, xCubemapGetViewMatrix(i, _pos));
-		matrix_set(matrix_projection, _proj);
+		var _world = matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40);
+		var _proj = xCubemapGetProjectionMatrix(0.001, radius);
+		var _pos = [x, y, z];
+		for (var i = 0; i < 6; ++i)
+		{
+			surface_set_target(xCubemapGetSurface(cubemap, i));
+			draw_clear(c_red);
+			matrix_set(matrix_view, xCubemapGetViewMatrix(i, _pos));
+			matrix_set(matrix_projection, _proj);
 
-		shader_set_uniform_f(_uLightPos, x, y, z);
-		shader_set_uniform_f(_uClipFar, radius);
-		matrix_set(matrix_world, _world);
-		vertex_submit(_vBuffer, pr_trianglelist, _texAlbedo)
-		matrix_set(matrix_world, matrix_build_identity());
+			shader_set_uniform_f(_uLightPos, x, y, z);
+			shader_set_uniform_f(_uClipFar, radius);
+			matrix_set(matrix_world, _world);
+			vertex_submit(_vBuffer, pr_trianglelist, _texAlbedo)
+			matrix_set(matrix_world, matrix_build_identity());
 
-		surface_reset_target();
+			surface_reset_target();
+		}
 	}
 }
 
@@ -79,17 +82,10 @@ shader_reset();
 
 with (xOLightPoint)
 {
-	var _size = cubemap[X_CUBEMAP_SIZE];
-	var _x = 0;
-	shadowmap = xSurfaceCheck(shadowmap, _size * 8, _size);
-	surface_set_target(shadowmap);
-	draw_clear(c_red);
-	for (var i = 0; i < 6; ++i)
+	if (!surface_exists(shadowmap))
 	{
-		draw_surface(cubemap[i], _x, 0);
-		_x += _size;
+		shadowmap = xCubemapToSingleSurface(cubemap, shadowmap);
 	}
-	surface_reset_target();
 }
 
 //==============================================================================
@@ -122,7 +118,7 @@ var _matView = matrix_build_lookat(
 var _matViewInverse = xMatrixClone(_matView);
 xMatrixInverse(_matViewInverse);
 
-var _aspect = _screenWidth / _screenHeight;
+var _aspect  = _screenWidth / _screenHeight;
 var _matProj = matrix_build_projection_perspective_fov(
 	fov, _aspect, 1, clipFar);
 
@@ -147,7 +143,7 @@ surface_copy(surGBuffer[xEGBuffer.Albedo], 0, 0, application_surface);
 
 //==============================================================================
 // SSAO
-var _ssaoWidth = _screenWidth * ssaoResolution;
+var _ssaoWidth  = _screenWidth * ssaoResolution;
 var _ssaoHeight = _screenHeight * ssaoResolution;
 surSsao = xSurfaceCheck(surSsao, _ssaoWidth, _ssaoHeight);
 surWork = xSurfaceCheck(surWork, _ssaoWidth, _ssaoHeight);
@@ -160,10 +156,10 @@ xSsaoDraw(
 
 //==============================================================================
 // Light pass
-var _tanFovY = dtan(fov * 0.5);
-var _tanAspect = [_tanFovY * _aspect, -_tanFovY];
-var _texSceneNormal = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
-var _texSceneDepth = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
+var _tanFovY          = dtan(fov * 0.5);
+var _tanAspect        = [_tanFovY * _aspect, -_tanFovY];
+var _texSceneNormal   = surface_get_texture(surGBuffer[xEGBuffer.Normal]);
+var _texSceneDepth    = surface_get_texture(surGBuffer[xEGBuffer.Depth]);
 var _texSceneEmissive = surface_get_texture(surGBuffer[xEGBuffer.Emissive]);
 
 surface_set_target_ext(0, application_surface);
@@ -187,23 +183,23 @@ gpu_set_colorwriteenable(true, true, true, false);
 gpu_set_blendmode(bm_add);
 
 // Directional light
-/*_shader = xShDeferredDirectional;
-shader_set(_shader);
-shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
-var _texel = 1 / shadowMapRes;
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 1.0, 1.0, 1.0, 1.0);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
-shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
-shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
-shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
-texture_set_stage(1, _texSceneNormal);
-texture_set_stage(2, _texSceneDepth);
-texture_set_stage(3, surface_get_texture(surShadowMap));
-draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
-shader_reset();*/
+//_shader = xShDeferredDirectional;
+//shader_set(_shader);
+//shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
+//shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
+//var _texel = 1 / shadowMapRes;
+//shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
+//shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 1.0, 1.0, 1.0, 1.0);
+//shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
+//shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
+//shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
+//shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
+//shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
+//texture_set_stage(1, _texSceneNormal);
+//texture_set_stage(2, _texSceneDepth);
+//texture_set_stage(3, surface_get_texture(surShadowMap));
+//draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
+//shader_reset();
 
 // Point lights
 if (instance_exists(xOLightPoint))
@@ -224,10 +220,11 @@ if (instance_exists(xOLightPoint))
 
 	gpu_set_cullmode(cull_clockwise);
 
-	var _1by255 = 1 / 255;
-	var _texSceneAlbedo = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
-	var _uLightPos = shader_get_uniform(_shader, "u_fLightPos");
-	var _uLightCol = shader_get_uniform(_shader, "u_fLightCol");
+	var _1by255          = 1 / 255;
+	var _texSceneAlbedo  = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
+	var _uLightPos       = shader_get_uniform(_shader, "u_fLightPos");
+	var _uLightCol       = shader_get_uniform(_shader, "u_fLightCol");
+	var _uShadowMapTexel = shader_get_uniform(_shader, "u_fShadowMapTexel");
 
 	with (xOLightPoint)
 	{
@@ -237,6 +234,9 @@ if (instance_exists(xOLightPoint))
 			color_get_green(color) * _1by255,
 			color_get_blue(color) * _1by255,
 			intensity);
+		shader_set_uniform_f(_uShadowMapTexel,
+			1 / surface_get_width(shadowmap),
+			1 / surface_get_height(shadowmap));
 		texture_set_stage(3, surface_get_texture(shadowmap));
 
 		var _scale = radius + 0.5;

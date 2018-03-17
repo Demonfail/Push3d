@@ -2,8 +2,8 @@
 
 //==============================================================================
 // Light bloom
-var _width = surface_get_width(surWork);
-var _height = surface_get_height(surWork);
+var _width    = surface_get_width(surWork);
+var _height   = surface_get_height(surWork);
 surLightBloom = xSurfaceCheck(surLightBloom, _width, _height);
 
 surface_set_target(surLightBloom);
