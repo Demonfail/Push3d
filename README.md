@@ -20,6 +20,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xCubemapGetProjectionMatrix](#xcubemapgetprojectionmatrix)
 	- [xCubemapGetSurface](#xcubemapgetsurface)
 	- [xCubemapGetViewMatrix](#xcubemapgetviewmatrix)
+	- [xCubemapToSingleSurface](#xcubemaptosinglesurface)
 	- [xDsListAddList](#xdslistaddlist)
 	- [xDsListAddMap](#xdslistaddmap)
 	- [xDsListAddUnique](#xdslistaddunique)
@@ -344,6 +345,21 @@ position | `array` | The center position of the cubemap in the world space (vec3
 
 ### Returns:
 `array`: The created view matrix.
+
+## xCubemapToSingleSurface
+```
+xCubemapToSingleSurface(cubemap, surface)
+```
+Puts all faces of the cubemap into a single surface.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+cubemap | `array` | The cubemap.
+surface | `real` | The target surface (recreated or resized if necessary).
+
+### Returns:
+`real`: The target surface.
 
 ## xDsListAddList
 ```
