@@ -404,7 +404,7 @@ value | `any` | The value to be added.
 ```
 xDsListInsertList(l1, pos, l2)
 ```
-Inserts the list l2 into the list t1 at the given position.
+Inserts the list l2 into the list l1 at the given position.
 
 ### Arguments:
 Name | Type | Description
@@ -493,10 +493,10 @@ Creates a matrix with given components.
 ### Arguments:
 Name | Type | Description
 ---- | ---- | -----------
-m00 | `real` | 
-m10 | `real` | 
-m20 | `real` | 
-m30 | `real` | 
+m00..m03 | `real` | The first row of the matrix.
+m10..m13 | `real` | The second row of the matrix.
+m20..m23 | `real` | The third row of the matrix.
+m30..m33 | `real` | The fourth row of the matrix.
 
 ### Returns:
 `array`: The created matrix.

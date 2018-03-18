@@ -202,13 +202,13 @@ class GMScript(GMBase):
 
             # Found script argument
             m = re.match(
-                r"/// @param(\s*\{(.+)\})?\s+(\w+)(\s+(.+))?", line)
+                r"/// @param(\s*\{(.+)\})?\s+([\w.]+)(\s+(.+))?", line)
             if not m:
                 m = re.match(
-                    r"/// @arg(\s*\{(.+)\})?\s+(\w+)(\s+(.+))?", line)
+                    r"/// @arg(\s*\{(.+)\})?\s+([\w.]+)(\s+(.+))?", line)
             if not m:
                 m = re.match(
-                    r"/// @argument(\s*\{(.+)\})?\s+(\w+)(\s+(.+))?", line)
+                    r"/// @argument(\s*\{(.+)\})?\s+([\w.]+)(\s+(.+))?", line)
             if m and script:
                 typename = m.group(2).strip() if m.group(2) else ""
                 name = m.group(3).strip()
