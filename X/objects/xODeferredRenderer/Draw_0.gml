@@ -50,16 +50,16 @@ surface_reset_target();
 // Point lights
 shader_set(xShShadowMap);
 var _uLightPos = shader_get_uniform(xShShadowMap, "u_fLightPos");
-var _uClipFar = shader_get_uniform(xShShadowMap, "u_fClipFar");
-var _vBuffer = vBuffer;
+var _uClipFar  = shader_get_uniform(xShShadowMap, "u_fClipFar");
+var _vBuffer   = vBuffer;
 
 with (xOLightPoint)
 {
 	if (!surface_exists(shadowmap))
 	{
 		var _world = matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40);
-		var _proj = xCubemapGetProjectionMatrix(0.001, radius);
-		var _pos = [x, y, z];
+		var _proj  = xCubemapGetProjectionMatrix(0.001, radius);
+		var _pos   = [x, y, z];
 		for (var i = 0; i < 6; ++i)
 		{
 			surface_set_target(xCubemapGetSurface(cubemap, i));

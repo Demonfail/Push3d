@@ -108,6 +108,7 @@ class GMScript(GMBase):
         self.note = None
         self.see_also = []
         self.example = None
+        self.source = None
 
     def __str__(self):
         s = "## {}\n".format(escape(self.name))
@@ -139,6 +140,10 @@ class GMScript(GMBase):
         if self.example:
             s += "\n\n### Example:\n"
             s += "{}".format(self.example)
+
+        if self.source:
+            s += "\n\n### Source:\n"
+            s += "{}".format(self.source)
 
         s += "\n" * 2
         return s
@@ -232,6 +237,15 @@ class GMScript(GMBase):
                 gm_obj_last = note
                 continue
 
+            # Found script source
+            m = re.match(r"/// @source(\s+(.+))?", line)
+            if m and script:
+                desc = m.group(1).strip() if m.group(1) else ""
+                source = GMSource(desc)
+                script.source = source
+                gm_obj_last = source
+                continue
+
             # Found script reference
             m = re.match(r"/// @see\s+(\w+)", line)
             if m and script:
@@ -255,9 +269,9 @@ class GMScript(GMBase):
 
                 if isinstance(gm_obj_last, GMBase):
                     if not isinstance(gm_obj_last, GMExample):
-                      gm_obj_last._desc += " {}".format(line[4:].strip())
+                        gm_obj_last._desc += " {}".format(line[4:].strip())
                     else:
-                      gm_obj_last._desc += "\n{}".format(line[4:])
+                        gm_obj_last._desc += "\n{}".format(line[4:])
                     continue
 
             # End of script description
@@ -291,6 +305,14 @@ class GMRetVal(GMBase):
 class GMNote(GMBase):
     def __init__(self, desc):
         super(GMNote, self).__init__(desc)
+
+    def __str__(self):
+        return "{}".format(self.desc())
+
+
+class GMSource(GMBase):
+    def __init__(self, desc):
+        super(GMSource, self).__init__(desc)
 
     def __str__(self):
         return "{}".format(self.desc())
@@ -345,11 +367,11 @@ if __name__ == "__main__":
             print("Invalid path.")
             sys.exit(1)
     else:
-      FNAME = PATH
-      PATH = os.path.dirname(PATH)
-      if not FNAME.endswith(".project.gmx") and not FNAME.endswith(".yyp"):
-        print("Invalid project file {}".format(FNAME))
-        sys.exit(1)
+        FNAME = PATH
+        PATH = os.path.dirname(PATH)
+        if not FNAME.endswith(".project.gmx") and not FNAME.endswith(".yyp"):
+            print("Invalid project file {}".format(FNAME))
+            sys.exit(1)
 
     if not FNAME:
         print("Project file was not found.")

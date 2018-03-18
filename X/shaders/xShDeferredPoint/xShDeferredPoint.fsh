@@ -71,10 +71,11 @@ struct PS_out
 	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
-// @return UV coordinates for the following cubemap layout:
-// +---------------------------+
-// |+X|-X|+Y|-Y|+Z|-Z|None|None|
-// +---------------------------+
+/// @param dir Sampling direction vector in world-space.
+/// @return UV coordinates for the following cubemap layout:
+/// +---------------------------+
+/// |+X|-X|+Y|-Y|+Z|-Z|None|None|
+/// +---------------------------+
 float2 xVec3ToCubeUv(float3 dir)
 {
 	float3 dirAbs = abs(dir);
@@ -138,7 +139,7 @@ float2 xVec3ToCubeUv(float3 dir)
 	return st;
 }
 
-// Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
+/// @source http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)
 {
 	if (uv.x < 0.0 || uv.y < 0.0
@@ -150,13 +151,13 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float2 f = frac(temp);
 	float2 centroidUV = floor(temp) * texel;
 	float2 pos = centroidUV;
-	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,0
+	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // 0,0
 	pos.y += texel.y;
-	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,1
+	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // 0,1
 	pos.x += texel.x;
-	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,1
+	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // 1,1
 	pos.y -= texel.y;
-	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,0
+	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // 1,0
 	float a = lerp(lb, lt, f.y);
 	float b = lerp(rb, rt, f.y);
 	float c = lerp(a, b, f.x);
@@ -173,19 +174,19 @@ void main(in VS_out IN, out PS_out OUT)
 		discard;
 	}
 
-	float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, screenUV).xyz) * u_fClipFar;
-	float3 posView = xProject(u_fTanAspect, screenUV, depth);
+	float  depth    = xDecodeDepth(texDepth.Sample(gm_BaseTexture, screenUV).xyz) * u_fClipFar;
+	float3 posView  = xProject(u_fTanAspect, screenUV, depth);
 	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 
 	float3 lightCol = 0.0;
 	float3 lightVec = u_fLightPos.xyz - posWorld;
-	float dist = length(lightVec);
+	float  dist     = length(lightVec);
 	float3 specular = 0.0;
 
 	if (dist < u_fLightPos.w)
 	{
-		float3 N = normalize(texNormal.Sample(gm_BaseTexture, screenUV).xyz * 2.0 - 1.0);
-		float3 L = normalize(lightVec);
+		float3 N    = normalize(texNormal.Sample(gm_BaseTexture, screenUV).xyz * 2.0 - 1.0);
+		float3 L    = normalize(lightVec);
 		float NdotL = saturate(dot(N, L));
 
 		if (NdotL > 0.0)

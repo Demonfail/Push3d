@@ -2,6 +2,7 @@
 /// @desc Recalculates tangent vectors and bitangent sign for the mesh.
 /// @param {real} mesh The id of the mesh.
 /// @return {bool} True on success.
+/// @source http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/
 var _mesh = argument0;
 var _vertex = _mesh[? "vertex"];
 var _texture = _mesh[? "texture"];
@@ -35,29 +36,28 @@ else
 }
 
 // Calculate tangent and bitangent
-// Source: http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/
 var _size = ds_list_size(_face);
-var i = 0;
-var tInd = 0;
-var bInd = 0;
+var i     = 0;
+var _tIdx = 0;
+var _bIdx = 0;
 var _temp;
 
 while (i < _size)
 {
 	// First vertex data
-	var _f0 = _face[| i++];
+	var _f0  = _face[| i++];
 	var _v0  = _f0[? "vertex"];
 	var _uv0 = _f0[? "texture"];
 	var _n0  = _f0[? "normal"];
 
 	// Second vertex data
-	var _f1 = _face[| i++];
+	var _f1  = _face[| i++];
 	var _v1  = _f1[? "vertex"];
 	var _uv1 = _f1[? "texture"];
 	var _n1  = _f1[? "normal"];
 
 	// Third vertex data
-	var _f2 = _face[| i++];
+	var _f2  = _face[| i++];
 	var _v2  = _f2[? "vertex"];
 	var _uv2 = _f2[? "texture"];
 	var _n2  = _f2[? "normal"];
@@ -189,17 +189,17 @@ while (i < _size)
 	ds_list_add(_bitangent, _B1s);
 	ds_list_add(_bitangent, _B2s);
 
-	_f0[? "tangent"] = tInd;
-	_f0[? "bitangent"] = bInd;
+	_f0[? "tangent"]   = _tIdx;
+	_f0[? "bitangent"] = _bIdx;
 
-	_f1[? "tangent"] = tInd + 3;
-	_f1[? "bitangent"] = bInd + 1;
+	_f1[? "tangent"]   = _tIdx + 3;
+	_f1[? "bitangent"] = _bIdx + 1;
 
-	_f2[? "tangent"] = tInd + 6;
-	_f2[? "bitangent"] = bInd + 2;
+	_f2[? "tangent"]   = _tIdx + 6;
+	_f2[? "bitangent"] = _bIdx + 2;
 
-	tInd += 9;
-	bInd += 3;
+	_tIdx += 9;
+	_bIdx += 3;
 }
 
 return true;

@@ -2,7 +2,7 @@
 /// @desc Gets euler angles from the YXZ rotation matrix.
 /// @param {array} m The YXZ rotation matrix.
 /// @return {array} An array containing the euler angles `[rotX, rotY, rotZ]`.
-// Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
+/// @source https://www.geometrictools.com/Documentation/EulerAngles.pdf
 var _thetaX, _thetaY, _thetaZ;
 
 if (argument0[6] < 1)

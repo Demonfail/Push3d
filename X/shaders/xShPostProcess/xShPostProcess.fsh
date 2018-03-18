@@ -18,9 +18,9 @@ float3 xColorGrade(float3 color, Texture2D lut, float index)
 }
 // include("ColorGrading.fsh")
 #pragma include("ChromaticAberration.fsh")
-// Source: http://john-chapman-graphics.blogspot.cz/2013/02/pseudo-lens-flare.html
 /// @param direction  Direction of distortion.
 /// @param distortion Per-channel distortion factor.
+/// @source http://john-chapman-graphics.blogspot.cz/2013/02/pseudo-lens-flare.html
 float3 xChromaticAberration(
 	Texture2D tex,
 	float2 uv, 

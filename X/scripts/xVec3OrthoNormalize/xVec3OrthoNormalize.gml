@@ -3,7 +3,7 @@
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 /// @return {bool} True if the vectors were orthonormalized.
-// Source: https://www.gamedev.net/forums/topic/585184-orthonormalize-two-vectors/
+/// @source https://www.gamedev.net/forums/topic/585184-orthonormalize-two-vectors/
 var _v1 = xVec3Clone(argument0);
 xVec3Normalize(_v1);
 var _proj = xVec3Clone(_v1);

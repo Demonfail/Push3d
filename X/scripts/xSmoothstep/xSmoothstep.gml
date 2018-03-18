@@ -4,6 +4,6 @@
 /// @param {real} e1 The upper edge of the Hermite function.
 /// @param {real} x  The source value for interpolation.
 /// @return {real} The resulting interpolated value.
-// Source: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
+/// @source https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
 var _t = clamp((argument2 - argument0) / (argument1 - argument0), 0, 1);
 return (_t * _t * (3 - 2 * _t));

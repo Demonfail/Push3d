@@ -4,7 +4,7 @@
 /// @param {array} v1 The first vector. Should be normalized!
 /// @param {array} v2 The second vector. Should be normalized!
 /// @param {real}  s  The slerping factor.
-// Source: https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/
+/// @source https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/
 var _dot = clamp(xVec3Dot(argument0, argument1), -1, 1);     
 var _theta = arccos(_dot) * argument2;
 var _relativeVec = xVec3Clone(argument1);

@@ -22,10 +22,20 @@
 #macro X_SSAO_KERNEL_SIZE 16
 
 xSurSsaoNoise = noone;
-xSsaoKernel = xSsaoCreateKernel(X_SSAO_KERNEL_SIZE);
-xSsaoRadius = argument0;
-xSsaoBias = argument1;
-xSsaoPower = argument2
+xSsaoKernel   = xSsaoCreateKernel(X_SSAO_KERNEL_SIZE);
+xSsaoRadius   = argument0;
+xSsaoBias     = argument1;
+xSsaoPower    = argument2;
 
-// TODO: Store SSAO shader uniforms once instead of calling
-// shader_get_uniform every frame.
+// Uniforms
+xUSsaoMatView      = shader_get_uniform(xShSSAO, "u_mView");
+xUSsaoMatProj      = shader_get_uniform(xShSSAO, "u_mProjection");
+xUSsaoTexel        = shader_get_uniform(xShSSAO, "u_fTexel");
+xUSsaoClipFar      = shader_get_uniform(xShSSAO, "u_fClipFar");
+xUSsaoTanAspect    = shader_get_uniform(xShSSAO, "u_fTanAspect");
+xUSsaoSampleKernel = shader_get_uniform(xShSSAO, "u_fSampleKernel");
+xUSsaoRadius       = shader_get_uniform(xShSSAO, "u_fRadius");
+xUSsaoPower        = shader_get_uniform(xShSSAO, "u_fPower");
+xUSsaoNoiseScale   = shader_get_uniform(xShSSAO, "u_fNoiseScale");
+xUSsaoBias         = shader_get_uniform(xShSSAO, "u_fBias");
+xUSsaoBlurTexel    = shader_get_uniform(xShSSAOBlur, "u_fTexel");

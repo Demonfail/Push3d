@@ -610,6 +610,9 @@ m | `array` | The YXZ rotation matrix.
 ### Returns:
 `array`: An array containing the euler angles `[rotX, rotY, rotZ]`.
 
+### Source:
+https://www.geometrictools.com/Documentation/EulerAngles.pdf
+
 ## xMatrixTranspose
 ```
 xMatrixTranspose(m)
@@ -688,6 +691,9 @@ mesh | `real` | The id of the mesh.
 
 ### Returns:
 `bool`: True on success.
+
+### Source:
+http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/
 
 ## xMeshSaveAsJson
 ```
@@ -1010,6 +1016,9 @@ x | `real` | The source value for interpolation.
 
 ### Returns:
 `real`: The resulting interpolated value.
+
+### Source:
+https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
 
 ## xSsaoCreateKernel
 ```
@@ -1906,6 +1915,9 @@ v2 | `array` | The second vector.
 ### Returns:
 `bool`: True if the vectors were orthonormalized.
 
+### Source:
+https://www.gamedev.net/forums/topic/585184-orthonormalize-two-vectors/
+
 ## xVec3Project
 ```
 xVec3Project(vector, screen, world, view, projection)
@@ -1957,6 +1969,9 @@ Name | Type | Description
 v1 | `array` | The first vector. Should be normalized!
 v2 | `array` | The second vector. Should be normalized!
 s | `real` | The slerping factor.
+
+### Source:
+https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/
 
 ## xVec3Subtract
 ```

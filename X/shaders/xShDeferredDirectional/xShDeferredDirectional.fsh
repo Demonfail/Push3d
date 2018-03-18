@@ -73,7 +73,7 @@ struct PS_out
 	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
-// Source: http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
+/// @source http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)
 {
 	if (uv.x < 0.0 || uv.y < 0.0

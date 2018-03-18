@@ -10,8 +10,9 @@ for (var i = argument0 - 1; i >= 0; --i)
 	var _s = i/argument0;
 	_s = lerp(0.1, 1.0, _s*_s);
 	xVec3Scale(_vec, _s);
-	_kernel[i*3 + 2] = _vec[2];
-	_kernel[i*3 + 1] = _vec[1];
-	_kernel[i*3 + 0] = _vec[0];
+	var _i3 = i*3;
+	_kernel[_i3 + 2] = _vec[2];
+	_kernel[_i3 + 1] = _vec[1];
+	_kernel[_i3]     = _vec[0];
 }
 return _kernel;
