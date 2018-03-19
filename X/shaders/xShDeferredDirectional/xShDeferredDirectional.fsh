@@ -1,3 +1,29 @@
+struct VS_out
+{
+	float4 Position : SV_POSITION;
+	float2 TexCoord : TEXCOORD0;
+};
+
+struct PS_out
+{
+	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
+	float4 Specular : SV_TARGET1; // Specular light only.
+};
+
+Texture2D texNormal    : register(t1);
+Texture2D texDepth     : register(t2);
+Texture2D texShadowMap : register(t3);
+
+uniform float4x4 u_mInverse;
+uniform float4x4 u_mShadowMap;
+uniform float    u_fShadowMapArea;
+uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
+uniform float    u_fClipFar;
+uniform float2   u_vTanAspect;
+uniform float3   u_fLightDir;
+uniform float4   u_fLightCol;       // (r,g,b,intensity)
+uniform float3   u_fCamPos;         // Camera's (x,y,z) position in world space.
+
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
@@ -47,32 +73,6 @@ float2 xUnproject(float4 p)
 }
 // include("Projecting.fsh")
 
-Texture2D texNormal    : register(t1);
-Texture2D texDepth     : register(t2);
-Texture2D texShadowMap : register(t3);
-
-uniform float4x4 u_mInverse;
-uniform float4x4 u_mShadowMap;
-uniform float    u_fShadowMapArea;
-uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
-uniform float    u_fClipFar;
-uniform float2   u_vTanAspect;
-uniform float3   u_fLightDir;
-uniform float4   u_fLightCol;       // (r,g,b,intensity)
-uniform float3   u_fCamPos;         // Camera's (x,y,z) position in world space.
-
-struct VS_out
-{
-	float4 Position : SV_POSITION;
-	float2 TexCoord : TEXCOORD0;
-};
-
-struct PS_out
-{
-	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
-	float4 Specular : SV_TARGET1; // Specular light only.
-};
-
 /// @source http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)
 {
@@ -120,11 +120,9 @@ void main(in VS_out IN, out PS_out OUT)
 		float3 posView = xProject(u_vTanAspect, IN.TexCoord, depth);
 		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 		float bias = 1.5;
-		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld + N * bias, 1.0)).xyz;
-		posShadowMap.z = posShadowMap.z * 0.5 + 0.5;
-		float2 texCoordShadowMap = float2(posShadowMap.xy * 0.5 + 0.5);
-		texCoordShadowMap.y = 1.0 - texCoordShadowMap.y;
-		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, texCoordShadowMap, posShadowMap.z);
+		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld + N * bias, 1.0)).xyz * 0.5 + 0.5;
+		posShadowMap.y = 1.0 - posShadowMap.y;
+		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, posShadowMap.xy, posShadowMap.z);
 		const float lerpRegion = 2.0;
 		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);
 		shadow = lerp(shadow, 0.0, shadowLerp);

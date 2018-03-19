@@ -1,3 +1,27 @@
+struct VS_out
+{
+	float4 Position : SV_POSITION;
+	float4 Vertex   : TEXCOORD0;
+};
+
+struct PS_out
+{
+	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
+	float4 Specular : SV_TARGET1; // Specular light only.
+};
+
+Texture2D texNormal    : register(t1);
+Texture2D texDepth     : register(t2);
+Texture2D texShadowMap : register(t3);
+
+uniform float2   u_fShadowMapTexel;
+uniform float4x4 u_mInverse;
+uniform float    u_fClipFar;
+uniform float2   u_vTanAspect;
+uniform float4   u_vLightPos;  // (x,y,z,radius)
+uniform float4   u_fLightCol;  // (r,g,b,intensity)
+uniform float3   u_fCamPos;    // Camera's (x,y,z) position in the world space
+
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
@@ -46,31 +70,7 @@ float2 xUnproject(float4 p)
 	return uv;
 }
 // include("Projecting.fsh")
-
-Texture2D texNormal    : register(t1);
-Texture2D texDepth     : register(t2);
-Texture2D texShadowMap : register(t3);
-
-uniform float2   u_fShadowMapTexel;
-uniform float4x4 u_mInverse;
-uniform float    u_fClipFar;
-uniform float2   u_vTanAspect;
-uniform float4   u_vLightPos;  // (x,y,z,radius)
-uniform float4   u_fLightCol;  // (r,g,b,intensity)
-uniform float3   u_fCamPos;    // Camera's (x,y,z) position in the world space
-
-struct VS_out
-{
-	float4 Position : SV_POSITION;
-	float4 Vertex   : TEXCOORD0;
-};
-
-struct PS_out
-{
-	float4 Total    : SV_TARGET0; // Sum of diffuse and specular light.
-	float4 Specular : SV_TARGET1; // Specular light only.
-};
-
+#pragma include("CubeMapping.fsh")
 /// @param dir Sampling direction vector in world-space.
 /// @return UV coordinates for the following cubemap layout:
 /// +---------------------------+
@@ -138,6 +138,7 @@ float2 xVec3ToCubeUv(float3 dir)
 	st.x = (float(i) * 2.0 + o + st.x) * 0.125;
 	return st;
 }
+// include("CubeMapping.fsh")
 
 /// @source http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)

@@ -1,3 +1,16 @@
+struct VS_out
+{
+	float4 Position : SV_POSITION;
+	float2 TexCoord : TEXCOORD0;
+};
+
+struct PS_out
+{
+	float4 Blurred : SV_TARGET0;
+};
+
+uniform float2 u_vTexel;
+
 #pragma include("Blur.fsh")
  // The MIT License (MIT) Copyright (c) 2015 Jam3
 
@@ -36,19 +49,6 @@ float4 xBlur9(Texture2D image, float2 uv, float2 texel)
 	return color;
 }
 // include("Blur.fsh")
-
-struct VS_out
-{
-	float4 Position : SV_POSITION;
-	float2 TexCoord : TEXCOORD0;
-};
-
-struct PS_out
-{
-	float4 Blurred : SV_TARGET0;
-};
-
-uniform float2 u_vTexel;
 
 void main(in VS_out IN, out PS_out OUT)
 {

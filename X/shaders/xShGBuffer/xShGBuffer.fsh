@@ -1,3 +1,25 @@
+struct VS_out
+{
+	float4 Position  : SV_POSITION;
+	float3 Normal    : NORMAL0;
+	float3 Tangent   : TANGENT0;
+	float3 Bitangent : BINORMAL0;
+	float2 TexCoord  : TEXCOORD0;
+	float  Depth     : TEXCOORD1;
+};
+
+struct PS_out
+{
+	float4 Albedo   : SV_TARGET0;
+	float4 Normal   : SV_TARGET1;
+	float4 Depth    : SV_TARGET2;
+	float4 Emissive : SV_TARGET3;
+};
+
+#define   texAlbedo     gm_BaseTextureObject
+Texture2D texNormal   : register(t1);
+Texture2D texEmissive : register(t2);
+
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
@@ -46,28 +68,6 @@ float2 xUnproject(float4 p)
 	return uv;
 }
 // include("Projecting.fsh")
-
-#define texAlbedo gm_BaseTextureObject
-Texture2D texNormal   : register(t1);
-Texture2D texEmissive : register(t2);
-
-struct VS_out
-{
-	float4 Position  : SV_POSITION;
-	float3 Normal    : NORMAL0;
-	float3 Tangent   : TANGENT0;
-	float3 Bitangent : BINORMAL0;
-	float2 TexCoord  : TEXCOORD0;
-	float  Depth     : TEXCOORD1;
-};
-
-struct PS_out
-{
-	float4 Albedo   : SV_TARGET0;
-	float4 Normal   : SV_TARGET1;
-	float4 Depth    : SV_TARGET2;
-	float4 Emissive : SV_TARGET3;
-};
 
 void main(in VS_out IN, out PS_out OUT)
 {

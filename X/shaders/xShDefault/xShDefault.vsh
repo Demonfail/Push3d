@@ -17,7 +17,7 @@ struct VS_out
 void main(in VS_in IN, out VS_out OUT)
 {
 	OUT.Position = mul(gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION], IN.Position);
-	OUT.Normal = mul(gm_Matrices[MATRIX_WORLD], float4(IN.Normal, 0.0)).xyz;
-	OUT.Color = IN.Color;
+	OUT.Normal   = mul(gm_Matrices[MATRIX_WORLD], float4(IN.Normal, 0.0)).xyz;
+	OUT.Color    = IN.Color;
 	OUT.TexCoord = IN.TexCoord;
 }
