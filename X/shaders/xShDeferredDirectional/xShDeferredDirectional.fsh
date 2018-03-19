@@ -72,6 +72,7 @@ float2 xUnproject(float4 p)
 	return uv;
 }
 // include("Projecting.fsh")
+#pragma include("ShadowMapping.fsh")
 
 /// @source http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
 float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float compareZ)
@@ -85,18 +86,19 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float2 f = frac(temp);
 	float2 centroidUV = floor(temp) * texel;
 	float2 pos = centroidUV;
-	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,0
+	float lb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (0,0)
 	pos.y += texel.y;
-	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //0,1
+	float lt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (0,1)
 	pos.x += texel.x;
-	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,1
+	float rt = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (1,1)
 	pos.y -= texel.y;
-	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); //1,0
-	float a = lerp(lb, lt, f.y);
-	float b = lerp(rb, rt, f.y);
-	float c = lerp(a, b, f.x);
-	return c;
+	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (1,0)
+	return lerp(
+		lerp(lb, lt, f.y),
+		lerp(lb, lt, f.y),
+		f.x);
 }
+// include("ShadowMapping.fsh")
 
 void main(in VS_out IN, out PS_out OUT)
 {

@@ -11,57 +11,54 @@ Vec2 xVec3ToCubeUv(Vec3 dir)
 		(dirAbs.x > dirAbs.z ? 0 : 2) :
 		(dirAbs.y > dirAbs.z ? 1 : 2);
 
-	float sc, tc, ma;
+	float uc, vc, ma;
 	float o = 0.0;
 
 	if (i == 0)
 	{
-		if (dir.x > 0)
+		if (dir.x > 0.0)
 		{
-			sc = +dir.y;
-			tc = -dir.z;
+			uc = dir.y;
 		}
 		else
 		{
-			sc = -dir.y;
-			tc = -dir.z;
+			uc = -dir.y;
 			o = 1.0;
 		}
+		vc = -dir.z;
 		ma = dirAbs.x;
 	}
 	else if (i == 1)
 	{
-		if (dir.y > 0)
+		if (dir.y > 0.0)
 		{
-			sc = -dir.x;
-			tc = -dir.z;
+			uc = -dir.x;
 		}
 		else
 		{
-			sc = +dir.x;
-			tc = -dir.z;
+			uc = dir.x;
 			o = 1.0;
 		}
+		vc = -dir.z;
 		ma = dirAbs.y;
 	}
 	else
 	{
-		if (dir.z > 0)
+		uc = dir.y;
+		if (dir.z > 0.0)
 		{
-			sc = +dir.y;
-			tc = +dir.x;
+			vc = +dir.x;
 		}
 		else
 		{
-			sc = +dir.y;
-			tc = -dir.x;
+			vc = -dir.x;
 			o = 1.0;
 		}
 		ma = dirAbs.z;
 	}
 
 	float invL = 1.0 / length(ma);
-	Vec2 st = (Vec2(sc, tc) * invL + 1.0) * 0.5;
-	st.x = (float(i) * 2.0 + o + st.x) * 0.125;
-	return st;
+	Vec2 uv = (Vec2(uc, vc) * invL + 1.0) * 0.5;
+	uv.x = (float(i) * 2.0 + o + uv.x) * 0.125;
+	return uv;
 }
