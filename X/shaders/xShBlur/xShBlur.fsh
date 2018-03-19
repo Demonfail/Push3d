@@ -48,9 +48,9 @@ struct PS_out
 	float4 Blurred : SV_TARGET0;
 };
 
-uniform float2 u_fTexel;
+uniform float2 u_vTexel;
 
 void main(in VS_out IN, out PS_out OUT)
 {
-	OUT.Blurred = xBlur9(gm_BaseTextureObject, IN.TexCoord, u_fTexel);
+	OUT.Blurred = xBlur9(gm_BaseTextureObject, IN.TexCoord, u_vTexel);
 }

@@ -9,15 +9,13 @@ if (_file == -1)
 }
 
 // Create mesh structure
-var _mesh = xMeshCreate();
-var _vertex = _mesh[? "vertex"];
-var _face = _mesh[? "face"];
-
-var _hasNormal = ds_map_exists(_mesh, "normal");
-var _normal = _hasNormal ? _mesh[? "normal"] : ds_list_create();
-
+var _mesh       = xMeshCreate();
+var _vertex     = _mesh[? "vertex"];
+var _face       = _mesh[? "face"];
+var _hasNormal  = ds_map_exists(_mesh, "normal");
+var _normal     = _hasNormal ? _mesh[? "normal"] : ds_list_create();
 var _hasTexture = ds_map_exists(_mesh, "texture");
-var _texture = _hasTexture ? _mesh[? "texture"] : ds_list_create();
+var _texture    = _hasTexture ? _mesh[? "texture"] : ds_list_create();
 
 // Laod mesh data
 while (!file_text_eof(_file))

@@ -33,8 +33,8 @@ gpu_set_tex_repeat(true);
 surface_set_target(_surSsao);
 draw_clear(0);
 shader_set(xShSSAO);
-texture_set_stage(1, _texSceneNormal);
-texture_set_stage(2, surface_get_texture(xSurSsaoNoise));
+texture_set_stage(xUSsaoTexNormal, _texSceneNormal);
+texture_set_stage(xUSsaoTexRandom, surface_get_texture(xSurSsaoNoise));
 
 if (X_SSAO_WORLD_SPACE_NORMALS)
 {

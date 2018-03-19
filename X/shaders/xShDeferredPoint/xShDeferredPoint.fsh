@@ -54,8 +54,8 @@ Texture2D texShadowMap : register(t3);
 uniform float2   u_fShadowMapTexel;
 uniform float4x4 u_mInverse;
 uniform float    u_fClipFar;
-uniform float2   u_fTanAspect;
-uniform float4   u_fLightPos;  // (x,y,z,radius)
+uniform float2   u_vTanAspect;
+uniform float4   u_vLightPos;  // (x,y,z,radius)
 uniform float4   u_fLightCol;  // (r,g,b,intensity)
 uniform float3   u_fCamPos;    // Camera's (x,y,z) position in the world space
 
@@ -175,15 +175,15 @@ void main(in VS_out IN, out PS_out OUT)
 	}
 
 	float  depth    = xDecodeDepth(texDepth.Sample(gm_BaseTexture, screenUV).xyz) * u_fClipFar;
-	float3 posView  = xProject(u_fTanAspect, screenUV, depth);
+	float3 posView  = xProject(u_vTanAspect, screenUV, depth);
 	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 
 	float3 lightCol = 0.0;
-	float3 lightVec = u_fLightPos.xyz - posWorld;
+	float3 lightVec = u_vLightPos.xyz - posWorld;
 	float  dist     = length(lightVec);
 	float3 specular = 0.0;
 
-	if (dist < u_fLightPos.w)
+	if (dist < u_vLightPos.w)
 	{
 		float3 N    = normalize(texNormal.Sample(gm_BaseTexture, screenUV).xyz * 2.0 - 1.0);
 		float3 L    = normalize(lightVec);
@@ -193,7 +193,7 @@ void main(in VS_out IN, out PS_out OUT)
 		{
 			float bias = 0.1 * tan(acos(NdotL));
 			bias = clamp(bias, 0.0, 0.05);
-			float distLinear = saturate(dist / u_fLightPos.w);
+			float distLinear = saturate(dist / u_vLightPos.w);
 
 			float shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, xVec3ToCubeUv(-lightVec), distLinear - bias);
 			float att = 1.0 - distLinear;

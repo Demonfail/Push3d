@@ -1,14 +1,20 @@
-#pragma include("DepthEncoding.fsh")
+varying vec2 v_vTexCoord;
+varying vec3 v_vPosWorld;
+
+uniform vec3  u_vLightPos;
+uniform float u_fClipFar;
+
+#pragma include("DepthEncoding.fsh", "glsl")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
-float3 xEncodeDepth(float d)
+vec3 xEncodeDepth(float d)
 {
 	const float inv255 = 1.0 / 255.0;
-	float3 enc;
+	vec3 enc;
 	enc.x = d;
 	enc.y = d * 255.0;
 	enc.z = enc.y * 255.0;
-	enc = frac(enc);
+	enc = fract(enc);
 	float temp = enc.z * inv255;
 	enc.x -= enc.y * inv255;
 	enc.y -= temp;
@@ -18,30 +24,20 @@ float3 xEncodeDepth(float d)
 
 /// @param c Encoded depth.
 /// @return Docoded linear depth.
-float xDecodeDepth(float3 c)
+float xDecodeDepth(vec3 c)
 {
 	const float inv255 = 1.0 / 255.0;
 	return c.x + c.y*inv255 + c.z*inv255*inv255;
 }
 // include("DepthEncoding.fsh")
 
-struct VS_out
+void main()
 {
-	float4 Position : SV_POSITION;
-	float2 TexCoord : TEXCOORD0;
-	float3 PosWorld : TEXCOORD1;
-};
-
-uniform float3 u_fLightPos;
-uniform float  u_fClipFar;
-
-float4 main(in VS_out IN) : SV_TARGET0
-{
-	float4 base = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
+	vec4 base = texture2D(gm_BaseTexture, v_vTexCoord);
 	if (base.a < 1.0)
 	{
 		discard;
 	}
-	float depth = min(length(IN.PosWorld - u_fLightPos) / u_fClipFar, 1.0);
-	return float4(xEncodeDepth(depth).xyz, 1.0);
+	float depth  = min(length(v_vPosWorld - u_vLightPos) / u_fClipFar, 1.0);
+	gl_FragColor = vec4(xEncodeDepth(depth).xyz, 1.0);
 }

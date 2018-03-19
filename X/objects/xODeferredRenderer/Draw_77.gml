@@ -37,7 +37,7 @@ var _shader = xShPostProcess;
 shader_set(_shader);
 texture_set_stage(1, sprite_get_texture(xSprColorGradingLut, 0));
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fLUTIndex"), keyboard_check(ord("C")));
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fTexel"), 1/_appSurW, 1/_appSurH);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_vTexel"), 1/_appSurW, 1/_appSurH);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fDistortion"), 3);
 draw_surface(application_surface, 0, 0);
 shader_reset();

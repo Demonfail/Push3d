@@ -895,14 +895,6 @@
             }
         },
         {
-            "Key": "6de46218-0978-44da-ba6a-de27f4bf7da9",
-            "Value": {
-                "id": "633d22ad-1e2b-4016-a988-471b826f8e00",
-                "resourcePath": "shaders\\xShShadowMapOrtho\\xShShadowMapOrtho.yy",
-                "resourceType": "GMShader"
-            }
-        },
-        {
             "Key": "6e0d060f-4b9b-4313-8c4f-0ec6da450688",
             "Value": {
                 "id": "9c444ec0-6ed6-47d3-8f83-7031b8db1eb6",
@@ -1676,6 +1668,14 @@
                 "id": "47241ca9-433b-490d-86f7-c316a9ceb4b4",
                 "resourcePath": "scripts\\xShaderSetUniformIntArrayCached\\xShaderSetUniformIntArrayCached.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "ced2e4fd-a4b8-4700-9353-d7924b95e8d3",
+            "Value": {
+                "id": "b27f33e1-ccc2-45dc-844d-cafad3899c95",
+                "resourcePath": "shaders\\xShShadowMapDirectional\\xShShadowMapDirectional.yy",
+                "resourceType": "GMShader"
             }
         },
         {

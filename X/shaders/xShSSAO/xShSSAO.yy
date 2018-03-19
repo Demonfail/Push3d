@@ -3,5 +3,5 @@
     "modelName": "GMShader",
     "mvc": "1.0",
     "name": "xShSSAO",
-    "type": 4
+    "type": 1
 }

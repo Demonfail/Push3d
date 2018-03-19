@@ -6,7 +6,7 @@
 /// @return {real} The id of the found element or noone,
 ///                if no such element has been found.
 var _element = argument0;
-var _name = argument1;
+var _name    = argument1;
 if (xXmlElementGetName(_element) == _name)
 {
 	return _element;

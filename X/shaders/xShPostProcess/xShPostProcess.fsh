@@ -48,13 +48,13 @@ struct PS_out
 Texture2D texLUT : register(t1);
 
 uniform float  u_fLUTIndex;
-uniform float2 u_fTexel;
+uniform float2 u_vTexel;
 uniform float  u_fDistortion;
 
 void main(in VS_out IN, out PS_out OUT)
 {
 	float2 vec = 0.5 - IN.TexCoord;
-	float3 distortion = float3(-u_fTexel.x, 0.0, u_fTexel.x) * u_fDistortion * min(length(vec) / 0.5, 1.0);
+	float3 distortion = float3(-u_vTexel.x, 0.0, u_vTexel.x) * u_fDistortion * min(length(vec) / 0.5, 1.0);
 	float3 base = xChromaticAberration(gm_BaseTextureObject, IN.TexCoord, normalize(vec), distortion);
 	OUT.Target0.rgb = xColorGrade(base, texLUT, u_fLUTIndex);
 	OUT.Target0.a = 1.0;

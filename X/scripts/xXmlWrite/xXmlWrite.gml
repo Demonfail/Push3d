@@ -2,12 +2,12 @@
 /// @desc Writes the tree of elements into a string.
 /// @param {real} rootElement The root element of the tree.
 /// @return {string} The string.
-var _element = argument[0];
-var _name = xXmlElementGetName(_element);
+var _element        = argument[0];
+var _name           = xXmlElementGetName(_element);
 var _attributeCount = xXmlElementGetAttributeCount(_element);
-var _childCount = xXmlElementGetChildCount(_element);
-var _value = xXmlElementGetValue(_element);
-var _indent = 0;
+var _childCount     = xXmlElementGetChildCount(_element);
+var _value          = xXmlElementGetValue(_element);
+var _indent         = 0;
 
 if (argument_count == 2)
 {

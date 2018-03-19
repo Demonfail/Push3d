@@ -26,20 +26,20 @@ enum xEXmlChars
 	QM    = 63  // Question mark
 };
 
-var _filePos = 0;
-var _fileSize = file_bin_size(_file);
-var _byte = xEXmlChars.Space;
-var _lastByte;
-var _isSeparator = true;
-var _token = "";
-var _isString = false;
+var _filePos       = 0;
+var _fileSize      = file_bin_size(_file);
+var _byte          = xEXmlChars.Space;
+var _isSeparator   = true;
+var _token         = "";
+var _isString      = false;
 var _attributeName = "";
-var _root = noone;
-var _element = noone;
-var _lastElement = noone;
+var _root          = noone;
+var _element       = noone;
+var _lastElement   = noone;
 var _parentElement = noone;
-var _isClosing = false;
-var _isComment = false;
+var _isClosing     = false;
+var _isComment     = false;
+var _lastByte;
 
 do
 {

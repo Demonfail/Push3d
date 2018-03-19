@@ -2,7 +2,7 @@
 /// @desc Destroys the element and all its children.
 /// @param {real} element The id of the element to be destroyed.
 var _element = argument0,
-var _parent = _element[? "parent"];
+var _parent  = _element[? "parent"];
 if (_parent != noone)
 {
 	var _index = ds_list_find_index(_parent[? "children"], _element);

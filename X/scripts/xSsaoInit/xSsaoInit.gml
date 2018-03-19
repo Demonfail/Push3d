@@ -28,14 +28,16 @@ xSsaoBias     = argument1;
 xSsaoPower    = argument2;
 
 // Uniforms
+xUSsaoTexNormal    = shader_get_sampler_index(xShSSAO, "texNormal");
+xUSsaoTexRandom    = shader_get_sampler_index(xShSSAO, "texRandom");
 xUSsaoMatView      = shader_get_uniform(xShSSAO, "u_mView");
 xUSsaoMatProj      = shader_get_uniform(xShSSAO, "u_mProjection");
-xUSsaoTexel        = shader_get_uniform(xShSSAO, "u_fTexel");
+xUSsaoTexel        = shader_get_uniform(xShSSAO, "u_vTexel");
 xUSsaoClipFar      = shader_get_uniform(xShSSAO, "u_fClipFar");
-xUSsaoTanAspect    = shader_get_uniform(xShSSAO, "u_fTanAspect");
-xUSsaoSampleKernel = shader_get_uniform(xShSSAO, "u_fSampleKernel");
+xUSsaoTanAspect    = shader_get_uniform(xShSSAO, "u_vTanAspect");
+xUSsaoSampleKernel = shader_get_uniform(xShSSAO, "u_vSampleKernel");
 xUSsaoRadius       = shader_get_uniform(xShSSAO, "u_fRadius");
 xUSsaoPower        = shader_get_uniform(xShSSAO, "u_fPower");
-xUSsaoNoiseScale   = shader_get_uniform(xShSSAO, "u_fNoiseScale");
+xUSsaoNoiseScale   = shader_get_uniform(xShSSAO, "u_vNoiseScale");
 xUSsaoBias         = shader_get_uniform(xShSSAO, "u_fBias");
-xUSsaoBlurTexel    = shader_get_uniform(xShSSAOBlur, "u_fTexel");
+xUSsaoBlurTexel    = shader_get_uniform(xShSSAOBlur, "u_vTexel");

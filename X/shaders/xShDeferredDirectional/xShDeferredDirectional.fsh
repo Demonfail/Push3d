@@ -56,7 +56,7 @@ uniform float4x4 u_mShadowMap;
 uniform float    u_fShadowMapArea;
 uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
 uniform float    u_fClipFar;
-uniform float2   u_fTanAspect;
+uniform float2   u_vTanAspect;
 uniform float3   u_fLightDir;
 uniform float4   u_fLightCol;       // (r,g,b,intensity)
 uniform float3   u_fCamPos;         // Camera's (x,y,z) position in world space.
@@ -117,7 +117,7 @@ void main(in VS_out IN, out PS_out OUT)
 	if (NdotL > 0.0)
 	{
 		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
-		float3 posView = xProject(u_fTanAspect, IN.TexCoord, depth);
+		float3 posView = xProject(u_vTanAspect, IN.TexCoord, depth);
 		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 		float bias = 1.5;
 		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld + N * bias, 1.0)).xyz;

@@ -39,7 +39,7 @@ matrix_set(matrix_projection, _matProjSun);
 
 var _matShadowMap = matrix_multiply(_matViewSun, _matProjSun);
 
-shader_set(xShShadowMapOrtho);
+shader_set(xShShadowMapDirectional);
 matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 40, 40, 40));
 vertex_submit(vBuffer, pr_trianglelist, _texAlbedo)
 matrix_set(matrix_world, matrix_build_identity());
@@ -49,7 +49,7 @@ surface_reset_target();
 
 // Point lights
 shader_set(xShShadowMap);
-var _uLightPos = shader_get_uniform(xShShadowMap, "u_fLightPos");
+var _uLightPos = shader_get_uniform(xShShadowMap, "u_vLightPos");
 var _uClipFar  = shader_get_uniform(xShShadowMap, "u_fClipFar");
 var _vBuffer   = vBuffer;
 
@@ -183,23 +183,23 @@ gpu_set_colorwriteenable(true, true, true, false);
 gpu_set_blendmode(bm_add);
 
 // Directional light
-//_shader = xShDeferredDirectional;
-//shader_set(_shader);
-//shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
-//shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
-//var _texel = 1 / shadowMapRes;
-//shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
-//shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 1.0, 1.0, 1.0, 1.0);
-//shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
-//shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
-//shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
-//shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
-//shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
-//texture_set_stage(1, _texSceneNormal);
-//texture_set_stage(2, _texSceneDepth);
-//texture_set_stage(3, surface_get_texture(surShadowMap));
-//draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
-//shader_reset();
+_shader = xShDeferredDirectional;
+shader_set(_shader);
+shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fLightDir"), sunDir);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapArea"), shadowMapArea);
+var _texel = 1 / shadowMapRes;
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fShadowMapTexel"), _texel, _texel);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fLightCol"), 1.0, 1.0, 1.0, 1.0);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
+shader_set_uniform_f_array(shader_get_uniform(_shader, "u_vTanAspect"), _tanAspect);
+shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
+shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mShadowMap"), _matShadowMap);
+texture_set_stage(1, _texSceneNormal);
+texture_set_stage(2, _texSceneDepth);
+texture_set_stage(3, surface_get_texture(surShadowMap));
+draw_surface(surGBuffer[xEGBuffer.Albedo], 0, 0);
+shader_reset();
 
 // Point lights
 if (instance_exists(xOLightPoint))
@@ -209,7 +209,7 @@ if (instance_exists(xOLightPoint))
 	shader_set(_shader);
 	shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 	shader_set_uniform_f(shader_get_uniform(_shader, "u_fCamPos"), x, y, z);
-	shader_set_uniform_f_array(shader_get_uniform(_shader, "u_fTanAspect"), _tanAspect);
+	shader_set_uniform_f_array(shader_get_uniform(_shader, "u_vTanAspect"), _tanAspect);
 	shader_set_uniform_matrix_array(shader_get_uniform(_shader, "u_mInverse"), _matViewInverse);
 	texture_set_stage(1, _texSceneNormal);
 	texture_set_stage(2, _texSceneDepth);
@@ -222,7 +222,7 @@ if (instance_exists(xOLightPoint))
 
 	var _1by255          = 1 / 255;
 	var _texSceneAlbedo  = surface_get_texture(surGBuffer[xEGBuffer.Albedo]);
-	var _uLightPos       = shader_get_uniform(_shader, "u_fLightPos");
+	var _uLightPos       = shader_get_uniform(_shader, "u_vLightPos");
 	var _uLightCol       = shader_get_uniform(_shader, "u_fLightCol");
 	var _uShadowMapTexel = shader_get_uniform(_shader, "u_fShadowMapTexel");
 

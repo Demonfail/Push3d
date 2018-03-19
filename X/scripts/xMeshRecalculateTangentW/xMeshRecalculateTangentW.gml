@@ -3,13 +3,13 @@
 /// @param {real} mesh The id of the mesh.
 /// @return {bool} True on success.
 /// @source http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/
-var _mesh = argument0;
-var _vertex = _mesh[? "vertex"];
-var _texture = _mesh[? "texture"];
-var _tangent = _mesh[? "tangent"];
+var _mesh      = argument0;
+var _vertex    = _mesh[? "vertex"];
+var _texture   = _mesh[? "texture"];
+var _tangent   = _mesh[? "tangent"];
 var _bitangent = _mesh[? "bitangent"];
-var _normal = _mesh[? "normal"];
-var _face = _mesh[? "face"];
+var _normal    = _mesh[? "normal"];
+var _face      = _mesh[? "face"];
 
 xAssert(!is_undefined(_texture), "Trying to recalculate TBN for mesh without UVs!");
 xAssert(!is_undefined(_normal), "Trying to recalculate TBN for mesh without normals!");
