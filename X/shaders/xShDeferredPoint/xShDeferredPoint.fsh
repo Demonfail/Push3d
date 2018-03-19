@@ -14,13 +14,13 @@ Texture2D texNormal    : register(t1);
 Texture2D texDepth     : register(t2);
 Texture2D texShadowMap : register(t3);
 
-uniform float2   u_fShadowMapTexel;
+uniform float2   u_vShadowMapTexel;
 uniform float4x4 u_mInverse;
 uniform float    u_fClipFar;
 uniform float2   u_vTanAspect;
 uniform float4   u_vLightPos;  // (x,y,z,radius)
-uniform float4   u_fLightCol;  // (r,g,b,intensity)
-uniform float3   u_fCamPos;    // Camera's (x,y,z) position in the world space
+uniform float4   u_vLightCol;  // (r,g,b,intensity)
+uniform float3   u_vCamPos;    // Camera's (x,y,z) position in the world space
 
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
@@ -159,7 +159,7 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (1,0)
 	return lerp(
 		lerp(lb, lt, f.y),
-		lerp(lb, lt, f.y),
+		lerp(rb, rt, f.y),
 		f.x);
 }
 // include("ShadowMapping.fsh")
@@ -195,13 +195,13 @@ void main(in VS_out IN, out PS_out OUT)
 			bias = clamp(bias, 0.0, 0.05);
 			float distLinear = saturate(dist / u_vLightPos.w);
 
-			float shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, xVec3ToCubeUv(-lightVec), distLinear - bias);
+			float shadow = xShadowMapCompare(texShadowMap, u_vShadowMapTexel, xVec3ToCubeUv(-lightVec), distLinear - bias);
 			float att = 1.0 - distLinear;
-			lightCol += u_fLightCol.rgb * u_fLightCol.a * NdotL * att * (1.0 - shadow);
+			lightCol += u_vLightCol.rgb * u_vLightCol.a * NdotL * att * (1.0 - shadow);
 
 			// TODO: Make BRDF.
 			float smoothness = 1.0;
-			float3 V = normalize(u_fCamPos - posWorld);
+			float3 V = normalize(u_vCamPos - posWorld);
 			float3 H = normalize(L + V);
 			float NdotH = max(dot(N, H), 0.0);
 			float specPower = pow(2.0, 1.0 + smoothness * 10.0);

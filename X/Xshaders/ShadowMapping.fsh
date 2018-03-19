@@ -21,6 +21,6 @@ float xShadowMapCompare(Texture2D shadowMap, Vec2 texel, Vec2 uv, float compareZ
 	float rb = step(xDecodeDepth(Sample(shadowMap, pos).rgb), compareZ); // (1,0)
 	return Lerp(
 		Lerp(lb, lt, f.y),
-		Lerp(lb, lt, f.y),
+		Lerp(rb, rt, f.y),
 		f.x);
 }

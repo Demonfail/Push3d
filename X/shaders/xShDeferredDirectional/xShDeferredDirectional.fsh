@@ -17,12 +17,12 @@ Texture2D texShadowMap : register(t3);
 uniform float4x4 u_mInverse;
 uniform float4x4 u_mShadowMap;
 uniform float    u_fShadowMapArea;
-uniform float2   u_fShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
+uniform float2   u_vShadowMapTexel; // (1/shadowMapWidth,1/shadowMapHeight)
 uniform float    u_fClipFar;
 uniform float2   u_vTanAspect;
-uniform float3   u_fLightDir;
-uniform float4   u_fLightCol;       // (r,g,b,intensity)
-uniform float3   u_fCamPos;         // Camera's (x,y,z) position in world space.
+uniform float3   u_vLightDir;
+uniform float4   u_vLightCol;       // (r,g,b,intensity)
+uniform float3   u_vCamPos;         // Camera's (x,y,z) position in world space.
 
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
@@ -95,7 +95,7 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 	float rb = step(xDecodeDepth(shadowMap.Sample(gm_BaseTexture, pos).rgb), compareZ); // (1,0)
 	return lerp(
 		lerp(lb, lt, f.y),
-		lerp(lb, lt, f.y),
+		lerp(rb, rt, f.y),
 		f.x);
 }
 // include("ShadowMapping.fsh")
@@ -110,7 +110,7 @@ void main(in VS_out IN, out PS_out OUT)
 
 	float shadow = 0.0;
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
-	float3 L = -normalize(u_fLightDir);
+	float3 L = -normalize(u_vLightDir);
 	float NdotL = saturate(dot(N, L));
 	
 	float4 lightCol = float4(0.0, 0.0, 0.0, 1.0);
@@ -124,16 +124,16 @@ void main(in VS_out IN, out PS_out OUT)
 		float bias = 1.5;
 		float3 posShadowMap = mul(u_mShadowMap, float4(posWorld + N * bias, 1.0)).xyz * 0.5 + 0.5;
 		posShadowMap.y = 1.0 - posShadowMap.y;
-		shadow = xShadowMapCompare(texShadowMap, u_fShadowMapTexel, posShadowMap.xy, posShadowMap.z);
+		shadow = xShadowMapCompare(texShadowMap, u_vShadowMapTexel, posShadowMap.xy, posShadowMap.z);
 		const float lerpRegion = 2.0;
 		float shadowLerp = saturate((length(posView) - u_fShadowMapArea * 0.5 + lerpRegion) / lerpRegion);
 		shadow = lerp(shadow, 0.0, shadowLerp);
 
-		lightCol.rgb = u_fLightCol.rgb * u_fLightCol.a * NdotL * (1.0 - shadow);
+		lightCol.rgb = u_vLightCol.rgb * u_vLightCol.a * NdotL * (1.0 - shadow);
 
 		// TODO: Make BRDF.
 		float smoothness = 1.0;
-		float3 V = normalize(u_fCamPos - posWorld);
+		float3 V = normalize(u_vCamPos - posWorld);
 		float3 H = normalize(L + V);
 		float NdotH = max(dot(N, H), 0.0);
 		float specPower = pow(2.0, 1.0 + smoothness * 10.0);

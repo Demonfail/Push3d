@@ -1,7 +1,7 @@
 varying vec2 v_vTexCoord;
 
-uniform sampler2D texLUT;
-uniform float     u_fLUTIndex;
+uniform sampler2D u_sLut;
+uniform float     u_fLutIndex;
 uniform vec2      u_vTexel;
 uniform float     u_fDistortion;
 
@@ -46,6 +46,6 @@ void main()
 	vec2 vec         = 0.5 - v_vTexCoord;
 	vec3 distortion  = vec3(-u_vTexel.x, 0.0, u_vTexel.x) * u_fDistortion * min(length(vec) / 0.5, 1.0);
 	vec3 base        = xChromaticAberration(gm_BaseTexture, v_vTexCoord, normalize(vec), distortion);
-	gl_FragColor.rgb = xColorGrade(base, texLUT, u_fLUTIndex);
+	gl_FragColor.rgb = xColorGrade(base, u_sLut, u_fLutIndex);
 	gl_FragColor.a   = 1.0;
 }

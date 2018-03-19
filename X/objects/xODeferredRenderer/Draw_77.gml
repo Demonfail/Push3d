@@ -35,8 +35,8 @@ surface_reset_target();
 // Post-process
 var _shader = xShPostProcess;
 shader_set(_shader);
-texture_set_stage(shader_get_sampler_index(_shader, "texLUT"), sprite_get_texture(xSprColorGradingLut, 0));
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fLUTIndex"), keyboard_check(ord("C")));
+texture_set_stage(shader_get_sampler_index(_shader, "u_sLut"), sprite_get_texture(xSprColorGradingLut, 0));
+shader_set_uniform_f(shader_get_uniform(_shader, "u_fLutIndex"), keyboard_check(ord("C")));
 shader_set_uniform_f(shader_get_uniform(_shader, "u_vTexel"), 1/_appSurW, 1/_appSurH);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fDistortion"), 3);
 draw_surface(application_surface, 0, 0);
