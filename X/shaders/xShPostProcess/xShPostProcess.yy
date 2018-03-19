@@ -3,5 +3,5 @@
     "modelName": "GMShader",
     "mvc": "1.0",
     "name": "xShPostProcess",
-    "type": 4
+    "type": 1
 }
