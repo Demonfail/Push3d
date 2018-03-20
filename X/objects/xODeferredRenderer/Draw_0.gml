@@ -90,20 +90,12 @@ with (xOLightPoint)
 }
 
 //==============================================================================
-// Clear G-Buffer
-surface_set_target_ext(0, application_surface);
-surface_set_target_ext(1, surGBuffer[xEGBuffer.NormalRoughness]);
-surface_set_target_ext(2, surGBuffer[xEGBuffer.DepthMetalness]);
-surface_set_target_ext(3, surGBuffer[xEGBuffer.EmissiveTranslucency]);
-draw_clear_alpha(0, 0);
-surface_reset_target();
-
-//==============================================================================
 // G-Buffer pass
 surface_set_target_ext(0, application_surface);
 surface_set_target_ext(1, surGBuffer[xEGBuffer.NormalRoughness]);
 surface_set_target_ext(2, surGBuffer[xEGBuffer.DepthMetalness]);
 surface_set_target_ext(3, surGBuffer[xEGBuffer.EmissiveTranslucency]);
+draw_clear_alpha(0, 0);
 
 _shader = xShGBuffer;
 shader_set(_shader);
@@ -204,9 +196,12 @@ texture_set_stage(4, surface_get_texture(surShadowMap));
 draw_surface(surGBuffer[xEGBuffer.AlbedoAO], 0, 0);
 shader_reset();
 
+gpu_set_ztestenable(true);
+
 // Point lights
 if (instance_exists(xOLightPoint))
 {
+	var _zFunc = gpu_get_zfunc();
 	var _cullMode = gpu_get_cullmode();
 	_shader = xShDeferredPoint;
 	shader_set(_shader);
@@ -223,6 +218,7 @@ if (instance_exists(xOLightPoint))
 	matrix_set(matrix_projection, _matProj);
 
 	gpu_set_cullmode(cull_clockwise);
+	gpu_set_zfunc(cmpfunc_greaterequal);
 
 	var _1by255          = 1 / 255;
 	var _texSceneAlbedo  = surface_get_texture(surGBuffer[xEGBuffer.AlbedoAO]);
@@ -250,6 +246,7 @@ if (instance_exists(xOLightPoint))
 	}
 	matrix_set(matrix_world, _matWorld);
 
+	gpu_set_zfunc(_zFunc);
 	gpu_set_cullmode(_cullMode);
 	shader_reset();
 }
@@ -257,7 +254,6 @@ if (instance_exists(xOLightPoint))
 gpu_set_colorwriteenable(true, true, true, true);
 gpu_set_blendmode(bm_normal);
 
-gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
 surface_reset_target();
 

@@ -1,4 +1,6 @@
 /// @desc Compose image
+var _appSurW = surface_get_width(application_surface);
+var _appSurH = surface_get_height(application_surface);
 
 //==============================================================================
 // Light bloom
@@ -13,13 +15,11 @@ draw_surface_stretched(surGBuffer[xEGBuffer.EmissiveTranslucency], 0, 0, _width,
 gpu_set_blendmode(bm_normal);
 surface_reset_target();
 
- //TODO: Optimize light-bloom blur.
+// TODO: Optimize light-bloom blur.
 xSurfaceBlur(surLightBloom, surWork, 8);
 xSurfaceBlur(surLightBloom, surWork, 4);
 xSurfaceBlur(surLightBloom, surWork, 2);
 
-var _appSurW = surface_get_width(application_surface);
-var _appSurH = surface_get_height(application_surface);
 surface_set_target(application_surface);
 gpu_set_zwriteenable(false);
 gpu_set_ztestenable(false);

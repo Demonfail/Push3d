@@ -223,46 +223,41 @@ float3 xBRDF(float3 f0, float roughness, float NdotL, float NdotV, float NdotH)
 
 void main(in VS_out IN, out PS_out OUT)
 {
-	float2 screenUV = xUnproject(IN.Vertex);
-
-	float4 normalRoughness = texNormalRoughness.Sample(gm_BaseTexture, screenUV);
-	if (dot(normalRoughness.xyz, 1.0) == 0.0)
-	{
-		discard;
-	}
-
-	float4 albedoAO             = texAlbedoAO.Sample(gm_BaseTexture, screenUV);
-	float4 depthMetalness       = texDepthMetalness.Sample(gm_BaseTexture, screenUV);
-	//float4 emissiveTranslucency = texEmissiveTranslucency.Sample(gm_BaseTexture, screenUV);
-
-	float3 base      = albedoAO.rgb;
-	float  roughness = normalRoughness.a;
-	float  metalness = depthMetalness.a;
+	float2 screenUV       = xUnproject(IN.Vertex);
+	float4 depthMetalness = texDepthMetalness.Sample(gm_BaseTexture, screenUV);
 
 	float  depth    = xDecodeDepth(depthMetalness.xyz) * u_fClipFar;
 	float3 posView  = xProject(u_vTanAspect, screenUV, depth);
 	float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
-
-	float3 lightCol = 0.0;
 	float3 lightVec = u_vLightPos.xyz - posWorld;
 	float  dist     = length(lightVec);
-	float3 specular = 0.0;
+
+	OUT.Total = 0.0;
+	OUT.Specular = 0.0;
 
 	if (dist < u_vLightPos.w)
 	{
+		float4 normalRoughness = texNormalRoughness.Sample(gm_BaseTexture, screenUV);
 		float3 N    = normalize(normalRoughness.xyz * 2.0 - 1.0);
 		float3 L    = normalize(lightVec);
 		float NdotL = saturate(dot(N, L));
 
 		if (NdotL > 0.0)
 		{
+			//float4 emissiveTranslucency = texEmissiveTranslucency.Sample(gm_BaseTexture, screenUV);
+			float4 albedoAO  = texAlbedoAO.Sample(gm_BaseTexture, screenUV);
+			float3 base      = albedoAO.rgb;
+			float  roughness = normalRoughness.a;
+			float  metalness = depthMetalness.a;
+
 			float bias = 0.1 * tan(acos(NdotL));
 			bias = clamp(bias, 0.0, 0.05);
 			float distLinear = saturate(dist / u_vLightPos.w);
 
 			float shadow = xShadowMapCompare(texShadowMap, u_vShadowMapTexel, xVec3ToCubeUv(-lightVec), distLinear - bias);
 			float att = 1.0 - distLinear;
-			lightCol += u_vLightCol.rgb * u_vLightCol.a * NdotL * att * (1.0 - shadow);
+
+			float3 lightCol = u_vLightCol.rgb * u_vLightCol.a * NdotL * att * (1.0 - shadow);
 
 			float3 f0 = lerp(X_F0_DEFAULT, base, metalness);
 
@@ -272,10 +267,10 @@ void main(in VS_out IN, out PS_out OUT)
 			float NdotV = saturate(dot(N, V));
 			float NdotH = saturate(dot(N, H));
 
-			specular.rgb = lightCol.rgb * xBRDF(f0, roughness, NdotL, NdotV, NdotH);
+			float3 specular = lightCol.rgb * xBRDF(f0, roughness, NdotL, NdotV, NdotH);
+			
+			OUT.Total = float4(base * lightCol * (1.0 - metalness) + specular, 1.0);
+			OUT.Specular = float4(specular, 1.0);
 		}
 	}
-
-	OUT.Total = float4(base * lightCol * (1.0 - metalness) + specular.rgb, 1.0);
-	OUT.Specular = float4(specular.rgb, 1.0);
 }
