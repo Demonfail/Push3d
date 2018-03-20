@@ -120,34 +120,38 @@ float xPow5(float x) { return (x*x*x*x*x); }
 #define X_F0_DEFAULT float3(0.22, 0.22, 0.22)
 
 /// @desc Normal distribution function
-/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+/// @source http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 float xSpecularD_GGX(float roughness, float NdotH)
 {
-	float r2 = xPow2(roughness);
+	float r2 = roughness*roughness;
 	float a = NdotH*NdotH*(r2-1.0);
 	return r2 / (X_PI*a*a + X_2_PI*a + X_PI);
 	// return r2 / (X_PI * xPow2(xPow2(NdotH) * (r2-1.0) + 1.0);
 }
 
 /// @desc Geometric attenuation
-/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+/// @source http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 float xSpecularG_Schlick(float roughness, float NdotL, float NdotV)
 {
-	float k = xPow2(roughness+1.0) * 0.125;
+	float k = roughness*roughness*0.125 + roughness*0.25 + 0.125;
+	// float k = xPow2(roughness+1.0) * 0.125;
 	float oneMinusK = 1.0-k;
-	return (NdotL / (NdotL*oneMinusK + k))
-		* (NdotV / (NdotV*oneMinusK + k));
+	float tempL = NdotL*oneMinusK;
+	float tempV = NdotV*oneMinusK;
+	return tempL*tempV + k*tempL + k*tempV + k*k;
+	// return (NdotL / (NdotL*oneMinusK + k))
+	// 	* (NdotV / (NdotV*oneMinusK + k));
 }
 
 /// @desc Fresnel
-/// @surce https://en.wikipedia.org/wiki/Schlick%27s_approximation
+/// @source https://en.wikipedia.org/wiki/Schlick%27s_approximation
 float3 xSpecularF_Schlick(float3 f0, float NdotV)
 {
 	return f0 + (1.0-f0) * xPow5(1.0-NdotV); 
 }
 
 /// @desc Cook-Torrance microfacet specular shading
-/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+/// @source http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 float3 xBRDF(float3 f0, float roughness, float NdotL, float NdotV, float NdotH)
 {
 	float3 specular = xSpecularD_GGX(roughness, NdotH)
