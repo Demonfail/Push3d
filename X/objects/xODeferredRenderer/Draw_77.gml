@@ -9,7 +9,7 @@ surLightBloom = xSurfaceCheck(surLightBloom, _width, _height);
 surface_set_target(surLightBloom);
 draw_clear_alpha(0, 1);
 gpu_set_blendmode_ext(bm_dest_alpha, bm_dest_alpha);
-draw_surface_stretched(surGBuffer[xEGBuffer.Emissive], 0, 0, _width, _height);
+draw_surface_stretched(surGBuffer[xEGBuffer.EmissiveTranslucency], 0, 0, _width, _height);
 gpu_set_blendmode(bm_normal);
 surface_reset_target();
 

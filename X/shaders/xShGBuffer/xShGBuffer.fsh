@@ -10,15 +10,16 @@ struct VS_out
 
 struct PS_out
 {
-	float4 Albedo   : SV_TARGET0;
-	float4 Normal   : SV_TARGET1;
-	float4 Depth    : SV_TARGET2;
-	float4 Emissive : SV_TARGET3;
+	float4 AlbedoAO             : SV_TARGET0;
+	float4 NormalRoughness      : SV_TARGET1;
+	float4 DepthMetalness       : SV_TARGET2;
+	float4 EmissiveTranslucency : SV_TARGET3;
 };
 
 #define   texAlbedo     gm_BaseTextureObject
 Texture2D texNormal   : register(t1);
-Texture2D texEmissive : register(t2);
+Texture2D texMaterial : register(t2); // Roughness, metalness, translucency, AO
+Texture2D texEmissive : register(t3);
 
 #pragma include("DepthEncoding.fsh")
 /// @param d Linearized depth to encode.
@@ -76,14 +77,22 @@ void main(in VS_out IN, out PS_out OUT)
 	{
 		discard;
 	}
+
 	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
 	N.y = -N.y;
 	N = normalize(mul(N, float3x3(IN.Tangent, IN.Bitangent, IN.Normal)));
-	OUT.Albedo = base;
-	OUT.Normal.rgb = N * 0.5 + 0.5;
-	OUT.Normal.a = 1.0;
-	OUT.Depth.rgb = xEncodeDepth(IN.Depth);
-	OUT.Depth.a = 1.0;
-	OUT.Emissive = texEmissive.Sample(gm_BaseTexture, IN.TexCoord);
-	OUT.Emissive.a = N.x;
+
+	float4 material = texMaterial.Sample(gm_BaseTexture, IN.TexCoord);
+
+	OUT.AlbedoAO.rgb = base;
+	OUT.AlbedoAO.a   = material.a;
+
+	OUT.NormalRoughness.rgb = N * 0.5 + 0.5;
+	OUT.NormalRoughness.a   = lerp(0.01, 0.99, material.r);
+
+	OUT.DepthMetalness.rgb = xEncodeDepth(IN.Depth);
+	OUT.DepthMetalness.a   = material.g;
+
+	OUT.EmissiveTranslucency   = texEmissive.Sample(gm_BaseTexture, IN.TexCoord);
+	OUT.EmissiveTranslucency.a = material.b;
 }

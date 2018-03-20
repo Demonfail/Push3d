@@ -8,12 +8,19 @@ gpu_set_texfilter(true);
 application_surface_enable(true);
 application_surface_draw_enable(false);
 
+// GB | RGB                  | A
+// -- | -------------------- | ------------
+// 0  | Albedo/SpecularColor | AO
+// 1  | Normal               | Roughness
+// 2  | Depth                | Metalness
+// 3  | Emissive             | Translucency
+
 enum xEGBuffer
 {
-	Albedo,
-	Normal,
-	Depth,
-	Emissive, // Used for emmisive materials and specular reflections.
+	AlbedoAO,
+	NormalRoughness,
+	DepthMetalness,
+	EmissiveTranslucency, // Emissive used for both emmisive materials and specular reflections!
 	SIZE
 };
 
@@ -23,10 +30,10 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
 }
 
 // Shadow mapping
-surShadowMap = noone;
-shadowMapRes = 1024;
+surShadowMap  = noone;
+shadowMapRes  = 1024;
 shadowMapArea = 1024;
-sunDir = [0.5, 0.5, -0.5];
+sunDir        = [0.5, 0.5, -0.5];
 
 // SSAO
 xSsaoInit(12, 4, 2);
@@ -37,11 +44,11 @@ surWork = noone;
 surLightBloom = noone;
 
 // Camera
-z = 1;
-pitch = 0;
-fov = 60;
-clipNear = 1;
-clipFar = 8192;
+z          = 1;
+pitch      = 0;
+fov        = 60;
+clipNear   = 1;
+clipFar    = 8192;
 mouseXLast = 0;
 mouseYLast = 0;
 

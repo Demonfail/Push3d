@@ -10,9 +10,11 @@ struct PS_out
 	float4 Specular : SV_TARGET1; // Specular light only.
 };
 
-Texture2D texNormal    : register(t1);
-Texture2D texDepth     : register(t2);
-Texture2D texShadowMap : register(t3);
+#define   texAlbedoAO               gm_BaseTextureObject
+Texture2D texNormalRoughness      : register(t1);
+Texture2D texDepthMetalness       : register(t2);
+//Texture2D texEmissiveTranslucency : register(t3);
+Texture2D texShadowMap            : register(t4);
 
 uniform float4x4 u_mInverse;
 uniform float4x4 u_mShadowMap;
@@ -99,26 +101,85 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 		f.x);
 }
 // include("ShadowMapping.fsh")
+#pragma include("BRDF.fsh")
+/// @return x^2
+float xPow2(float x) { return (x*x); }
+
+/// @return x^3
+float xPow3(float x) { return (x*x*x); }
+
+/// @return x^4
+float xPow4(float x) { return (x*x*x*x); }
+
+/// @return x^5
+float xPow5(float x) { return (x*x*x*x*x); }
+
+#define X_PI         3.14159265359
+#define X_F0_DEFAULT float3(0.22, 0.22, 0.22)
+
+/// @desc Normal distribution function
+/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+float xSpecularD_GGX(float roughness, float NdotH)
+{
+	float r2 = xPow2(roughness);
+	return r2 / (X_PI * xPow2((xPow2(NdotH) * (r2-1.0) + 1.0)));
+}
+
+/// @desc Geometric attenuation
+/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+float xSpecularG_Schlick(float roughness, float NdotL, float NdotV)
+{
+	float k = xPow2(roughness+1.0) * 0.125;
+	float oneMinusK = 1.0-k;
+	return (NdotL / (NdotL * oneMinusK + k))
+		* (NdotV / (NdotV * oneMinusK + k));
+}
+
+/// @desc Fresnel
+/// @surce https://en.wikipedia.org/wiki/Schlick%27s_approximation
+float3 xSpecularF_Schlick(float3 f0, float NdotV)
+{
+	return f0 + (1.0-f0) * xPow5(1.0-NdotV); 
+}
+
+/// @desc Cook-Torrance microfacet specular shading
+/// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+float3 BRDF(float3 f0, float roughness, float NdotL, float NdotV, float NdotH)
+{
+	float3 specular = xSpecularD_GGX(roughness, NdotH)
+		* xSpecularF_Schlick(f0, NdotV)
+		* xSpecularG_Schlick(roughness, NdotL, NdotH);
+	return specular / (4.0 * NdotL * NdotV);
+}
+// include("BRDF.fsh")
 
 void main(in VS_out IN, out PS_out OUT)
 {
-	float4 base = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
-	if (base.a < 1.0)
+	float4 normalRoughness = texNormalRoughness.Sample(gm_BaseTexture, IN.TexCoord);
+	if (dot(normalRoughness.xyz, 1.0) == 0.0)
 	{
 		discard;
 	}
 
-	float shadow = 0.0;
-	float3 N = normalize(texNormal.Sample(gm_BaseTexture, IN.TexCoord).xyz * 2.0 - 1.0);
-	float3 L = -normalize(u_vLightDir);
-	float NdotL = saturate(dot(N, L));
-	
+	float4 albedoAO             = texAlbedoAO.Sample(gm_BaseTexture, IN.TexCoord);
+	float4 depthMetalness       = texDepthMetalness.Sample(gm_BaseTexture, IN.TexCoord);
+	//float4 emissiveTranslucency = texEmissiveTranslucency.Sample(gm_BaseTexture, IN.TexCoord);
+
+	float3 N     = normalize(normalRoughness.xyz * 2.0 - 1.0);
+	float3 L     = -normalize(u_vLightDir);
+	float  NdotL = saturate(dot(N, L));
+
+	float  shadow   = 0.0;
 	float4 lightCol = float4(0.0, 0.0, 0.0, 1.0);
 	float4 specular = float4(0.0, 0.0, 0.0, 1.0);
-	
+
+	float3 base      = albedoAO.rgb;
+	float  roughness = normalRoughness.a;
+	float  metalness = depthMetalness.a;
+
 	if (NdotL > 0.0)
 	{
-		float depth = xDecodeDepth(texDepth.Sample(gm_BaseTexture, IN.TexCoord).xyz) * u_fClipFar;
+		float depth = xDecodeDepth(depthMetalness.xyz) * u_fClipFar;
 		float3 posView = xProject(u_vTanAspect, IN.TexCoord, depth);
 		float3 posWorld = mul(u_mInverse, float4(posView, 1.0)).xyz;
 		float bias = 1.5;
@@ -131,15 +192,17 @@ void main(in VS_out IN, out PS_out OUT)
 
 		lightCol.rgb = u_vLightCol.rgb * u_vLightCol.a * NdotL * (1.0 - shadow);
 
-		// TODO: Make BRDF.
-		float smoothness = 1.0;
+		float3 f0 = lerp(X_F0_DEFAULT, base, metalness);
+
 		float3 V = normalize(u_vCamPos - posWorld);
 		float3 H = normalize(L + V);
-		float NdotH = max(dot(N, H), 0.0);
-		float specPower = pow(2.0, 1.0 + smoothness * 10.0);
-		specular.rgb = lightCol.rgb * pow(NdotH, (specPower + 8.0) / 8.0);
+
+		float NdotV = saturate(dot(N, V));
+		float NdotH = saturate(dot(N, H));
+
+		specular.rgb = lightCol.rgb * BRDF(f0, roughness, NdotL, NdotV, NdotH);
 	}
 
-	OUT.Total = base * lightCol + float4(specular.rgb, 0.0);
+	OUT.Total = float4(base * lightCol * (1.0 - metalness), 1.0) + float4(specular.rgb, 0.0);
 	OUT.Specular = specular;
 }
