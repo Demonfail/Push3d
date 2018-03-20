@@ -7,8 +7,8 @@
 float xSpecularD_GGX(float roughness, float NdotH)
 {
 	float r2 = roughness*roughness;
-	float a = NdotH*NdotH*(r2-1.0);
-	return r2 / (X_PI*a*a + X_2_PI*a + X_PI);
+	float a = NdotH*NdotH*(r2-1.0) + 1.0;
+	return r2 / (X_PI*a*a);
 	// return r2 / (X_PI * xPow2(xPow2(NdotH) * (r2-1.0) + 1.0);
 }
 
@@ -16,14 +16,10 @@ float xSpecularD_GGX(float roughness, float NdotH)
 /// @source http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 float xSpecularG_Schlick(float roughness, float NdotL, float NdotV)
 {
-	float k = roughness*roughness*0.125 + roughness*0.25 + 0.125;
-	// float k = xPow2(roughness+1.0) * 0.125;
+	float k = xPow2(roughness+1.0) * 0.125;
 	float oneMinusK = 1.0-k;
-	float tempL = NdotL*oneMinusK;
-	float tempV = NdotV*oneMinusK;
-	return tempL*tempV + k*tempL + k*tempV + k*k;
-	// return (NdotL / (NdotL*oneMinusK + k))
-	// 	* (NdotV / (NdotV*oneMinusK + k));
+	return (NdotL / (NdotL*oneMinusK + k))
+		* (NdotV / (NdotV*oneMinusK + k));
 }
 
 /// @desc Fresnel
