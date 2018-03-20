@@ -102,6 +102,9 @@ float xShadowMapCompare(Texture2D shadowMap, float2 texel, float2 uv, float comp
 }
 // include("ShadowMapping.fsh")
 #pragma include("BRDF.fsh")
+#define X_PI   3.14159265359
+#define X_2_PI 6.28318530718
+
 /// @return x^2
 float xPow2(float x) { return (x*x); }
 
@@ -114,7 +117,6 @@ float xPow4(float x) { return (x*x*x*x); }
 /// @return x^5
 float xPow5(float x) { return (x*x*x*x*x); }
 
-#define X_PI         3.14159265359
 #define X_F0_DEFAULT float3(0.22, 0.22, 0.22)
 
 /// @desc Normal distribution function
@@ -122,7 +124,9 @@ float xPow5(float x) { return (x*x*x*x*x); }
 float xSpecularD_GGX(float roughness, float NdotH)
 {
 	float r2 = xPow2(roughness);
-	return r2 / (X_PI * xPow2((xPow2(NdotH) * (r2-1.0) + 1.0)));
+	float a = NdotH*NdotH*(r2-1.0);
+	return r2 / (X_PI*a*a + X_2_PI*a + X_PI);
+	// return r2 / (X_PI * xPow2(xPow2(NdotH) * (r2-1.0) + 1.0);
 }
 
 /// @desc Geometric attenuation
@@ -131,8 +135,8 @@ float xSpecularG_Schlick(float roughness, float NdotL, float NdotV)
 {
 	float k = xPow2(roughness+1.0) * 0.125;
 	float oneMinusK = 1.0-k;
-	return (NdotL / (NdotL * oneMinusK + k))
-		* (NdotV / (NdotV * oneMinusK + k));
+	return (NdotL / (NdotL*oneMinusK + k))
+		* (NdotV / (NdotV*oneMinusK + k));
 }
 
 /// @desc Fresnel
@@ -144,12 +148,12 @@ float3 xSpecularF_Schlick(float3 f0, float NdotV)
 
 /// @desc Cook-Torrance microfacet specular shading
 /// @surce http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
-float3 BRDF(float3 f0, float roughness, float NdotL, float NdotV, float NdotH)
+float3 xBRDF(float3 f0, float roughness, float NdotL, float NdotV, float NdotH)
 {
 	float3 specular = xSpecularD_GGX(roughness, NdotH)
 		* xSpecularF_Schlick(f0, NdotV)
 		* xSpecularG_Schlick(roughness, NdotL, NdotH);
-	return specular / (4.0 * NdotL * NdotV);
+	return specular / (4.0*NdotL*NdotV);
 }
 // include("BRDF.fsh")
 
@@ -200,7 +204,7 @@ void main(in VS_out IN, out PS_out OUT)
 		float NdotV = saturate(dot(N, V));
 		float NdotH = saturate(dot(N, H));
 
-		specular.rgb = lightCol.rgb * BRDF(f0, roughness, NdotL, NdotV, NdotH);
+		specular.rgb = lightCol.rgb * xBRDF(f0, roughness, NdotL, NdotV, NdotH);
 	}
 
 	OUT.Total = float4(base * lightCol * (1.0 - metalness), 1.0) + float4(specular.rgb, 0.0);
