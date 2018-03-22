@@ -4,7 +4,7 @@ varying vec3 v_vPosWorld;
 uniform vec3  u_vLightPos;
 uniform float u_fClipFar;
 
-#pragma include("DepthEncoding.fsh", "glsl")
+#pragma include("DepthEncoding.xsh", "glsl")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
 vec3 xEncodeDepth(float d)
@@ -29,7 +29,7 @@ float xDecodeDepth(vec3 c)
 	const float inv255 = 1.0 / 255.0;
 	return c.x + c.y*inv255 + c.z*inv255*inv255;
 }
-// include("DepthEncoding.fsh")
+// include("DepthEncoding.xsh")
 
 void main()
 {

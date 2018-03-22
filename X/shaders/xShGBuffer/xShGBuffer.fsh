@@ -21,7 +21,7 @@ Texture2D texNormal   : register(t1);
 Texture2D texMaterial : register(t2); // Roughness, metalness, translucency, AO
 Texture2D texEmissive : register(t3);
 
-#pragma include("DepthEncoding.fsh")
+#pragma include("DepthEncoding.xsh")
 /// @param d Linearized depth to encode.
 /// @return Encoded depth.
 float3 xEncodeDepth(float d)
@@ -46,8 +46,8 @@ float xDecodeDepth(float3 c)
 	const float inv255 = 1.0 / 255.0;
 	return c.x + c.y*inv255 + c.z*inv255*inv255;
 }
-// include("DepthEncoding.fsh")
-#pragma include("Projecting.fsh")
+// include("DepthEncoding.xsh")
+#pragma include("Projecting.xsh")
 /// @param tanAspect (tanFovY*(screenWidth/screenHeight),-tanFovY), where
 ///                  tanFovY = dtan(fov*0.5)
 /// @param texCoord  Sceen-space UV.
@@ -68,7 +68,7 @@ float2 xUnproject(float4 p)
 	uv.y = 1.0 - uv.y;
 	return uv;
 }
-// include("Projecting.fsh")
+// include("Projecting.xsh")
 
 void main(in VS_out IN, out PS_out OUT)
 {

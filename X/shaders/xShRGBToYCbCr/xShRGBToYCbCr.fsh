@@ -2,7 +2,7 @@ varying vec2 v_vTexCoord;
 
 uniform vec2 u_vScreenSize; // (screenWidth,screenHeight)
 
-#pragma include("YCbCr.fsh", "glsl")
+#pragma include("YCbCr.xsh", "glsl")
 /// @desc Converts RGB space color to YCbCr space color.
 vec3 xRGBtoYCbCr(vec3 rgb)
 {
@@ -20,7 +20,7 @@ vec3 xYCbCrToRGB(vec3 YCbCr)
 		YCbCr.r - 0.344 * (YCbCr.g - 0.5) - 0.714 * (YCbCr.b - 0.5),
 		YCbCr.r + 1.772 * (YCbCr.g - 0.5));
 }
-// include("YCbCr.fsh")
+// include("YCbCr.xsh")
 
 void main()
 {

@@ -11,8 +11,7 @@ struct PS_out
 
 uniform float2 u_vTexel;
 
-#pragma include("Blur.fsh")
- // The MIT License (MIT) Copyright (c) 2015 Jam3
+// The MIT License (MIT) Copyright (c) 2015 Jam3
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +35,7 @@ uniform float2 u_vTexel;
 ///        `direction` is `(1.0,0.0)` for horizontal or `(0.0,1.0)` for
 ///        vertical blur.
 /// @source https://github.com/Jam3/glsl-fast-gaussian-blur
-float4 xBlur9(Texture2D image, float2 uv, float2 texel)
+float4 blur9(Texture2D image, float2 uv, float2 texel)
 {
 	float4 color = float4(0.0, 0.0, 0.0, 0.0);
 	float2 off1 = texel * 1.3846153846;
@@ -48,9 +47,8 @@ float4 xBlur9(Texture2D image, float2 uv, float2 texel)
 	color += image.Sample(gm_BaseTexture, uv - off2) * 0.0702702703;
 	return color;
 }
-// include("Blur.fsh")
 
 void main(in VS_out IN, out PS_out OUT)
 {
-	OUT.Blurred = xBlur9(gm_BaseTextureObject, IN.TexCoord, u_vTexel);
+	OUT.Blurred = blur9(gm_BaseTextureObject, IN.TexCoord, u_vTexel);
 }
