@@ -29,12 +29,6 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
 	surGBuffer[i] = noone;
 }
 
-// Shadow mapping
-surShadowMap  = noone;
-shadowMapRes  = 1024;
-shadowMapArea = 1024;
-sunDir        = [0.5, 0.5, -0.5];
-
 // SSAO
 xSsaoInit(12, 4, 2);
 ssaoResolution = 0.5;
