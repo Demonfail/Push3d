@@ -5,7 +5,7 @@ Maintained by: [kraifpatrik](https://github.com/kraifpatrik)
 Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 
 # Latest Screenshot
-![The latest screenshot](https://raw.githubusercontent.com/GameMakerDiscord/x/master/ScreenshotLatest.png)
+![The latest screenshot](ScreenshotLatest.png)
 
 # Table of Contents
 - [Reference](#reference) 
@@ -2694,4 +2694,5 @@ rootElement | `real` | The root element of the tree.
 
 ### Returns:
 `string`: The string.
+
 
