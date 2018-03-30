@@ -5,7 +5,7 @@ Maintained by: [kraifpatrik](https://github.com/kraifpatrik)
 Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 
 # Latest Screenshot
-![The latest screenshot](./ScreenshotLatest.png)
+![The latest screenshot](https://raw.githubusercontent.com/GameMakerDiscord/x/master/ScreenshotLatest.png)
 
 # Table of Contents
 - [Reference](#reference) 
@@ -27,6 +27,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xDsListInsertList](#xdslistinsertlist)
 	- [xDsListInsertMap](#xdslistinsertmap)
 	- [xDsListInsertUnique](#xdslistinsertunique)
+	- [xHammersley2D](#xhammersley2d)
 	- [xMatrixAddComponentwise](#xmatrixaddcomponentwise)
 	- [xMatrixBuildLookAt](#xmatrixbuildlookat)
 	- [xMatrixClone](#xmatrixclone)
@@ -441,6 +442,21 @@ position | `real` | The index to insert the value at.
 
 ### Returns:
 `real`: The index on which has been the value found or -1.
+
+## xHammersley2D
+```
+xHammersley2D(i, n)
+```
+Gets i-th point from sequence of uniformly distributed points on a unit square.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+i | `real` | The point index in sequence.
+n | `real` | The total size of the sequence.
+
+### Source:
+http://holger.dammertz.org/stuff/notes_HammersleyOnHemisphere.html
 
 ## xMatrixAddComponentwise
 ```
