@@ -1,4 +1,4 @@
-/// @func xGuiOnDragVScrollbarThumb(vscrollbar, event)
+/// @func xGuiOnDragVScrollbarThumb(vScrollbarThumb, event)
 var _delegate = argument0[? "delegate"];
 argument0[? "y"] = clamp(
 	argument0[? "y"] + argument1[? "y"] + argument0[? "mouseYOffset"],

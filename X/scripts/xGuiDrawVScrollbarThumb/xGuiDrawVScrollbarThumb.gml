@@ -1,4 +1,4 @@
-/// @func xGuiDrawVScrollbarThumb(vscrollbar)
+/// @func xGuiDrawVScrollbarThumb(vScrollbarThumb)
 xDrawRectangle(
 	argument0[? "x"], argument0[? "y"],
 	argument0[? "width"], argument0[? "height"],

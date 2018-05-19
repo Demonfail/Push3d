@@ -15,6 +15,12 @@ _checkbox[? "name"] = "checkbox1";
 xGuiSetPosition(_checkbox, 32, 64);
 xGuiAddWidget(_container, _checkbox);
 
+var _hslider = xGuiHSlider(0, 10);
+_hslider[? "name"] = "slider1";
+_hslider[? "width"] = 128;
+xGuiSetPosition(_hslider, 32, 96);
+xGuiAddWidget(_container, _hslider);
+
 var _hscrollbar = xGuiHScrollbar();
 _hscrollbar[? "width"] = 256;
 xGuiSetPosition(_hscrollbar, 32, 32 + 128);

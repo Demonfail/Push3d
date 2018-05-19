@@ -1,4 +1,4 @@
-/// @func xGuiOnDragHScrollbarThumb(hscrollbar, event)
+/// @func xGuiOnDragHScrollbarThumb(hScrollbarThumb, event)
 var _delegate = argument0[? "delegate"];
 argument0[? "x"] = clamp(
 	argument0[? "x"] + argument1[? "x"] + argument0[? "mouseXOffset"],
