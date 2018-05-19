@@ -21,6 +21,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xCubemapGetSurface](#xcubemapgetsurface)
 	- [xCubemapGetViewMatrix](#xcubemapgetviewmatrix)
 	- [xCubemapToSingleSurface](#xcubemaptosinglesurface)
+	- [xDrawRectangle](#xdrawrectangle)
 	- [xDsListAddList](#xdslistaddlist)
 	- [xDsListAddMap](#xdslistaddmap)
 	- [xDsListAddUnique](#xdslistaddunique)
@@ -361,6 +362,22 @@ surface | `real` | The target surface (recreated or resized if necessary).
 
 ### Returns:
 `real`: The target surface.
+
+## xDrawRectangle
+```
+xDrawRectangle(x, y, width, height, color[, alpha])
+```
+Draws a rectangle of the given size and color at the given position.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The x position to draw the rectangle at.
+y | `real` | The y position to draw the rectangle at.
+width | `real` | The width of the rectangle.
+height | `real` | The height of the rectangle.
+color | `real` | The color of the rectangle.
+alpha | `real` | The alpha of the rectangle.
 
 ## xDsListAddList
 ```

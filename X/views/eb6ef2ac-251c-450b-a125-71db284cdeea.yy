@@ -1,0 +1,31 @@
+{
+    "id": "eb6ef2ac-251c-450b-a125-71db284cdeea",
+    "modelName": "GMFolder",
+    "mvc": "1.1",
+    "name": "eb6ef2ac-251c-450b-a125-71db284cdeea",
+    "children": [
+        "72cc8fe4-bf79-4117-9cd8-f79b56e9c33a",
+        "bcc22dea-59b1-4fd6-b8b5-9c0dd6987e5a",
+        "5665f236-1d19-4590-bddd-9ddf25e00745",
+        "79ac1c72-63f3-4e4d-b006-5977ad9bf83c",
+        "9dbd8053-649f-4bec-947a-e132259f9236",
+        "98f4f461-fa61-4065-a248-131b13819f1d",
+        "6aecf9a7-62a7-4e32-b58f-2a699acbd51f",
+        "b892d82f-0c49-4415-921e-1c0d561bd104",
+        "80f96238-d9b3-4d75-abf3-dc2e545e9a90",
+        "64fb8c11-5d27-4753-82c6-64db492d4015",
+        "816ff0b4-dbec-4f5b-b7fb-fb0cf32c7570",
+        "ae01aa10-6d10-41ea-8e99-6dee3cd4454b",
+        "31e4e737-060b-466c-b486-c80f4f1dd49c",
+        "76fc393a-d18b-4ffe-94b3-260fa1e66248",
+        "7346dcfc-11f0-425c-8b05-26b789c608fb",
+        "14943aa1-0ed7-45ef-be03-123915b8642f",
+        "5608ebd6-0ba7-4a1a-9360-642f40ec2c18",
+        "dd6f8dd7-5371-4371-9be8-17144fb8c560",
+        "428b3bce-78be-47da-a9ca-df470468c3c1"
+    ],
+    "filterType": "GMScript",
+    "folderName": "Events",
+    "isDefaultView": false,
+    "localisedFolderName": ""
+}
