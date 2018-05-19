@@ -1,4 +1,6 @@
 /// @func xGuiHScrollbarThumb()
+/// @desc Creates a new horizontal scrollbar thumb.
+/// @return {real} The created horizontal scrollbar thumb.
 var _thumb = xGuiWidget();
 _thumb[? "width"] = 32;
 _thumb[? "mouseXOffset"] = 0;

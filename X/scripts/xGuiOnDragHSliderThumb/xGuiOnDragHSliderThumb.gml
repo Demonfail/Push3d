@@ -1,4 +1,7 @@
 /// @func xGuiOnDragHSliderThumb(hSliderThumb, event)
+/// @desc Defines how horizontal slider thumb handles a "drag" event.
+/// @param {real} hSliderThumb The horizontal slider thumb.
+/// @param {real} event        The event to handle.
 var _delegate = argument0[? "delegate"];
 var _xPrev = argument0[? "x"];
 var _xMax = _delegate[? "width"] - argument0[? "width"];

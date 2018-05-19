@@ -1,4 +1,6 @@
 /// @func xGuiVScrollbarThumb()
+/// @desc Creates a new vertical scrollbar thumb.
+/// @return {real} The created vertical scrollbar thumb.
 var _thumb = xGuiWidget();
 _thumb[? "height"] = 32;
 _thumb[? "mouseYOffset"] = 0;

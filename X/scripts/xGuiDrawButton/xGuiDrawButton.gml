@@ -1,4 +1,6 @@
 /// @func xGuiDrawButton(button)
+/// @desc Draws the button.
+/// @param {real} button The button to draw.
 var _text = argument0[? "text"];
 var _x = argument0[? "x"];
 var _y = argument0[? "y"];

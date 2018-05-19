@@ -1,4 +1,6 @@
 /// @func xGuiHSliderThumb()
+/// @desc Creates a new horizontal slider thumb.
+/// @return {real} The created horizontal slider thumb.
 var _thumb = xGuiWidget();
 _thumb[? "width"] = 24;
 _thumb[? "height"] = 24;

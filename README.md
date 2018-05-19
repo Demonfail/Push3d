@@ -28,6 +28,32 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xDsListInsertList](#xdslistinsertlist)
 	- [xDsListInsertMap](#xdslistinsertmap)
 	- [xDsListInsertUnique](#xdslistinsertunique)
+	- [xGuiButton](#xguibutton)
+	- [xGuiCheckbox](#xguicheckbox)
+	- [xGuiContainer](#xguicontainer)
+	- [xGuiDrawButton](#xguidrawbutton)
+	- [xGuiDrawCheckbox](#xguidrawcheckbox)
+	- [xGuiDrawContainer](#xguidrawcontainer)
+	- [xGuiDrawHScrollbar](#xguidrawhscrollbar)
+	- [xGuiDrawHScrollbarThumb](#xguidrawhscrollbarthumb)
+	- [xGuiDrawHSlider](#xguidrawhslider)
+	- [xGuiDrawHSliderThumb](#xguidrawhsliderthumb)
+	- [xGuiDrawVScrollbar](#xguidrawvscrollbar)
+	- [xGuiDrawVScrollbarThumb](#xguidrawvscrollbarthumb)
+	- [xGuiHScrollbar](#xguihscrollbar)
+	- [xGuiHScrollbarThumb](#xguihscrollbarthumb)
+	- [xGuiHSlider](#xguihslider)
+	- [xGuiHSliderThumb](#xguihsliderthumb)
+	- [xGuiOnClickCheckbox](#xguionclickcheckbox)
+	- [xGuiOnDragHScrollbarThumb](#xguiondraghscrollbarthumb)
+	- [xGuiOnDragHSliderThumb](#xguiondraghsliderthumb)
+	- [xGuiOnDragStartHScrollbarThumb](#xguiondragstarthscrollbarthumb)
+	- [xGuiOnDragStartHSliderThumb](#xguiondragstarthsliderthumb)
+	- [xGuiOnDragStartVScrollbarThumb](#xguiondragstartvscrollbarthumb)
+	- [xGuiOnDragVScrollbarThumb](#xguiondragvscrollbarthumb)
+	- [xGuiOnRedrawContainer](#xguionredrawcontainer)
+	- [xGuiVScrollbar](#xguivscrollbar)
+	- [xGuiVScrollbarThumb](#xguivscrollbarthumb)
 	- [xHammersley2D](#xhammersley2d)
 	- [xMatrixAddComponentwise](#xmatrixaddcomponentwise)
 	- [xMatrixBuildLookAt](#xmatrixbuildlookat)
@@ -459,6 +485,298 @@ position | `real` | The index to insert the value at.
 
 ### Returns:
 `real`: The index on which has been the value found or -1.
+
+## xGuiButton
+```
+xGuiButton(text)
+```
+Creates a new button.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+text | `string` | The text on the button.
+
+### Returns:
+`real`: The created button.
+
+## xGuiCheckbox
+```
+xGuiCheckbox(checked)
+```
+Creates a new checkbox.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+checked | `bool` | True to set it's default state to "checked".
+
+### Returns:
+`real`: The created checkbox.
+
+## xGuiContainer
+```
+xGuiContainer()
+```
+Creates a new container.
+
+### Returns:
+`real`: The created container.
+
+## xGuiDrawButton
+```
+xGuiDrawButton(button)
+```
+Draws the button.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+button | `real` | The button to draw.
+
+## xGuiDrawCheckbox
+```
+xGuiDrawCheckbox(checkbox)
+```
+Draws the checkox.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+checkbox | `real` | The checkbox to draw.
+
+## xGuiDrawContainer
+```
+xGuiDrawContainer(container)
+```
+Draws the container.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+container | `real` | The container to draw.
+
+## xGuiDrawHScrollbar
+```
+xGuiDrawHScrollbar(hScrollbar)
+```
+Draws the horizontal scrollbar.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbar | `real` | The horizontal scrollbar to draw.
+
+## xGuiDrawHScrollbarThumb
+```
+xGuiDrawHScrollbarThumb(hScrollbarThumb)
+```
+Draws the horizontal scrollbar thumb.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbarThumb | `real` | The horizontal scrollbar thumb to draw.
+
+## xGuiDrawHSlider
+```
+xGuiDrawHSlider(hSlider)
+```
+Draws the horizontal slider.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbar | `real` | The horizontal slider to draw.
+
+## xGuiDrawHSliderThumb
+```
+xGuiDrawHSliderThumb(hSliderThumb)
+```
+Draws the horizontal slider thumb.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hSliderThumb | `real` | The horizontal slider thumb to draw.
+
+## xGuiDrawVScrollbar
+```
+xGuiDrawVScrollbar(vScrollbar)
+```
+Draws the vertical scrollbar.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbar | `real` | The vertical scrollbar to draw.
+
+## xGuiDrawVScrollbarThumb
+```
+xGuiDrawVScrollbarThumb(vScrollbarThumb)
+```
+Draws the vertical scrollbar thumb.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+vScrollbarThumb | `real` | The vertical scrollbar thumb to draw.
+
+## xGuiHScrollbar
+```
+xGuiHScrollbar()
+```
+Creates a new horizontal scrollbar.
+
+### Returns:
+`real`: The created horizontal scrollbar.
+
+## xGuiHScrollbarThumb
+```
+xGuiHScrollbarThumb()
+```
+Creates a new horizontal scrollbar thumb.
+
+### Returns:
+`real`: The created horizontal scrollbar thumb.
+
+## xGuiHSlider
+```
+xGuiHSlider(valueMin, valueMax)
+```
+Creates a new horizontal slider.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+valueMin | `real` | The minimal value of the slider.
+valueMax | `real` | The maxmimum value of the slider.
+
+### Returns:
+`real`: The created horizontal slider.
+
+## xGuiHSliderThumb
+```
+xGuiHSliderThumb()
+```
+Creates a new horizontal slider thumb.
+
+### Returns:
+`real`: The created horizontal slider thumb.
+
+## xGuiOnClickCheckbox
+```
+xGuiOnClickCheckbox(checkbox, event)
+```
+Defines how checkbox handles a "click" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+checkbox | `real` | The checkbox.
+event | `real` | The event to handle.
+
+## xGuiOnDragHScrollbarThumb
+```
+xGuiOnDragHScrollbarThumb(hScrollbarThumb, event)
+```
+Defines how horizontal scrollbar thumb handles a "drag" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbarThumb | `real` | The horizontal scrollbar thumb.
+event | `real` | The event to handle.
+
+## xGuiOnDragHSliderThumb
+```
+xGuiOnDragHSliderThumb(hSliderThumb, event)
+```
+Defines how horizontal slider thumb handles a "drag" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hSliderThumb | `real` | The horizontal slider thumb.
+event | `real` | The event to handle.
+
+## xGuiOnDragStartHScrollbarThumb
+```
+xGuiOnDragStartHScrollbarThumb(hScrollbarThumb, event)
+```
+Defines how horizontal scrollbar thumb handles a "dragstart" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hScrollbarThumb | `real` | The horizontal scrollbar thumb.
+event | `real` | The event to handle.
+
+## xGuiOnDragStartHSliderThumb
+```
+xGuiOnDragStartHSliderThumb(hSliderThumb, event)
+```
+Defines how horizontal slider thumb handles a "dragstart" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+hSliderThumb | `real` | The horizontal slider thumb.
+event | `real` | The event to handle.
+
+## xGuiOnDragStartVScrollbarThumb
+```
+xGuiOnDragStartVScrollbarThumb(vScrollbarThumb, event)
+```
+Defines how vertical scrollbar thumb handles a "dragstart" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+vScrollbarThumb | `real` | The vertical scrollbar thumb.
+event | `real` | The event to handle.
+
+## xGuiOnDragVScrollbarThumb
+```
+xGuiOnDragVScrollbarThumb(vScrollbarThumb, event)
+```
+Defines how vertical scrollbar thumb handles a "drag" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+vScrollbarThumb | `real` | The vertical scrollbar thumb.
+event | `real` | The event to handle.
+
+## xGuiOnRedrawContainer
+```
+xGuiOnRedrawContainer(container, event)
+```
+Defines how container handles a "redraw" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+container | `real` | The container.
+event | `real` | The event to handle.
+
+## xGuiVScrollbar
+```
+xGuiVScrollbar()
+```
+Creates a new vertical scrollbar.
+
+### Returns:
+`real`: The created vertical scrollbar.
+
+## xGuiVScrollbarThumb
+```
+xGuiVScrollbarThumb()
+```
+Creates a new vertical scrollbar thumb.
+
+### Returns:
+`real`: The created vertical scrollbar thumb.
 
 ## xHammersley2D
 ```

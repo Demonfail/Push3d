@@ -1,4 +1,6 @@
 /// @func xGuiVScrollbar()
+/// @desc Creates a new vertical scrollbar.
+/// @return {real} The created vertical scrollbar.
 var _scrollbar = xGuiWidgetSet();
 var _width = 16;
 _scrollbar[? "width"] = _width;

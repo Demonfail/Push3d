@@ -1,4 +1,6 @@
 /// @func xGuiHScrollbar()
+/// @desc Creates a new horizontal scrollbar.
+/// @return {real} The created horizontal scrollbar.
 var _scrollbar = xGuiWidgetSet();
 var _height = 16;
 _scrollbar[? "height"] = _height;

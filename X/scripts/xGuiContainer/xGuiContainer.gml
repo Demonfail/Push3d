@@ -1,4 +1,6 @@
 /// @func xGuiContainer()
+/// @desc Creates a new container.
+/// @return {real} The created container.
 var _c = xGuiWidgetSet();
 _c[? "surface"] = noone;
 _c[? "background"] = c_white;

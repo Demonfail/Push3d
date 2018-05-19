@@ -1,4 +1,6 @@
 /// @func xGuiDrawCheckbox(checkbox)
+/// @desc Draws the checkox.
+/// @param {real} checkbox The checkbox to draw.
 xDrawRectangle(
 	argument0[? "x"],
 	argument0[? "y"],
