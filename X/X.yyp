@@ -554,7 +554,7 @@
             "Key": "36edb25a-7ef0-40d3-8b83-ca9e6d286c85",
             "Value": {
                 "id": "6ea1b032-0f3a-4f47-8202-7769f75be4a0",
-                "resourcePath": "rooms\\xRTests\\xRTests.yy",
+                "resourcePath": "rooms\\xRDeferredRenderingTest\\xRDeferredRenderingTest.yy",
                 "resourceType": "GMRoom"
             }
         },
@@ -1916,6 +1916,14 @@
                 "id": "3940f261-e68c-4dde-9729-0dbf42a42a52",
                 "resourcePath": "scripts\\xGuiEventKeyPress\\xGuiEventKeyPress.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "ba87f990-b36d-468f-96b6-4bcbc316d1c7",
+            "Value": {
+                "id": "39886d26-6c09-4383-ad8f-106057d00c14",
+                "resourcePath": "rooms\\xRGuiTest\\xRGuiTest.yy",
+                "resourceType": "GMRoom"
             }
         },
         {

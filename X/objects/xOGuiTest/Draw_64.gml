@@ -1,4 +1,3 @@
-/// @desc Draw GUI
 xGuiSetRectangle(gui, 0, 0, window_get_width(), window_get_height());
 xGuiDraw(gui);
 //var _hovered = gui[? "widgetHovered"];
