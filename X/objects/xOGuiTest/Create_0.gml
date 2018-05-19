@@ -6,9 +6,14 @@ xGuiSetRectangle(_container, 32, 32, 256, 128);
 xGuiAddWidget(gui, _container);
 
 var _button = xGuiButton("Save");
-_button[? "name"] = "buttonSave";
+_button[? "name"] = "btnSave";
 xGuiSetPosition(_button, 32, 32);
 xGuiAddWidget(_container, _button);
+
+var _checkbox = xGuiCheckbox(true);
+_checkbox[? "name"] = "checkbox1";
+xGuiSetPosition(_checkbox, 32, 64);
+xGuiAddWidget(_container, _checkbox);
 
 var _hscrollbar = xGuiHScrollbar();
 _hscrollbar[? "width"] = 256;
