@@ -1,52 +1,63 @@
-/// @func xGuiTriggerEvent(widget, event)
-/// @desc Triggers the event within the widget. If the event's
-///       "bubble" property is set to `true`, then the event
-///       will be recursively triggered in the widget's delegate
-///       until it reaches the GUI system object. If the event
-///       does not bubble and the widget has no delegate, it is
-///       destroyed automatically, otherwise it's necessary to
-///       destroy it by hand!
-/// @param {real} widget The widget.
-/// @param {real} event  The event.
-/// @return {real} The widget.
-/// @see xGuiHasEvent
-/// @see xGuiGetEvent
-/// @see xGuiDestroyEvent
-// TODO: Rewrite event triggering to iterative if it shows to be heavy
-// on performance when recursive.
-var _delegate = argument0[? "delegate"];
-var _type = argument1[? "type"];
+/// @func xGuiTriggerEvent(widget, event, ...)
+var _widget = argument[0];
+var _events = ds_list_create();
+var _eventCount = argument_count - 1;
+var _firstIteration = true;
 
-if (argument1[? "target"] == noone)
+for (var i = 1; i < argument_count; ++i)
 {
-	argument1[? "target"] = argument0;
+	ds_list_add(_events, argument[i]);
 }
 
-if (ds_map_exists(argument0, "eventActions"))
+while (_widget != noone)
 {
-	var _eventActions = argument0[? "eventActions"];
-	if (ds_map_exists(_eventActions, _type))
+	for (var i = 0; i < _eventCount; ++i)
 	{
-		var _eventList = _eventActions[? _type];
-		var _size = ds_list_size(_eventList);
-		for (var i = 0; i < _size; ++i)
+		var _event = _events[| i];
+		var _type = _event[? "type"];
+
+		// Set event's target to the current widget (if not yet
+		// specified).
+		if (_firstIteration && _event[? "target"] == noone)
 		{
-			script_execute(_eventList[| i], argument0, argument1);
+			_event[? "target"] = _widget;
+		}
+
+		// Execute event actions.
+		if (ds_map_exists(_widget, "eventActions"))
+		{
+			var _eventActions = _widget[? "eventActions"];
+			if (ds_map_exists(_eventActions, _type))
+			{
+				var _actions = _eventActions[? _type];
+				var _size = ds_list_size(_actions);
+				for (var i = 0; i < _size; ++i)
+				{
+					script_execute(_actions[| i], _widget, _event);
+				}
+			}
+		}
+
+		if (ds_map_exists(_widget, "events"))
+		{
+			// Add to event stack in the top level GUI object.
+			ds_stack_push(_widget[? "events"], _event);
+		}
+		else if (!_event[? "bubble"])
+		{
+			// Delete event from the event list if it does not bubble.
+			ds_list_delete(_events, i);
+			xGuiDestroyEvent(_event);
+			--i;
+			--_eventCount;
 		}
 	}
+
+	// Trigger in the delegate.
+	_widget = _widget[? "delegate"];
+	_firstIteration = false;
 }
 
-if (argument1[? "bubble"] && _delegate != noone)
-{
-	xGuiTriggerEvent(_delegate, argument1);
-}
-else if (ds_map_exists(argument0, "events"))
-{
-	ds_stack_push(argument0[? "events"], argument1);
-}
-else
-{
-	ds_map_destroy(argument1);
-}
+ds_list_destroy(_events);
 
-return argument0;
+return argument[0];

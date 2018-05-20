@@ -47,6 +47,14 @@
             }
         },
         {
+            "Key": "03e0559e-324a-4f0d-a204-98ab7685285e",
+            "Value": {
+                "id": "2a18f46e-9789-44f5-8ba9-feda254063ec",
+                "resourcePath": "scripts\\xGuiTriggerEvent\\xGuiTriggerEvent.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "03f5bbb0-2ba7-4699-99f5-0f60091eaf43",
             "Value": {
                 "id": "4dc680a0-22c5-4ba8-9f27-f04a7ed50987",
@@ -1306,7 +1314,7 @@
             "Key": "7f891f60-d484-4a84-a38e-c877007a08f0",
             "Value": {
                 "id": "9284e7ef-d717-45cc-9cc0-1e69c6c5afa0",
-                "resourcePath": "scripts\\xGuiTriggerEvent\\xGuiTriggerEvent.yy",
+                "resourcePath": "scripts\\xGuiTriggerEventRecursive\\xGuiTriggerEventRecursive.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -2794,6 +2802,7 @@
         "d45b9a19-e9b9-4491-ba88-ddafa300a5c1",
         "1f80b82f-5b87-4143-a502-f5a1e36a4424",
         "fac775a2-80fc-4930-bd6f-a6766cc10757",
+        "03e0559e-324a-4f0d-a204-98ab7685285e",
         "7f891f60-d484-4a84-a38e-c877007a08f0",
         "f3b07a3b-9c48-4e48-806f-9133257fd3f7",
         "98e01ee4-0be0-4eec-bb4e-e4e86ed2950d",

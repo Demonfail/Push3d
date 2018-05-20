@@ -4,5 +4,4 @@
 /// @param {real} event    The event to handle.
 var _checked = argument0[? "checked"];
 argument0[? "checked"] = !_checked;
-xGuiTriggerEvent(argument0, xGuiEventChange(_checked, !_checked));
-xGuiTriggerEvent(argument0, xGuiEventRedraw());
+xGuiTriggerEvent(argument0, xGuiEventChange(_checked, !_checked), xGuiEventRedraw());

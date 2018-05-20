@@ -2,7 +2,7 @@ gui = xGuiCreate();
 
 var _container = xGuiContainer();
 _container[? "background"] = $F0F0F0;
-xGuiSetRectangle(_container, 32, 32, 256, 128);
+xGuiSetRectangle(_container, 32, 32, 512, 256);
 xGuiAddWidget(gui, _container);
 
 var _button = xGuiButton("Save");
@@ -22,11 +22,11 @@ xGuiSetPosition(_hslider, 32, 96);
 xGuiAddWidget(_container, _hslider);
 
 var _hscrollbar = xGuiHScrollbar();
-_hscrollbar[? "width"] = 256;
-xGuiSetPosition(_hscrollbar, 32, 32 + 128);
+_hscrollbar[? "width"] = 512;
+xGuiSetPosition(_hscrollbar, 32, 32 + 256);
 xGuiAddWidget(gui, _hscrollbar);
 
 var _vscrollbar = xGuiVScrollbar();
-_vscrollbar[? "height"] = 128;
-xGuiSetPosition(_vscrollbar, 32 + 256, 32);
+_vscrollbar[? "height"] = 256;
+xGuiSetPosition(_vscrollbar, 32 + 512, 32);
 xGuiAddWidget(gui, _vscrollbar);

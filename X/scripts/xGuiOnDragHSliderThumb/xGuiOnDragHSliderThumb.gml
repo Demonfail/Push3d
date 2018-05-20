@@ -12,5 +12,6 @@ var _xNew = clamp(
 argument0[? "x"] = _xNew;
 var _valueNew = lerp(_delegate[? "min"], _delegate[? "max"], _xNew / _xMax);
 _delegate[? "value"] = _valueNew;
-xGuiTriggerEvent(_delegate, xGuiEventChange(_delegate[? "value"], _valueNew));
-xGuiTriggerEvent(argument0, xGuiEventRedraw());
+xGuiTriggerEvent(argument0,
+	xGuiEventChange(_delegate[? "value"], _valueNew),
+	xGuiEventRedraw());
