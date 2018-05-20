@@ -1,4 +1,4 @@
-/// @func xGuiTriggerEvent(widget, events)
+/// @func xGuiTriggerEventList(widget, events)
 /// @desc Triggers given events in the widget. Events which have property
 ///       "bubble" set to `true` are then triggered in the widget's delegate
 ///       until they reach the GUI system object.
@@ -7,6 +7,7 @@
 /// @note Events that do not bubble are destroyed automatically, but the rest
 ///       you must destroy by hand! Also the passed list of events is not
 ///       deleted by this script and therefore it's up to you as well.
+/// @see xGuiTriggerEvent
 /// @see xGuiHasEvent
 /// @see xGuiGetEvent
 /// @see xGuiDestroyEvent

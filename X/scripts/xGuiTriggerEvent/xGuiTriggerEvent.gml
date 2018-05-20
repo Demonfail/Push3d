@@ -6,6 +6,7 @@
 /// @param {real} event  The event to be triggered.
 /// @note Events that do not bubble are destroyed automatically, but the rest
 ///       you must destroy by hand!
+/// @see xGuiTriggerEventList
 /// @see xGuiHasEvent
 /// @see xGuiGetEvent
 /// @see xGuiDestroyEvent
