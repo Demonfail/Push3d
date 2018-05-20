@@ -323,7 +323,8 @@ class GMReference(GMBase):
         super(GMReference, self).__init__(desc)
 
     def __str__(self):
-        return "[{}](#{})".format(self._desc, self._desc.replace("_", "-_"))
+        return "[{}](#{})".format(
+            self._desc, self._desc.replace("_", "-_").lower())
 
 
 class GMExample(GMBase):

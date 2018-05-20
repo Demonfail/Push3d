@@ -1028,7 +1028,7 @@ gui | `real` | The GUI system to get an event from.
 All events retrieved with this function must be destroyed when you're done using them!
 
 ### See Also:
-[xGuiHasEvent](#xGuiHasEvent), [xGuiDestroyEvent](#xGuiDestroyEvent)
+[xGuiHasEvent](#xguihasevent), [xGuiDestroyEvent](#xguidestroyevent)
 
 ## xGuiGetEventTargetName
 ```
@@ -1096,7 +1096,7 @@ gui | `real` | The GUI system.
 `bool`: True if there are some event.
 
 ### See Also:
-[xGuiGetEvent](#xGuiGetEvent)
+[xGuiGetEvent](#xguigetevent)
 
 ## xGuiOnClickCheckbox
 ```
@@ -1244,7 +1244,7 @@ event | `real` | The event.
 `real`: The widget.
 
 ### See Also:
-[xGuiHasEvent](#xGuiHasEvent), [xGuiGetEvent](#xGuiGetEvent), [xGuiDestroyEvent](#xGuiDestroyEvent)
+[xGuiHasEvent](#xguihasevent), [xGuiGetEvent](#xguigetevent), [xGuiDestroyEvent](#xguidestroyevent)
 
 ## xGuiVScrollbar
 ```
