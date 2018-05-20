@@ -1,6 +1,6 @@
 /// @func xVec3Slerp(v1, v2, s)
-/// @desc Performs a spherical linear interpolation between
-///       the vectors `v1`, `v2` and stores the result to `v1`.
+/// @desc Performs a spherical linear interpolation between the vectors `v1`,
+///       `v2` and stores the result to `v1`.
 /// @param {array} v1 The first vector. Should be normalized!
 /// @param {array} v2 The second vector. Should be normalized!
 /// @param {real}  s  The slerping factor.

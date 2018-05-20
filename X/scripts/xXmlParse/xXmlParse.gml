@@ -1,8 +1,8 @@
 /// @func xXmlParse(string)
 /// @desc Parses value from the string.
 /// @param {string} string The string to parse.
-/// @return {real/string} Real value or a string, where XML character
-///                       entities are replaced with their original form.
+/// @return {real/string} Real value or a string, where XML character entities
+///                       are replaced with their original form.
 var _string = argument0;
 
 // Clear whitespace, replace character entities

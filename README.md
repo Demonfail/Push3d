@@ -273,9 +273,11 @@ msg | `string` | The error message.
 ### Example:
 ```
 var _map = ds_map_create();
-xAssertDsExists(_map, ds_type_map, "This should pass, since we just created it.");
+xAssertDsExists(_map, ds_type_map,
+    "This should pass, since we just created it.");
 ds_map_destroy(_map);
-xAssertDsExists(_map, ds_type_map, "This will abort the game just as expected.");
+xAssertDsExists(_map, ds_type_map,
+    "This will abort the game just as expected.");
 ```
 
 ## xColorAlphaToArgb
@@ -1230,18 +1232,18 @@ height | `real` | The new height of the widget.
 
 ## xGuiTriggerEvent
 ```
-xGuiTriggerEvent(widget, event)
+xGuiTriggerEvent(widget, event, ...)
 ```
-Triggers the event within the widget. If the event's "bubble" property is set to `true`, then the event will be recursively triggered in the widget's delegate until it reaches the GUI system object. If the event does not bubble and the widget has no delegate, it is destroyed automatically, otherwise it's necessary to destroy it by hand!
+Triggers given events in the widget. Events which have property "bubble" set to `true` are then triggered in the widget's delegate until they reach the GUI system object.
 
 ### Arguments:
 Name | Type | Description
 ---- | ---- | -----------
 widget | `real` | The widget.
-event | `real` | The event.
+event | `real` | The event to be triggered.
 
-### Returns:
-`real`: The widget.
+### Note:
+Events that do not bubble are destroyed automatically, but the rest you must destroy by hand!
 
 ### See Also:
 [xGuiHasEvent](#xguihasevent), [xGuiGetEvent](#xguigetevent), [xGuiDestroyEvent](#xguidestroyevent)
@@ -1869,7 +1871,7 @@ Name | Type | Description
 size | `real` | Number of vectors in the kernel.
 
 ### Returns:
-`array`: The created kernel as `[v1X, v1Y, v1Z, v2X, v2Y, v2Z, ..., vnX, vnY, vnZ]`.
+`array`: The created kernel as `[v1X, v1Y, v1Z, v2X, v2Y, v2Z, ...,///                 vnX, vnY, vnZ]`.
 
 ## xSsaoDraw
 ```

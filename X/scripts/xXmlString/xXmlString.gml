@@ -1,6 +1,6 @@
 /// @func xXmlString(value)
-/// @desc Turns given value into a string. Replaces
-///       characters with their XML-safe form.
+/// @desc Turns given value into a string. Replaces characters with their
+///       XML-safe form.
 /// @param {any} value The value to be turned into a string.
 /// @return {string} The resulting string.
 var _value = argument0;

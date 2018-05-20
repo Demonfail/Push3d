@@ -1,7 +1,8 @@
 /// @func xCubemapToSingleSurface(cubemap, surface)
 /// @desc Puts all faces of the cubemap into a single surface.
 /// @param {array} cubemap The cubemap.
-/// @param {real}  surface The target surface (recreated or resized if necessary).
+/// @param {real}  surface The target surface (recreated or resized if
+///                        necessary).
 /// @return {real} The target surface.
 var _size = argument0[X_CUBEMAP_SIZE];
 var _x = 0;

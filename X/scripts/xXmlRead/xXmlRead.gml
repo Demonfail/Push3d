@@ -1,6 +1,6 @@
 /// @func xXmlRead(fileName)
-/// @desc Reads the XML formatted file and stores
-///       the contained data into a tree of elements.
+/// @desc Reads the XML formatted file and stores the contained data into a
+///       tree of elements.
 /// @param {string} fileName The name of the XML formatted file.
 /// @return {real} The root element of the tree on success or noone on fail.
 var _file = file_bin_open(argument0, 0);
@@ -60,7 +60,8 @@ do
 				{
 					xXmlElementDestroy(_root);
 				}
-				show_debug_message("ERROR: Unexpected symbol '<' at " + string(_filePos) + "!");
+				show_debug_message("ERROR: Unexpected symbol '<' at "
+					+ string(_filePos) + "!");
 				return noone;
 			}
 
@@ -88,7 +89,8 @@ do
 				{
 					xXmlElementDestroy(_root);
 				}
-				show_debug_message("ERROR: Unexpected symbol '>' at " + string(_filePos) + "!");
+				show_debug_message("ERROR: Unexpected symbol '>' at "
+					+ string(_filePos) + "!");
 				return noone;
 			}
 
@@ -174,7 +176,8 @@ do
 				{
 					if (_element != noone)
 					{
-						xXmlElementSetAttribute(_element, _attributeName, xXmlParse(_token));
+						xXmlElementSetAttribute(_element, _attributeName,
+							xXmlParse(_token));
 					}
 					_attributeName = "";
 				}
@@ -223,7 +226,8 @@ do
 			{
 				xXmlElementSetName(_element, _token);
 			}
-			else if (_lastElement != noone && xXmlElementGetName(_lastElement) == "") {
+			else if (_lastElement != noone
+					&& xXmlElementGetName(_lastElement) == "") {
 				xXmlElementSetName(_lastElement, _token);
 			}
 			_token = "";
@@ -234,7 +238,8 @@ do
 		// Build token
 		if (_byte > xEXmlChars.Null && _byte <= xEXmlChars.CR)
 		{
-			_byte = xEXmlChars.Space; // Replace new lines, tabs, etc. with spaces
+			// Replace new lines, tabs, etc. with spaces
+			_byte = xEXmlChars.Space;
 		}
 		_token += chr(_byte);
 	}

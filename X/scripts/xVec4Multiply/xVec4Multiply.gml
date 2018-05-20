@@ -1,6 +1,6 @@
 /// @func xVec4Multiply(v1, v2)
-/// @desc Multiplies the vectors `v1`, `v2` componentwise and
-///       stores the result into `v1`.
+/// @desc Multiplies the vectors `v1`, `v2` componentwise and stores the result
+///       into `v1`.
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 /// @example

@@ -1,6 +1,6 @@
 /// @func xStringRemovePart(string, startStr, endStr)
-/// @desc Removes part beginning with startStr and
-///       ending with endStr from the string.
+/// @desc Removes part beginning with startStr and ending with endStr from the
+///       string.
 /// @param {string} startStr The start of the part to remove.
 /// @param {string} endStr   The end of the part to remove.
 /// @param {string} string   The string to remove the part from.

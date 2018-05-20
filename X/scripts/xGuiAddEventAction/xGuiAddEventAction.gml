@@ -1,14 +1,13 @@
 /// @func xGuiAddEventAction(widget, event, action)
-/// @desc Adds an event action to the widget. This action will then
-///       be executed every time the widgets receives an event of
-///       given type.
+/// @desc Adds an event action to the widget. This action will then be executed
+///       every time the widgets receives an event of given type.
 /// @param {real}   widget The widget to add the action to.
-/// @param {string} event  The name of the event on which the action
-///                        should be executed.
-/// @param {real}   action A script (the action) that will be executed.
-///                        Must take two arguments, where the first one
-///                        will be the widget that received the event
-///                        and the second one will be the event itself.
+/// @param {string} event  The name of the event on which the action should be
+///                        executed.
+/// @param {real}   action A script (the action) that will be executed. Must
+///                        take two arguments, where the first one will be the
+///                        widget that received the event and the second one
+///                        will be the event itself.
 /// @return {real} The widget.
 xAssert(script_exists(argument2), "Cannot add unexisting event action.");
 var _eventActions;

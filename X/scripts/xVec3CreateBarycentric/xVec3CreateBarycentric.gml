@@ -1,6 +1,6 @@
 /// @func xVec3CreateBarycentric(v1, v2, v3, f, g)
-/// @desc Creates a new vector using barycentric coordinates, following
-///       formula `v1 + f(v2-v1) + g(v3-v1)`.
+/// @desc Creates a new vector using barycentric coordinates, following formula
+///       `v1 + f(v2-v1) + g(v3-v1)`.
 /// @param {array} v1 The first point of triangle.
 /// @param {array} v2 The second point of triangle.
 /// @param {array} v3 The third point of triangle.

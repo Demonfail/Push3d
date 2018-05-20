@@ -1,6 +1,6 @@
 /// @func xVec3Cross(v1, v2)
-/// @desc Gets the cross product of the vectors `v1`, `v2`
-///       and stores it to `v1`.
+/// @desc Gets the cross product of the vectors `v1`, `v2` and stores it to
+///       `v1`.
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 var _x = argument0[1]*argument1[2] - argument0[2]*argument1[1];

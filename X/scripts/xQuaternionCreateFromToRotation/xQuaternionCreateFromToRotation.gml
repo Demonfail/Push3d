@@ -1,5 +1,6 @@
 /// @func xQuaternionCreateFromToRotation(from, to)
-/// @desc Creates a quaternion that represents rotation from one vector to another.
+/// @desc Creates a quaternion that represents rotation from one vector to
+///       another.
 /// @param {array} from The 3D "from" vector.
 /// @param {array} to   The 3D "to" vector.
 /// @return {array} The created quaternion.

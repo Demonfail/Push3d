@@ -1,6 +1,6 @@
 /// @func xStringJoinArray(string, array)
-/// @desc Joins values in the array putting the string
-///       between each two consecutive values.
+/// @desc Joins values in the array putting the string between each two
+///       consecutive values.
 /// @param {string} string The string to put between two consecutive values.
 /// @param {array}  array  An array of values that you want to join.
 /// @return {string} The resulting string.

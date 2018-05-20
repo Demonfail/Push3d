@@ -1,6 +1,6 @@
 /// @func xMatrixMultiplyComponentwise(m1, m2)
-/// @desc Multiplies matrices `m1`, `m2` componentwise and stores the
-///       result to `m1`.
+/// @desc Multiplies matrices `m1`, `m2` componentwise and stores the result to
+///       `m1`.
 /// @param {array} m1 The first matrix.
 /// @param {array} m2 The second matrix.
 argument0[@  0] *= argument1[@  0];

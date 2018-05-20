@@ -1,6 +1,6 @@
 /// @func xStringJoin(string, values...)
-/// @desc Joins given values together putting the string
-///       between each consecutive two.
+/// @desc Joins given values together putting the string between each
+///       consecutive two.
 /// @param {string} string The string to put between two consecutive values.
 /// @param {any}    values Any number of values to be joined.
 /// @return {string} The resulting string.

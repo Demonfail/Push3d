@@ -19,7 +19,8 @@ switch (argument1)
 		{
 			var f = _face[| i++];
 			var v = f[? "vertex"];
-			vertex_position_3d(_vBuffer, _vertex[| v], _vertex[| v + 1], _vertex[| v + 2]);
+			vertex_position_3d(
+				_vBuffer, _vertex[| v], _vertex[| v + 1], _vertex[| v + 2]);
 		}
 		break;
 
@@ -36,10 +37,13 @@ switch (argument1)
 			var n  = f[? "normal"];
 			var t  = f[? "tangent"];
 			var b  = f[? "bitangent"];
-			vertex_position_3d(_vBuffer, _vertex[| v], _vertex[| v + 1], _vertex[| v + 2]);
-			vertex_normal(_vBuffer, _normal[| n], _normal[| n + 1], _normal[| n + 2]);
+			vertex_position_3d(
+				_vBuffer, _vertex[| v], _vertex[| v + 1], _vertex[| v + 2]);
+			vertex_normal(
+				_vBuffer, _normal[| n], _normal[| n + 1], _normal[| n + 2]);
 			vertex_texcoord(_vBuffer, _texture[| uv], _texture[| uv + 1]);
-			vertex_float4(_vBuffer, _tangent[| t], _tangent[| t + 1], _tangent[| t + 2], _bitangent[| b]);
+			vertex_float4(
+				_vBuffer, _tangent[| t], _tangent[| t + 1], _tangent[| t + 2], _bitangent[| b]);
 		}
 		break;
 

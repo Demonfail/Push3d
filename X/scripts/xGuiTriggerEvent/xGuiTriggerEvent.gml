@@ -1,4 +1,14 @@
 /// @func xGuiTriggerEvent(widget, event, ...)
+/// @desc Triggers given events in the widget. Events which have property
+///       "bubble" set to `true` are then triggered in the widget's delegate
+///       until they reach the GUI system object.
+/// @param {real} widget The widget.
+/// @param {real} event  The event to be triggered.
+/// @note Events that do not bubble are destroyed automatically, but the rest
+///       you must destroy by hand!
+/// @see xGuiHasEvent
+/// @see xGuiGetEvent
+/// @see xGuiDestroyEvent
 var _widget = argument[0];
 var _events = ds_list_create();
 var _eventCount = argument_count - 1;
@@ -15,14 +25,11 @@ while (_widget != noone)
 	{
 		var _event = _events[| i];
 		var _type = _event[? "type"];
-
-		// Set event's target to the current widget (if not yet
-		// specified).
+		// Set event's target to the current widget (if not yet specified).
 		if (_firstIteration && _event[? "target"] == noone)
 		{
 			_event[? "target"] = _widget;
 		}
-
 		// Execute event actions.
 		if (ds_map_exists(_widget, "eventActions"))
 		{
@@ -37,7 +44,6 @@ while (_widget != noone)
 				}
 			}
 		}
-
 		if (ds_map_exists(_widget, "events"))
 		{
 			// Add to event stack in the top level GUI object.
@@ -45,19 +51,17 @@ while (_widget != noone)
 		}
 		else if (!_event[? "bubble"])
 		{
-			// Delete event from the event list if it does not bubble.
+			// If the event does not bubble, delete it from the event list.
 			ds_list_delete(_events, i);
 			xGuiDestroyEvent(_event);
 			--i;
 			--_eventCount;
 		}
 	}
-
 	// Trigger in the delegate.
 	_widget = _widget[? "delegate"];
 	_firstIteration = false;
 }
 
 ds_list_destroy(_events);
-
 return argument[0];

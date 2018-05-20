@@ -1,8 +1,8 @@
 /// @func xSsaoDraw(surSsao, surWork, surDepth, surNormal, matView, matProj, clipFar)
 /// @desc Renders SSAO into the `surSsao` surface.
 /// @param {real} surSsao   The surface to draw the SSAO to.
-/// @param {real} surWork   A working surface used for blurring the SSAO. Must have
-///                         the same size as `surSsao`!
+/// @param {real} surWork   A working surface used for blurring the SSAO. Must
+///                         have the same size as `surSsao`!
 /// @param {real} surDepth  A surface containing the scene depth.
 /// @param {real} surNormal A surface containing the scene normals.
 /// @param {array} matView  The view matrix used when rendering the scene.
@@ -25,8 +25,8 @@ if (!surface_exists(xSurSsaoNoise))
 	xSurSsaoNoise = xSsaoMakeNoiseSurface(X_SSAO_NOISE_TEXTURE_SIZE);
 }
 
-// TODO: For the SSAO, texture repeat should be enabled only for the
-// noise texture, otherwise false occlusion occurs on the screen edges.
+// TODO: For the SSAO, texture repeat should be enabled only for the noise
+// texture, otherwise false occlusion occurs on the screen edges.
 var _texRepeat = gpu_get_tex_repeat();
 gpu_set_tex_repeat(true);
 

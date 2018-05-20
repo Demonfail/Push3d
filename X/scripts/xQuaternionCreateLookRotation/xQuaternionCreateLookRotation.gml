@@ -1,6 +1,6 @@
 /// @func xQuaternionCreateLookRotation(forward, up)
-/// @desc Creates a quaternion with the specified forward and up vectors.
-///       These vectors must not be parallel! If they are, then an identity
+/// @desc Creates a quaternion with the specified forward and up vectors. These
+///       vectors must not be parallel! If they are, then an identity
 ///       quaternion will be returned.
 /// @param {array} forward The 3D forward unit vector.
 /// @param {array} up      The 3D up unit vector.

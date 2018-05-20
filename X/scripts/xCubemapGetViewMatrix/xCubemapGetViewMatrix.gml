@@ -1,7 +1,8 @@
 /// @func xCubemapGetViewMatrix(side, position)
 /// @desc Creates a view matrix for given cubemap side.
 /// @param {real}  side     The cubemap side.
-/// @param {array} position The center position of the cubemap in the world space (vec3).
+/// @param {array} position The center position of the cubemap in the world
+///                         space (vec3).
 /// @return {array} The created view matrix.
 var _negEye = xVec3Clone(argument1);
 xVec3Scale(_negEye, -1);

@@ -1,5 +1,6 @@
 /// @func xDsListInsertUnique(list, value, position)
-/// @desc If the value is not in the list, it is inserted to it at given position.
+/// @desc If the value is not in the list, it is inserted to it at given
+///       position.
 /// @param {real} list     The id of the list.
 /// @param {any}  value    The value to be added.
 /// @param {real} position The index to insert the value at.

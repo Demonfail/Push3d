@@ -1,6 +1,6 @@
 /// @func xSurfaceCheck(surface, width, height)
-/// @desc Checks whether the surface exists and if it has correct size.
-///       Broken surfaces are recreated. Surfaces of wrong size are resized.
+/// @desc Checks whether the surface exists and if it has correct size. Broken
+///       surfaces are recreated. Surfaces of wrong size are resized.
 /// @param {real} surface The id of the surface.
 /// @param {real} width   The desired width of the surface.
 /// @param {real} height  The desired height of the surface.

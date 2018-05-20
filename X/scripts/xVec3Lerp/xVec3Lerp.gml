@@ -1,6 +1,6 @@
 /// @func xVec3Lerp(v1, v2, s)
-/// @desc Linearly interpolates between vectors `v1`, `v2` and
-///       stores the resulting vector into `v1`.
+/// @desc Linearly interpolates between vectors `v1`, `v2` and stores the
+///       resulting vector into `v1`.
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 /// @param {real}  s  The interpolation factor.

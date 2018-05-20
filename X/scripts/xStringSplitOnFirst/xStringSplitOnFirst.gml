@@ -2,9 +2,9 @@
 /// @desc Splits the string in two at the first occurence of the delimiter.
 /// @param {string} string    The string to split.
 /// @param {string} delimiter The delimiter.
-/// @return {array} An array containing [firstHalf, secondHalf]. If the delimiter
-///                 is not found in the string, then secondHalf equals empty string
-///                 and firstHalf is the original string.
+/// @return {array} An array containing [firstHalf, secondHalf]. If the
+///                 delimiter is not found in the string, then secondHalf
+///                 equals empty string and firstHalf is the original string.
 var i = string_pos(argument1, argument0);
 if (i == 0)
 {

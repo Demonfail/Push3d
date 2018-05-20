@@ -1,6 +1,6 @@
 /// @func xQuaternionLerp(q1, q2, s)
-/// @desc Performs a linear interpolation between the quaternions
-///       `q1`, `q2` and stores the result to `q1`.
+/// @desc Performs a linear interpolation between the quaternions `q1`, `q2`
+///       and stores the result to `q1`.
 /// @param {array} q1 The first quaternion.
 /// @param {array} q2 The second quaternion.
 /// @param {real}  s  The lerping factor.

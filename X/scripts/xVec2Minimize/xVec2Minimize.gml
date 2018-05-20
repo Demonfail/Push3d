@@ -1,6 +1,6 @@
 /// @func xVec2Minimize(v1, v2)
-/// @desc Gets a vector that is made up of the smallest components
-///       of the vectors `v1`, `v2` and stores it into `v1`.
+/// @desc Gets a vector that is made up of the smallest components of the
+///       vectors `v1`, `v2` and stores it into `v1`.
 /// @param {array} v1 The first vector.
 /// @param {array} v2 The second vector.
 /// @example

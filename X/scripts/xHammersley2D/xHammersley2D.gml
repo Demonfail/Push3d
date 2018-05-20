@@ -1,5 +1,6 @@
 /// @func xHammersley2D(i, n)
-/// @desc Gets i-th point from sequence of uniformly distributed points on a unit square.
+/// @desc Gets i-th point from sequence of uniformly distributed points on a
+///       unit square.
 /// @param {real} i The point index in sequence.
 /// @param {real} n The total size of the sequence.
 /// @source http://holger.dammertz.org/stuff/notes_HammersleyOnHemisphere.html

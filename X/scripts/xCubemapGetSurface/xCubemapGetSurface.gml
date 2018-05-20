@@ -1,6 +1,6 @@
 /// @func xCubemapGetSurface(cubemap, side)
-/// @desc Gets a surface for given cubemap side. If the surface
-///       is corrupted, then a new one is created.
+/// @desc Gets a surface for given cubemap side. If the surface is corrupted,
+///       then a new one is created.
 /// @param {array} cubemap The cubemap.
 /// @param {real}  side    The cubemap side.
 /// @return {real} The surface.

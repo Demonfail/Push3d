@@ -4,7 +4,7 @@
 /// @note This also handles the GUI logic!
 var _gui = argument0;
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Get mouse and keyboard state
 var _mouseX = window_mouse_get_x();
 var _mouseY = window_mouse_get_y();
@@ -53,7 +53,7 @@ if (keyboard_check_released(vk_anykey))
 	_keyUp = keyboard_lastkey;
 }
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Update GUI
 var _itemsStack = ds_stack_create();
 var _indexStack = ds_stack_create();
@@ -251,7 +251,7 @@ ds_stack_destroy(_pushStack);
 ds_stack_destroy(_containerStack);
 ds_stack_destroy(_matrixStack);
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Mouse events
 var _mouseMoved = (_mouseXPrev != _mouseX || _mouseYPrev != _mouseY);
 
@@ -319,7 +319,8 @@ if (_widgetDrag != noone)
 		if (!_gui[? "dragging"])
 		{
 			_gui[? "dragging"] = true;
-			xGuiTriggerEvent(_widgetDrag, xGuiEventDragStart(_mouseXDrag, _mouseYDrag));
+			xGuiTriggerEvent(_widgetDrag,
+				xGuiEventDragStart(_mouseXDrag, _mouseYDrag));
 		}
 		xGuiTriggerEvent(_widgetDrag, xGuiEventDrag(_mouseXDrag, _mouseYDrag));
 	}

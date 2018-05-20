@@ -1,8 +1,8 @@
 /// @func xSurfaceBlur(target, work, scale)
 /// @desc Blurs the target surface.
 /// @param {real} target The id of the surface to be blurred.
-/// @param {real} work   The id of the working surface. Must have
-///                      the same size as the target surface.
+/// @param {real} work   The id of the working surface. Must have the same size
+///                      as the target surface.
 /// @param {real} scale  The scale of the blur kernel.
 var _shader = xShBlur;
 var _texelW = argument2/surface_get_width(argument0);
