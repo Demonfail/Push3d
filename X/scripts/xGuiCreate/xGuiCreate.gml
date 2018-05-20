@@ -1,4 +1,6 @@
 /// @func xGuiCreate()
+/// @desc Creates a new GUI system.
+/// @return {real} The created GUI system.
 var _gui = xGuiWidgetSet();
 _gui[? "events"] = ds_stack_create();
 _gui[? "mouseX"] = 0;

@@ -1,4 +1,10 @@
 /// @func xGuiEventKeyUp(key, alt, ctrl, shift)
+/// @desc Creates a new "keyup" event.
+/// @param {real} key   The key that was released.
+/// @param {bool} alt   True if the alt key was held during the key release.
+/// @param {bool} ctrl  True if the ctrl key was held during the key release.
+/// @param {bool} shift True if the shift key was held during the key release.
+/// @return {real} The created event.
 var _e = xGuiEvent("keyup");
 _e[? "bubble"] = false;
 _e[? "key"] = argument0;

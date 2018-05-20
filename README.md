@@ -28,9 +28,15 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xDsListInsertList](#xdslistinsertlist)
 	- [xDsListInsertMap](#xdslistinsertmap)
 	- [xDsListInsertUnique](#xdslistinsertunique)
+	- [xGuiAddEventAction](#xguiaddeventaction)
+	- [xGuiAddWidget](#xguiaddwidget)
 	- [xGuiButton](#xguibutton)
 	- [xGuiCheckbox](#xguicheckbox)
 	- [xGuiContainer](#xguicontainer)
+	- [xGuiCreate](#xguicreate)
+	- [xGuiDestroy](#xguidestroy)
+	- [xGuiDestroyEvent](#xguidestroyevent)
+	- [xGuiDraw](#xguidraw)
 	- [xGuiDrawButton](#xguidrawbutton)
 	- [xGuiDrawCheckbox](#xguidrawcheckbox)
 	- [xGuiDrawContainer](#xguidrawcontainer)
@@ -40,10 +46,32 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xGuiDrawHSliderThumb](#xguidrawhsliderthumb)
 	- [xGuiDrawVScrollbar](#xguidrawvscrollbar)
 	- [xGuiDrawVScrollbarThumb](#xguidrawvscrollbarthumb)
+	- [xGuiEvent](#xguievent)
+	- [xGuiEventChange](#xguieventchange)
+	- [xGuiEventClick](#xguieventclick)
+	- [xGuiEventDrag](#xguieventdrag)
+	- [xGuiEventDragEnd](#xguieventdragend)
+	- [xGuiEventDragStart](#xguieventdragstart)
+	- [xGuiEventKeyDown](#xguieventkeydown)
+	- [xGuiEventKeyPress](#xguieventkeypress)
+	- [xGuiEventKeyUp](#xguieventkeyup)
+	- [xGuiEventMouseDown](#xguieventmousedown)
+	- [xGuiEventMouseEnter](#xguieventmouseenter)
+	- [xGuiEventMouseLeave](#xguieventmouseleave)
+	- [xGuiEventMouseMove](#xguieventmousemove)
+	- [xGuiEventMousePress](#xguieventmousepress)
+	- [xGuiEventMouseUp](#xguieventmouseup)
+	- [xGuiEventMouseWheel](#xguieventmousewheel)
+	- [xGuiEventRedraw](#xguieventredraw)
+	- [xGuiEventScroll](#xguieventscroll)
+	- [xGuiFindWidget](#xguifindwidget)
+	- [xGuiGetEvent](#xguigetevent)
+	- [xGuiGetEventTargetName](#xguigeteventtargetname)
 	- [xGuiHScrollbar](#xguihscrollbar)
 	- [xGuiHScrollbarThumb](#xguihscrollbarthumb)
 	- [xGuiHSlider](#xguihslider)
 	- [xGuiHSliderThumb](#xguihsliderthumb)
+	- [xGuiHasEvent](#xguihasevent)
 	- [xGuiOnClickCheckbox](#xguionclickcheckbox)
 	- [xGuiOnDragHScrollbarThumb](#xguiondraghscrollbarthumb)
 	- [xGuiOnDragHSliderThumb](#xguiondraghsliderthumb)
@@ -52,6 +80,9 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xGuiOnDragStartVScrollbarThumb](#xguiondragstartvscrollbarthumb)
 	- [xGuiOnDragVScrollbarThumb](#xguiondragvscrollbarthumb)
 	- [xGuiOnRedrawContainer](#xguionredrawcontainer)
+	- [xGuiSetPosition](#xguisetposition)
+	- [xGuiSetRectangle](#xguisetrectangle)
+	- [xGuiTriggerEvent](#xguitriggerevent)
 	- [xGuiVScrollbar](#xguivscrollbar)
 	- [xGuiVScrollbarThumb](#xguivscrollbarthumb)
 	- [xHammersley2D](#xhammersley2d)
@@ -486,6 +517,37 @@ position | `real` | The index to insert the value at.
 ### Returns:
 `real`: The index on which has been the value found or -1.
 
+## xGuiAddEventAction
+```
+xGuiAddEventAction(widget, event, action)
+```
+Adds an event action to the widget. This action will then be executed every time the widgets receives an event of given type.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widget | `real` | The widget to add the action to.
+event | `string` | The name of the event on which the action should be executed.
+action | `real` | A script (the action) that will be executed. Must take two arguments, where the first one will be the widget that received the event and the second one will be the event itself.
+
+### Returns:
+`real`: The widget.
+
+## xGuiAddWidget
+```
+xGuiAddWidget(widgetSet, widget)
+```
+Adds the widget to the widget set.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widgetSet | `real` | The widget set to add the widget to.
+widget | `real` | The widget to be added.
+
+### Returns:
+`real`: The widget set.
+
 ## xGuiButton
 ```
 xGuiButton(text)
@@ -522,6 +584,51 @@ Creates a new container.
 
 ### Returns:
 `real`: The created container.
+
+## xGuiCreate
+```
+xGuiCreate()
+```
+Creates a new GUI system.
+
+### Returns:
+`real`: The created GUI system.
+
+## xGuiDestroy
+```
+xGuiDestroy(gui)
+```
+Destroys the GUI system.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+gui | `real` | The GUI system to be destroyed.
+
+## xGuiDestroyEvent
+```
+xGuiDestroyEvent(event)
+```
+Destroys the event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+event | `real` | The event to be destroyed.
+
+## xGuiDraw
+```
+xGuiDraw(gui)
+```
+Draws the GUI system.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+gui | `real` | The GUI system to be drawed.
+
+### Note:
+This also handles the GUI logic!
 
 ## xGuiDrawButton
 ```
@@ -622,6 +729,316 @@ Name | Type | Description
 ---- | ---- | -----------
 vScrollbarThumb | `real` | The vertical scrollbar thumb to draw.
 
+## xGuiEvent
+```
+xGuiEvent(type)
+```
+Creates a new event of given type.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+type | `string` | The event type.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventChange
+```
+xGuiEventChange(valPrev, valueNew)
+```
+Creates a new "change" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+valPrev | `any` | The previous value of the property that has changed.
+valueNew | `any` | The new value of the property that has changed.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventClick
+```
+xGuiEventClick(alt, ctrl, shift)
+```
+Creates a new "click" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+alt | `bool` | True if the alt key was held during the click.
+ctrl | `bool` | True if the ctrl key was held during the click.
+shift | `bool` | True if the shift key was held during the click.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventDrag
+```
+xGuiEventDrag(x, y)
+```
+Creates a new "drag" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The new x position.
+y | `real` | The new y position.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventDragEnd
+```
+xGuiEventDragEnd(x, y)
+```
+Creates a new "dragend" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The final x position.
+y | `real` | The final y position.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventDragStart
+```
+xGuiEventDragStart(x, y)
+```
+Creates a new "dragstart" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+x | `real` | The starting x position.
+y | `real` | The starting y position.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventKeyDown
+```
+xGuiEventKeyDown(key, alt, ctrl, shift)
+```
+Creates a new "keydown" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+key | `real` | The key that is down.
+alt | `bool` | True if the alt key is down.
+ctrl | `bool` | True if the ctrl key is down.
+shift | `bool` | True if the shift key is down.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventKeyPress
+```
+xGuiEventKeyPress(key, alt, ctrl, shift)
+```
+Creates a new "keypress" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+key | `real` | The key that was pressed.
+alt | `bool` | True if the alt key was held during the key press.
+ctrl | `bool` | True if the ctrl key was held during the key press.
+shift | `bool` | True if the shift key was held during the key press.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventKeyUp
+```
+xGuiEventKeyUp(key, alt, ctrl, shift)
+```
+Creates a new "keyup" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+key | `real` | The key that was released.
+alt | `bool` | True if the alt key was held during the key release.
+ctrl | `bool` | True if the ctrl key was held during the key release.
+shift | `bool` | True if the shift key was held during the key release.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseDown
+```
+xGuiEventMouseDown(button, alt, ctrl, shift)
+```
+Creates a new "mousedown" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+button | `real` | The mouse button that is down.
+alt | `bool` | True if the alt key is down.
+ctrl | `bool` | True if the ctrl key is down.
+shift | `bool` | True if the shift key is down.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseEnter
+```
+xGuiEventMouseEnter()
+```
+Creates a new "mouseenter" event.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseLeave
+```
+xGuiEventMouseLeave()
+```
+Creates a new "mouseleave" event.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseMove
+```
+xGuiEventMouseMove(button, x, y, prevX, prevY, alt, ctrl, shift)
+```
+Creates a new "mousemove" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+button | `real` | The mouse button that was down during the mouse movement.
+x | `real` | The new mouse x position.
+y | `real` | The new mouse y position.
+prevX | `real` | The previous mouse x position.
+prevY | `real` | The previous mouse y position.
+alt | `bool` | True if the alt key was held during the mouse movement.
+ctrl | `bool` | True if the ctrl key was held during the mouse movement.
+shift | `bool` | True if the shift key was held during the mouse movement.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMousePress
+```
+xGuiEventMousePress(button, alt, ctrl, shift)
+```
+Creates a new "mousepress" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+button | `real` | The mouse button that was pressed.
+alt | `bool` | True if the alt key was held during the mouse button press.
+ctrl | `bool` | True if the ctrl key was held during the mouse button press.
+shift | `bool` | True if the shift key was held during the mouse button press.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseUp
+```
+xGuiEventMouseUp(button, alt, ctrl, shift)
+```
+Creates a new "mouseup" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+button | `real` | The mouse button that was released.
+alt | `bool` | True if the alt key was held during the mouse button release.
+ctrl | `bool` | True if the ctrl key was held during the mouse button release.
+shift | `bool` | True if the shift key was held during the mouse button release.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventMouseWheel
+```
+xGuiEventMouseWheel(wheel, alt, ctrl, shift)
+```
+Creates a new "mousewheel" event.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+wheel | `real` | The mouse wheel scrolling direction (`-1` is up, `1` is down).
+alt | `bool` | True if the alt key was held during the mouse wheel scroll.
+ctrl | `bool` | True if the ctrl key was held during the mouse wheel scroll.
+shift | `bool` | True if the shift key was held during the mouse wheel scroll.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventRedraw
+```
+xGuiEventRedraw()
+```
+Creates a new "redraw" event.
+
+### Returns:
+`real`: The created event.
+
+## xGuiEventScroll
+```
+xGuiEventScroll()
+```
+Creates a new "scroll" event.
+
+### Returns:
+`real`: The created event.
+
+## xGuiFindWidget
+```
+xGuiFindWidget(widgetSet, name)
+```
+Recursively finds a widget of given name within the widget set.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widgetSet | `real` | The widget set to search within.
+name | `string` | The name of the widget to be found.
+
+### Returns:
+`real`: The found widget or the constant `noone` if no widget was found.
+
+## xGuiGetEvent
+```
+xGuiGetEvent(gui)
+```
+Gets an event that occurred within the GUI system.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+gui | `real` | The GUI system to get an event from.
+
+### Returns:
+`real`: The event.
+
+### Note:
+All events retrieved with this function must be destroyed when you're done using them!
+
+### See Also:
+[xGuiHasEvent](#xGuiHasEvent), [xGuiDestroyEvent](#xGuiDestroyEvent)
+
+## xGuiGetEventTargetName
+```
+xGuiGetEventTargetName(event)
+```
+Gets the name of the event's target widget.
+
+### Returns:
+`string`: The name of the event's target widget.
+
 ## xGuiHScrollbar
 ```
 xGuiHScrollbar()
@@ -663,6 +1080,23 @@ Creates a new horizontal slider thumb.
 
 ### Returns:
 `real`: The created horizontal slider thumb.
+
+## xGuiHasEvent
+```
+xGuiHasEvent(gui)
+```
+Checks whether some events occurred within the GUI system.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+gui | `real` | The GUI system.
+
+### Returns:
+`bool`: True if there are some event.
+
+### See Also:
+[xGuiGetEvent](#xGuiGetEvent)
 
 ## xGuiOnClickCheckbox
 ```
@@ -759,6 +1193,58 @@ Name | Type | Description
 ---- | ---- | -----------
 container | `real` | The container.
 event | `real` | The event to handle.
+
+## xGuiSetPosition
+```
+xGuiSetPosition(widget, x, y)
+```
+Sets the position of the widget.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widget | `real` | The widget.
+x | `real` | The new x position of the widget.
+y | `real` | The new y position of the widget.
+
+### Returns:
+`real`: The widget.
+
+## xGuiSetRectangle
+```
+xGuiSetRectangle(widget, x, y, width, height)
+```
+Sets the position and size of the widget.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widget | `real` | The widget.
+x | `real` | The new x position of the widget.
+y | `real` | The new y position of the widget.
+width | `real` | The new width of the widget.
+height | `real` | The new height of the widget.
+
+### Returns:
+`real`: The widget.
+
+## xGuiTriggerEvent
+```
+xGuiTriggerEvent(widget, event)
+```
+Triggers the event within the widget. If the event's "bubble" property is set to `true`, then the event will be recursively triggered in the widget's delegate until it reaches the GUI system object. If the event does not bubble and the widget has no delegate, it is destroyed automatically, otherwise it's necessary to destroy it by hand!
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widget | `real` | The widget.
+event | `real` | The event.
+
+### Returns:
+`real`: The widget.
+
+### See Also:
+[xGuiHasEvent](#xGuiHasEvent), [xGuiGetEvent](#xGuiGetEvent), [xGuiDestroyEvent](#xGuiDestroyEvent)
 
 ## xGuiVScrollbar
 ```

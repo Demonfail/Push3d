@@ -1,4 +1,6 @@
 /// @func xGuiDestroy(gui)
+/// @desc Destroys the GUI system.
+/// @param {real} gui The GUI system to be destroyed.
 var _events = argument0[? "events"];
 repeat (ds_stack_size(_events))
 {

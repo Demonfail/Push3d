@@ -1,4 +1,7 @@
 /// @func xGuiDraw(gui)
+/// @desc Draws the GUI system.
+/// @param {real} gui The GUI system to be drawed.
+/// @note This also handles the GUI logic!
 var _gui = argument0;
 
 //==============================================================================

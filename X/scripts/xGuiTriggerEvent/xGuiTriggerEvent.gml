@@ -1,4 +1,17 @@
 /// @func xGuiTriggerEvent(widget, event)
+/// @desc Triggers the event within the widget. If the event's
+///       "bubble" property is set to `true`, then the event
+///       will be recursively triggered in the widget's delegate
+///       until it reaches the GUI system object. If the event
+///       does not bubble and the widget has no delegate, it is
+///       destroyed automatically, otherwise it's necessary to
+///       destroy it by hand!
+/// @param {real} widget The widget.
+/// @param {real} event  The event.
+/// @return {real} The widget.
+/// @see xGuiHasEvent
+/// @see xGuiGetEvent
+/// @see xGuiDestroyEvent
 // TODO: Rewrite event triggering to iterative if it shows to be heavy
 // on performance when recursive.
 var _delegate = argument0[? "delegate"];
