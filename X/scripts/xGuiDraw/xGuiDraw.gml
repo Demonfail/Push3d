@@ -98,7 +98,8 @@ while (!ds_stack_empty(_itemsStack))
 
 		if (_topContainer == _container || _redrawing)
 		{
-			if (ds_map_exists(_container, "scrDraw")) {
+			if (ds_map_exists(_container, "scrDraw"))
+			{
 				script_execute(_container[? "scrDraw"], _container);
 			}
 		}
@@ -147,39 +148,44 @@ while (!ds_stack_empty(_itemsStack))
 		}
 
 		// Feed mouse and keyboard input
+		var _eventList = ds_list_create();
+
 		if (_mousePress != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventMousePress(_mousePress, _altDown, _ctrlDown, _shiftDown));
 		}
 		else if (_mouseDown != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventMouseDown(_mouseDown, _altDown, _ctrlDown, _shiftDown));
 		}
 
 		if (_mouseUp != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventMouseUp(_mouseUp, _altDown, _ctrlDown, _shiftDown));
 		}
 
 		if (_keyPress != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventKeyPress(_keyPress, _altDown, _ctrlDown, _shiftDown));
 		}
 		else if (_keyDown != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventKeyDown(_keyDown, _altDown, _ctrlDown, _shiftDown));
 		}
 
 		if (_keyUp != noone)
 		{
-			xGuiTriggerEvent(_item,
+			ds_list_add(_eventList,
 				xGuiEventKeyUp(_keyUp, _altDown, _ctrlDown, _shiftDown));
 		}
+
+		xGuiTriggerEventList(_item, _eventList);
+		ds_list_destroy(_eventList);
 
 		// Draw
 		if (ds_map_exists(_item, "surface"))
@@ -213,7 +219,8 @@ while (!ds_stack_empty(_itemsStack))
 		{
 			if (_topContainer == noone || _topContainer[? "redrawing"])
 			{
-				if (ds_map_exists(_item, "scrDraw")) {
+				if (ds_map_exists(_item, "scrDraw"))
+				{
 					script_execute(_item[? "scrDraw"], _item);
 				}
 

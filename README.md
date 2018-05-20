@@ -83,6 +83,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xGuiSetPosition](#xguisetposition)
 	- [xGuiSetRectangle](#xguisetrectangle)
 	- [xGuiTriggerEvent](#xguitriggerevent)
+	- [xGuiTriggerEvent](#xguitriggerevent)
 	- [xGuiVScrollbar](#xguivscrollbar)
 	- [xGuiVScrollbarThumb](#xguivscrollbarthumb)
 	- [xHammersley2D](#xhammersley2d)
@@ -1244,6 +1245,24 @@ event | `real` | The event to be triggered.
 
 ### Note:
 Events that do not bubble are destroyed automatically, but the rest you must destroy by hand!
+
+### See Also:
+[xGuiHasEvent](#xguihasevent), [xGuiGetEvent](#xguigetevent), [xGuiDestroyEvent](#xguidestroyevent)
+
+## xGuiTriggerEvent
+```
+xGuiTriggerEvent(widget, events)
+```
+Triggers given events in the widget. Events which have property "bubble" set to `true` are then triggered in the widget's delegate until they reach the GUI system object.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+widget | `real` | The widget.
+events | `real` | The list of events to be triggered.
+
+### Note:
+Events that do not bubble are destroyed automatically, but the rest you must destroy by hand! Also the passed list of events is not deleted by this script and therefore it's up to you as well.
 
 ### See Also:
 [xGuiHasEvent](#xguihasevent), [xGuiGetEvent](#xguigetevent), [xGuiDestroyEvent](#xguidestroyevent)

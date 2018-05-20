@@ -2615,6 +2615,14 @@
             }
         },
         {
+            "Key": "f6919e3a-a1e3-402f-bb81-a295c84afe3c",
+            "Value": {
+                "id": "af31a599-c6b7-40e2-aa18-fbce2c4cff27",
+                "resourcePath": "scripts\\xGuiTriggerEventList\\xGuiTriggerEventList.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f6ac57ce-1049-48a5-aeb8-1e586e6ce2d0",
             "Value": {
                 "id": "94b04632-b607-41b9-8ad3-891fe963290e",
@@ -2795,6 +2803,7 @@
         "1f80b82f-5b87-4143-a502-f5a1e36a4424",
         "fac775a2-80fc-4930-bd6f-a6766cc10757",
         "03e0559e-324a-4f0d-a204-98ab7685285e",
+        "f6919e3a-a1e3-402f-bb81-a295c84afe3c",
         "f3b07a3b-9c48-4e48-806f-9133257fd3f7",
         "98e01ee4-0be0-4eec-bb4e-e4e86ed2950d",
         "1d4013ab-c222-4cd7-aa59-00691d78ae99",
