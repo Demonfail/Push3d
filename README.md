@@ -11,6 +11,8 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 - [Reference](#reference) 
 	- [xAssert](#xassert)
 	- [xAssertDsExists](#xassertdsexists)
+	- [xAssertEqual](#xassertequal)
+	- [xAssertNotEqual](#xassertnotequal)
 	- [xColorAlphaToArgb](#xcoloralphatoargb)
 	- [xColorArgbToAlpha](#xcolorargbtoalpha)
 	- [xColorFromArgb](#xcolorfromargb)
@@ -141,6 +143,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 	- [xStringJoinList](#xstringjoinlist)
 	- [xStringRemovePart](#xstringremovepart)
 	- [xStringSplitOnFirst](#xstringsplitonfirst)
+	- [xStringTrim](#xstringtrim)
 	- [xSurfaceBlur](#xsurfaceblur)
 	- [xSurfaceCheck](#xsurfacecheck)
 	- [xSurfaceCreateFromSprite](#xsurfacecreatefromsprite)
@@ -280,6 +283,32 @@ ds_map_destroy(_map);
 xAssertDsExists(_map, ds_type_map,
     "This will abort the game just as expected.");
 ```
+
+## xAssertEqual
+```
+xAssertEqual(exp, val, msg)
+```
+Shows the error message if the expression is not equal to `val`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+exp | `any` | The expression to assert.
+val | `any` | The expected value.
+msg | `string` | The error message.
+
+## xAssertNotEqual
+```
+xAssertNotEqual(exp, val, msg)
+```
+Shows the error message if the expression is equal to `val`.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+exp | `any` | The expression to assert.
+val | `any` | The expected value.
+msg | `string` | The error message.
 
 ## xColorAlphaToArgb
 ```
@@ -2054,6 +2083,20 @@ delimiter | `string` | The delimiter.
 
 ### Returns:
 `array`: An array containing [firstHalf, secondHalf]. If the delimiter is not found in the string, then secondHalf equals empty string and firstHalf is the original string.
+
+## xStringTrim
+```
+xStringTrim(str)
+```
+Removes leading and trailing whitespace from the string.
+
+### Arguments:
+Name | Type | Description
+---- | ---- | -----------
+str | `string` | The string to remove the whitespace from.
+
+### Returns:
+`string`: The resulting string.
 
 ## xSurfaceBlur
 ```
