@@ -112,6 +112,10 @@ void main()
 			sampleDepth       *= u_fClipFar;
 			float attenuation =  smoothstep(0.0, 1.0, u_fRadius / abs(origin.z - sampleDepth + u_fBias));
 			occlusion         += attenuation * step(sampleDepth, sampleVS.z);
+			//if (abs(origin.z - sampleDepth/* + u_fBias*/) < u_fRadius)
+			//{
+			//	occlusion += step(sampleDepth, sampleVS.z);
+			//}
 		}
 	}
 	occlusion = clamp(1.0 - occlusion / float(X_SSAO_KERNEL_SIZE), 0.0, 1.0);

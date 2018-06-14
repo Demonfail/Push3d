@@ -2,7 +2,7 @@
 var _appSurW = surface_get_width(application_surface);
 var _appSurH = surface_get_height(application_surface);
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Light bloom
 var _width    = surface_get_width(surWork);
 var _height   = surface_get_height(surWork);
@@ -31,7 +31,7 @@ gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
 surface_reset_target();
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Post-process
 var _shader = xShPostProcess;
 shader_set(_shader);

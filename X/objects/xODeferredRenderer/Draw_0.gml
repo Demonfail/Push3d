@@ -16,7 +16,7 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
 
 gpu_set_blendenable(false);
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Shadow maps
 var _vBuffer = vBuffer;
 
@@ -105,7 +105,7 @@ if (instance_exists(xOLightPoint))
 	}
 }
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // G-Buffer pass
 surface_set_target_ext(0, application_surface);
 surface_set_target_ext(1, surGBuffer[xEGBuffer.NormalRoughness]);
@@ -151,7 +151,7 @@ draw_clear_alpha(0, 0);
 surface_reset_target();
 surface_copy(surGBuffer[xEGBuffer.AlbedoAO], 0, 0, application_surface);
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // SSAO
 var _ssaoWidth  = _screenWidth * ssaoResolution;
 var _ssaoHeight = _screenHeight * ssaoResolution;
@@ -164,7 +164,7 @@ xSsaoDraw(
 	_matProj,
 	clipFar);
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Light pass
 var _tanFovY          = dtan(fov * 0.5);
 var _tanAspect        = [_tanFovY * _aspect, -_tanFovY];
@@ -276,7 +276,7 @@ if (instance_exists(xOLightPoint))
 			1 / surface_get_height(shadowmap));
 		texture_set_stage(4, surface_get_texture(shadowmap));
 
-		var _scale = radius + 0.5;
+		var _scale = radius * 2.0; // TODO: Make point light mesh more detailed.
 		matrix_set(matrix_world,
 			matrix_build(x, y, z, 0, 0, 0, _scale, _scale, _scale));
 		vertex_submit(other.vBufferLightPoint, pr_trianglelist, _texSceneAlbedo);
@@ -294,7 +294,7 @@ gpu_set_blendmode(bm_normal);
 gpu_set_zwriteenable(true);
 surface_reset_target();
 
-//==============================================================================
+////////////////////////////////////////////////////////////////////////////////
 // Forward pass
 //surface_set_target(application_surface);
 //matrix_set(matrix_view, _matView);

@@ -1,5 +1,4 @@
-//==============================================================================
-// Process GUI events
+// @desc Process GUI events
 while (xGuiHasEvent(gui))
 {
 	var _event = xGuiGetEvent(gui);
