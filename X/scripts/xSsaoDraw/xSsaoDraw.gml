@@ -28,13 +28,14 @@ if (!surface_exists(xSurSsaoNoise))
 // TODO: For the SSAO, texture repeat should be enabled only for the noise
 // texture, otherwise false occlusion occurs on the screen edges.
 var _texRepeat = gpu_get_tex_repeat();
-gpu_set_tex_repeat(true);
+gpu_set_tex_repeat(false);
 
 surface_set_target(_surSsao);
 draw_clear(0);
 shader_set(xShSSAO);
 texture_set_stage(xUSsaoTexNormal, _texSceneNormal);
 texture_set_stage(xUSsaoTexRandom, surface_get_texture(xSurSsaoNoise));
+gpu_set_texrepeat_ext(xUSsaoTexRandom, true);
 
 if (X_SSAO_WORLD_SPACE_NORMALS)
 {

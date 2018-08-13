@@ -30,7 +30,7 @@ for (var i = xEGBuffer.SIZE - 1; i >= 0; --i)
 }
 
 // SSAO
-xSsaoInit(12, 4, 2);
+xSsaoInit(8, 4, 2);
 ssaoResolution = 0.5;
 surSsao = noone;
 surWork = noone;
