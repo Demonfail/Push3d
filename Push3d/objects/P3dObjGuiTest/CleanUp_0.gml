@@ -1,0 +1,1 @@
+p3d_gui_destroy(gui);

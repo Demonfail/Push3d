@@ -1,1 +1,0 @@
-xGuiDestroy(gui);

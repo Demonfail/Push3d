@@ -1,5 +1,5 @@
-# X
-A collection of useful scripts/shaders/objects for GameMaker Studio 2.
+# Push3d
+Read as "pushed", is a revamp of [PushEd](https://marketplace.yoyogames.com/assets/676/pushed-level-editor) for GameMaker Studio 2, now focusing on 3D.
 
 Maintained by: [kraifpatrik](https://github.com/kraifpatrik)
 Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
