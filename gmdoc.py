@@ -157,7 +157,7 @@ class GMScript(GMBase):
                 self.example)
 
     def link(self):
-        return "[{}](#{})".format(self.name, self.name.replace("_", "-_").lower())
+        return "[{}](#{})".format(self.name, self.name.lower())
 
     @staticmethod
     def load(f, l):
